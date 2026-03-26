@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweet Crumbs Bakery</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+     background: url('https://images.unsplash.com/photo-1509440159596-0249088772ff') no-repeat center center/cover;
+    color:#333;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.6);
+    z-index: -1;
+}
+
+.section {
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    margin: 30px auto;
+}
+
+/* NAVBAR */
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 10%;
+    background:white;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo img{
+    width:50px;
+    height:50px;
+    object-fit:cover;
+    border-radius:50%;
+}
+
+.logo h2{
+    font-size:1.5rem;
+    color:#d2691e;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:20px;
+}
+
+nav ul li{
+    cursor:pointer;
+    font-weight:500;
+}
+
+/* HEADER / CAROUSEL */
+header{
+    position:relative;
+    height:80vh;
+    overflow:hidden;
+}
+
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-size:cover;
+    background-position:center;
+    opacity:0;
+    transition:opacity 1s ease;
+}
+
+.slide.active{opacity:1;}
+
+.header-text{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    color:white;
+    background:rgba(0,0,0,0.4);
+    padding:20px 30px;
+    border-radius:10px;
+}
+
+.header-text h1{font-size:3rem;}
+
+/* SECTIONS */
+.section{
+    padding:50px 10%;
+    text-align:center;
+}
+
+/* PRODUCTS */
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+.card{
+    background:white;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    overflow:hidden;
+    transition:transform 0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card img{width:100%;height:150px;object-fit:cover;}
+
+.card h3{margin:10px;}
+
+.card button{
+    margin:10px;
+    padding:10px;
+    border:none;
+    background:#d2691e;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+/* BAKERS */
+.bakers{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content:center;
+}
+
+.baker{
+    width:200px;
+}
+
+.baker img{
+    width:100%;
+    border-radius:50%;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0%;
+    height: 2px;
+    background: #d2691e;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+nav ul li a:hover {
+    color: #d2691e;
+}
+
+.card button {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    background: #d2691e;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: 0.5s;
+}
+
+.card button:hover::before {
+    left: 100%;
+}
+
+.card button:hover {
+     transform: scale(0.95);
+    background: #a0522d;
+    box-shadow: 0 0 10px rgba(210,105,30,0.5);
+}
+
+@keyframes float {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+.baker img {
+    width: 100%;
+    border-radius: 50%;
+    animation: float 3s ease-in-out infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.baker img:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.baker p {
+    margin-top: 10px;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.baker:hover p {
+    opacity: 1;
+    transform: translateY(-3px);
+}
+
+/* FOOTER */
+footer{
+    background:#333;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR WITH LOGO -->
+<nav>
+    <div class="logo">
+        <img src="logo.png" alt="Bakery Logo">
+        <h2>Velvet Crust Cakes</h2>
+    </div>
+
+    <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="register.html">Register</a></li>
+    </ul>
+</nav>
+
+<!-- HEADER -->
+<header>
+    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1549931319-a545dcf3bc73');"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1509440159596-0249088772ff');"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1517686469429-8bdb88b9f907');"></div>
+
+    <div class="header-text">
+        <h1>Velvet Crust Cakes</h1>
+        <p>Freshly baked happiness every day</p>
+    </div>
+</header>
+
+<!-- DESCRIPTION -->
+<section class="section">
+    <h2>About Our Bakery</h2>
+    <p>At Velvet Crust Cakes, we craft delicious pastries, breads, and desserts using only the finest ingredients. Every bite is made with love and passion, bringing warmth and sweetness to your day.</p>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section">
+    <h2>Trending Treats</h2>
+    <div class="products">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec">
+            <h3>Croissant</h3>
+            <button onclick="addToCart('Croissant')">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="cake.jpg">
+            <h3>Chocolate Cake</h3>
+            <button onclick="addToCart('Chocolate Cake')">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="donuts.jpg">
+            <h3>Donuts</h3>
+            <button onclick="addToCart('Donuts')">Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<!-- BAKERS -->
+<section class="section">
+    <h2>Meet Our Bakers</h2>
+    <div class="bakers">
+        <div class="baker">
+            <img src="honami.jpg">
+            <p>Chef Honami Mochizuki</p>
+        </div>
+
+        <div class="baker">
+            <img src="sasaki.jpg">
+            <p>Chef Sasaki Shuumei</p>
+        </div>
+
+        <div class="baker">
+            <img src="ritsu.jpg">
+            <p>Chef Ritsu Sakuma</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Velvet Crust Cakes | Follow us on social media</p>
+</footer>
+
+<script>
+let slides = document.querySelectorAll('.slide');
+let index = 0;
+
+function showSlide(){
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+    index = (index + 1) % slides.length;
+}
+
+setInterval(showSlide, 3000);
+
+function addToCart(item){
+    alert(item + " added to cart!");
+}
+</script>
+
+</body>
+</html>
