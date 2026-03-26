@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" 
+	content="width=device-width, 
+	initial-scale=1.0">
+	<title>Registration Form | Velvet Crust Cakes </title>
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link href="https://fonts.googleapis.com" rel="stylesheet">
+	
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+}
+
+#bg-video {
+	position: fixed;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	min-height: 100%;
+	z-index: -1;
+	object-fit: cover;
+}
+body{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+
+.topbar {
+	position: fixed;
+	inset: 0 0 auto 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1rem clamp (1rem, 3vw, 3rem);
+	z-index: 20;
+	background: linear-gradient (rgba(2, 18, 30, 0.8), rgba(2, 18, 30, 0));
+	color: #ffffff;
+	border-radius: 12px;
+}
+
+.static-topbar {
+	position: sticky;
+	background: #052436;
+}
+
+.brand {
+	color: var(--sand);
+	text-decoration: none;
+	font-weight: 1000;
+	font-size: clamp(1rem, 2.2vw, 1.35rem);
+	letter-spacing: 0.04em;
+	padding-left: 20px;
+	padding-top: 20px;
+}
+
+.menu {
+	list-style: none;
+	font-size: 30px;
+	margin: 0;
+	padding-right: 20px;
+	padding-top: 20px;
+	display: flex;
+	gap: clamp(0.6rem, 1.6vw, 1.4rem);
+}
+
+.menu a {
+	color: #dff2fb;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 0.95rem;
+	letter-spacing: 0.03em;
+}
+
+.menu a:hover {
+	color: #ffffff;
+}
+
+
+.wrapper{
+	width: 750px;
+	background: transparent;
+	border: 2px solid rgba(255, 255, 255, .2);
+	backdrop-filter: blur(10px);
+	color: #fff;
+	border-radius: 10px;
+	padding: 40px 35px 55px;
+}
+.wrapper h1 {
+	font-size: 36px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.wrapper .input-box{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 15px;
+}
+.input-box .input-field{
+	position: relative;
+	width: calc(50% - 10px);
+	height: 50px;
+	margin: 13px 0;
+}
+
+.input-box .input-field input{
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	border: 2px solid rgba(255, 255, 255, .2);
+	outline: none;
+	font-size: 16px;
+	color: #fff;
+	border-radius: 6px;
+	padding: 15px 15px 15px 40px;
+}
+
+.input-box .input-field input::placeholder{
+	color: #fff;
+}
+
+.input-box .input-field i {
+	position: absolute;
+	left: 15px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 20px;
+}
+
+.wrapper label {
+	font-size: 14.5px;
+	margin: 10px 0 23px;
+	display: inline-block;
+}
+
+.wrapper label input {
+	accent-color: #fff;
+	margin-right: 5px;
+}
+
+.wrapper .btn {
+	width: 100%;
+	height: 45px;
+	background: #fff;
+	border: none;
+	outline: none;
+	border-radius: 6px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, -1);
+	cursor: pointer;
+	font-size: 16px;
+	color: #333;
+	font-weight: 600;
+}
+
+@media (max-width: 576px) {
+	.input-box .input-field {
+		width: 100%;
+	}
+}
+
+	
+	</style>
+</head>
+
+<body>
+
+	<video autoplay muted loop id="bg-video">
+		<source src="background1.mp4" type="video/mp4">
+	</video>
+	
+	<header class="topbar">
+		<a class="brand" href="home.html">Velvet Crust Cakes</a>
+		<nav aria-label="Primary">
+			<ul class="menu">
+								
+					<li>
+						<a href="index.html"> Home </a>
+					</li>
+					
+					<li>
+						<a href="shop.html"> Shop </a>
+					</li>
+					
+
+					<li>
+						<a href="login.html"> Login </a>
+					</li>
+			</ul>
+			</nav>
+		</header>
+	
+	<div class="wrapper">
+		<form action=" ">
+			<h1>Register</h1>
+			
+			<div class="input-box">
+				<div class="input-field">
+					<input type="text" placeholder="Full Name" required>
+					<i class='bx bxs-user'></i>
+			</div>
+			<div class="input-field">
+					<input type="text" 
+					placeholder="Username" required>
+					<i class='bx bxs-user'></i>
+			</div>
+		</div>
+		
+			<div class="input-box">
+				<div class="input-field">
+					<input type="email" placeholder="Email" 
+					required>
+					<i class='bx bxs-envelope'></i>
+			</div>
+			<div class="input-field">
+					<input type="number" placeholder="Phone Number" 
+					required>
+					<i class='bx bxs-phone'></i>
+			</div>
+		</div>
+		
+			<div class="input-box">
+					<div class="input-field">
+					<input type="password" 
+					placeholder="Password" required>
+					<i class='bx bxs-lock-alt'></i>
+			</div>
+			<div class="input-field">
+				<input type="password" 
+				placeholder="Confirm Password" required>
+				<i class='bx bxs-lock-alt'></i>
+			</div>
+		</div>
+			<label><input type="checkbox"> I hereby declare that the above information provided is true and correct</label>
+			<button type="submit" class="btn">Register</button>
+		</form>
+	</div>
+</body>
+</html>

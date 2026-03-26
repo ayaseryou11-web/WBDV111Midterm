@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" 
+	content="width=device-width,
+	initial-scale=1.0">
+	<title> Login | Velvet Crust Cakes </title>
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+}
+
+#bg-video {
+	position: fixed;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	min-height: 100%;
+	z-index: -1;
+	object-fit: cover;
+}
+
+body{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	padding-top: 120px;
+	background: black;
+}
+
+.main-container {
+	margin-left: 250px;
+	margin-bottom: 100px;
+}
+
+
+.topbar {
+	position: fixed;
+	inset: 0 0 auto 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1rem clamp (1rem, 3vw, 3rem);
+	z-index: 20;
+	background: linear-gradient (rgba(2, 18, 30, 0.8), rgba(2, 18, 30, 0));
+	color: #ffffff;
+	border-radius: 12px;
+}
+
+.static-topbar {
+	position: sticky;
+	background: #052436;
+}
+
+.brand {
+	color: var(--sand);
+	text-decoration: none;
+	font-weight: 1000;
+	font-size: clamp(1rem, 2.2vw, 1.35rem);
+	letter-spacing: 0.04em;
+	padding-left: 20px;
+	padding-top: 20px;
+}
+
+.menu {
+	list-style: none;
+	font-size: 30px;
+	margin: 0;
+	padding-right: 20px;
+	padding-top: 20px;
+	display: flex;
+	gap: clamp(0.6rem, 1.6vw, 1.4rem);
+}
+
+.menu a {
+	color: #dff2fb;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 0.95rem;
+	letter-spacing: 0.03em;
+}
+
+.menu a:hover {
+	color: #ffffff;
+}
+
+.wrapper{
+	width: 420px;
+	background: transparent;
+	border: 2px solid rgba(255, 255, 255, .2);
+	backdrop-filter: blur(10px);
+	color: #fff;
+	border-radius: 12px;
+	padding: 30px 40px;
+}
+.wrapper h1{
+	font-size: 36px;
+	text-align: center;
+}
+.wrapper .input-box{
+	position: relative;
+	width: 100%;
+	height: 50px;
+
+	margin: 30px 0;
+}
+.input-box input{
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	border: none;
+	outline: none;
+	border: 2px solid rgba(255, 255, 255, .2);
+	border-radius: 40px;
+	font-size: 16px;
+	color: #fff;
+	padding: 20px 45px 20px 20px;
+}
+.input-box input::placeholder{
+	color: #fff;
+}
+.input-box i{
+	position: absolute;
+	right: 20px;
+	top: 30%;
+	transform: translate(-50%);
+	font-size: 20px;
+}
+.wrapper .remember-forgot{
+	display: flex;
+	justify-content: space-between;
+	font-size: 14.5px;
+	margin: -15px 0 15px;
+}
+.remember-forgot label input{
+	accent-color: #fff;
+	margin-right: 3px;
+}
+.remember-forgot a{
+	color: #fff;
+	text-decoration: none;
+}
+.remember-forgot a:hover{
+	text-decoration: underline;
+}
+.wrapper .btn{
+	width: 100%;
+	height: 45px;
+	background: #fff;
+	border: none;
+	outline: none;
+	border-radius: 40px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+	cursor: pointer;
+	font-size: 16px;
+	color: #333;
+	font-weight: 600;
+	
+}
+.wrapper .register-link{
+	font-size: 14,5px;
+	text-align: center;
+	margin: 20px; 0 15px;
+	
+}
+.register-link p a{
+	color: #fff;
+	text-decoration: none;
+	font-weight: 600;
+}
+.register-link p a:hover{
+	text-decoration: underline;
+}
+
+</style>
+</head>
+
+<body>
+
+	<video autoplay muted loop id="bg-video">
+		<source src="background1.mp4" type="video/mp4">
+	</video>
+
+	<header class="topbar">
+		<a class="brand" href="home.html">Velvet Crust Cakes</a>
+		<nav aria-label="Primary">
+			<ul class="menu">
+								
+					<li>
+						<a href="index.html"> Home </a>
+					</li>
+					
+					<li>
+						<a href="shop.html"> Shop </a>
+					</li>
+					
+					<li>
+						<a href="register.html"> Sign Up </a>
+					</li>
+			</ul>
+			</nav>
+		</header>
+
+	<div class="wrapper">
+	
+		<form action="">
+			<h1> Login to <b> Velvet Crust Cakes </b> </h1>
+			<div class="input-box">
+				<input type="text" placeholder="Username" required>
+				<i class='bx bx-user-circle'></i>
+	</div>
+	
+	<div class="input-box">
+		<input type="password" placeholder="Password" required>
+		<i class='bx bxs-lock'></i>
+	</div>
+	
+	<div class="remember-forgot">
+		<label><input type="checkbox"> Remember Me </label>
+		<a href="#"> Forgot Password </a>
+	</div>
+	
+	<button type="submit" class="btn"> Login </button>
+	
+	<div class="register-link">
+		<p> Don't have an account? <a href="register.html">Register Now </a></p>
+	</div>
+</form>
+</div>
+</body>
+</html>
