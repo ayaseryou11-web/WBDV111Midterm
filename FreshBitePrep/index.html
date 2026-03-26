@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FreshBite Prep</title>
+	
+<!-- Code for font awesome cdn -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs
+/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Code for font awesome cdn -->
+
+<style>
+:root
+{
+	--orange: #F5340F;
+	--black: #130f40;
+	--light-color: #666;
+	--box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.15);
+	--border:2em solid rgba(0,0,0.1);
+	--outline:.1rem solid rgba(0,0,0.1);
+}
+
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+	outline: none;
+	border: none;
+	text-decoration: none;
+	transition: all .2s linear;
+	text-transform: none;
+}
+
+html {
+	font-size: 62.5%;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+	scroll-padding-top: 7rem;
+}
+
+body {
+	min-height: 100vh;
+	background: url(teyvat2.jpg) no-repeat;
+	background-size: cover;
+	background-position: center;
+	backdrop-filter: blur(10px);
+}
+
+.btn {
+	margin-top: 1rem;
+	display: inline-block;
+	padding: .8rem 3rem;
+	font-size: 1.7rem;
+	border: .2rem solid var(--black);
+	border-radius: .5rem;
+	color: var(--black);
+	cursor: pointer;
+	background: none;
+}
+
+.btn:hover {
+	background: var(--orange);
+	color: #fff;
+}
+
+.header {
+	border: 0px solid;
+	height: 80px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 2rem 9%;
+	background: #fff;
+	box-shadow: var(--box-shadow);
+}
+
+.header img {
+	width: 100px;
+}
+
+.header .navbar a{
+	font-size: 1.9rem;
+	margin: 0 4rem;
+	color: var(--black);
+}
+
+.header .navbar a:hover {
+	color: var(--orange);
+}
+
+.header .icons div{
+	border: 0px solid;
+	height: 4.5rem;
+	width: 4.5rem;
+	line-height: 4.5rem;
+	border-radius: .5rem;
+	background: #eee;
+	color: var(--black);
+	font-size: 2rem;
+	margin-right: .3rem;
+	text-align: center;
+	cursor: pointer;
+}
+
+.header .icons div:hover{
+	background: var(--orange);
+	color: white;
+}
+
+#menu-btn {
+	display: none;
+}
+
+.header .search-form {
+	position: absolute;
+	border: 0px solid;
+	top: 105%;
+	right: -110rem;
+	width: 50rem;
+	height: 5rem;
+	background: #fff;
+	border-radius: .5rem;
+	overflow: hidden;
+	align-items: center;
+	display: flex;
+	box-shadow: var(--box-shadow);
+}
+
+.header .search-form.active {
+	right: 2rem;
+	transition: .4s linear; 
+}
+
+.header .search-form input {
+	height: 100%; 
+	width: 100%;
+	background: none;
+	text-transform: none;
+	font-size: 1.6rem;
+	color: var(--black);
+	padding: 0 1.5rem;
+}
+
+.header .search-form label {
+	font-size: 2.2rem;
+	padding-right: 1.5rem;
+	color: var(--black);
+	cursor: pointer;
+}
+
+.header .search-form label:hover{
+	color: var(--orange);
+}
+
+.header .shopping-cart {
+	background: #fff;
+	border: 0px solid;
+	position: absolute;
+	top: 105%;
+	right: -110%;
+	padding: 1rem;
+	border-radius: .5rem;
+	box-shadow: var(--box-shadow);
+	width: 35rem;
+}
+
+.header .shopping-cart.active {
+	right: 2rem;
+	transition: .4s linear;
+}
+
+.header .shopping-cart .box {
+	border: 0px solid blue;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	position: relative;
+	margin: 1rem 0;
+}
+
+.header .shopping-cart .box img {
+	height: 10rem;
+}
+
+.header .shopping-cart .box .fa-trash {
+	font-size: 2rem;
+	position: absolute;
+	top: 50%;
+	right: 2rem;
+	cursor: pointer;
+	color: var(--light-color);
+	transform: translateY(-50%);
+}
+
+.header .shopping-cart .box .fa-trash:hover {
+	color: var(--orange);
+}
+
+.header .shopping-cart .box .content h3 {
+	color: var(--black);
+	font-size: 1.7rem;
+	padding-bottom: 1rem;
+}
+
+.header .shopping-cart .box .content span {
+	color: var(--light-color);
+	font-size: 1.6rem;
+	padding-bottom: 1.6rem;
+}
+
+.header .shopping-cart .box .content .quantity {
+	padding-left: 1rem;
+}
+
+.header .shopping-cart .total {
+	font-size: 2.5rem;
+	padding: 1rem 0;
+	text-align: center;
+	color: var(--black);
+}
+
+.header .shopping-cart .btn {
+	display: block;
+	text-align: center;
+	margin: 1rem 0;
+}
+
+.header .login-form {
+	border: 0px solid;
+	position: absolute;
+	width: 35rem;
+	top: 105%;
+	right: -105%;
+	box-shadow: var(--box-shadow);
+	padding: 2rem;
+	border-radius: .5rem;
+	background: #fff;
+	text-align: center;
+}
+
+.header .login-form.active {
+	right: 2rem;
+	transition: .4s linear;
+}
+
+.header .login-form h3 {
+	font-size: 2.5rem;
+	text-transform: uppercase;
+	color: var(--black);
+}
+
+.header .login-form .box {
+	width: 100%;
+	border: 0px solid;
+	margin: .7rem 0;
+	background: #eee;
+	border-radius: .5rem;
+	padding: 1rem;
+	font-size: 1.6rem;
+	color: var(--black);
+	text-transform: none;
+}
+
+.header .login-form p {
+	font-size: 1.4rem;
+	padding: .5rem 0;
+	color: var(--light-color);
+}
+
+.header .login-form p a {
+	color: var(--orange);
+	text-decoration: underline;
+}
+
+.home {
+	padding-top: 10rem;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	
+	
+}
+
+.home .main_slide h1 {
+	font-size: 7rem;
+	color: var(--black);
+	margin-bottom: 2rem;
+	line-height: 1.2;
+}
+
+.home .main_slide h1 span {
+	color: black;
+}
+
+.main_slide {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-align: center;
+	gap: 5rem;
+	width: 100%;
+	padding: 0 9%;
+}
+
+.home .main_slide p {
+	font-size: 1.4rem;
+	text-transform: none;
+	line-height: 1.6;
+	max-width: 45rem;
+	margin: 1rem 0;
+	color: var(--black);
+}
+
+.main_slide div:nth-child(2) {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	padding-top: 40px;
+}
+
+.main_slide div:nth-child(1) {
+	padding-top: 20px;
+	flex: 1;
+	font-size: 30px;
+	text-align: left;
+}
+
+.main_slide img {
+	width: 100%;
+	max-width: 500px;
+}
+
+.main_slide div:nth-child(2) img {
+	width: 150%;
+	max-width: 800px;
+	height: auto;
+}
+
+.main_slide div:nth-child(1) span {
+	color: var(--orange);
+	text-decoration: underline;
+	text-underline-offset: 10px;
+	text-decoration-color: rgb(253, 176, 34);
+}
+
+.red-btn {
+	cursor: pointer;
+	margin-top: 20px;
+	width: 160px;
+	font-weight: bold;
+	color: aliceblue;
+	line-height: 50px;
+	background-color: rgb(253, 77, 8);
+	border-radius: 5px;
+	border: 1px solid rgb(253, 77, 8);
+	box-shadow: 0 10px 15px rgb(250, 120, 69);
+	transition: all 0.2s;
+}
+
+.red-btn:hover {
+	background-color: white;
+	box-shadow: 0 2px 15px rgb(250, 120, 69);
+	border: 1px solid rgb(253, 77, 8);
+	color: rgb(253, 77, 8);
+}
+
+.food-items {
+	margin: 70px auto;
+	padding: 20px;
+	background-color: white;
+	border-radius: 30px;
+	display: flex;
+	justify-content: center;
+	gap: 60px;
+	flex-wrap: wrap;
+	max-width: 1200px;
+}
+
+.item {
+	width: 250px;
+	padding: 30px;
+	text-align: center;
+}
+
+.item div {
+	height: 160px;
+}
+
+.item img {
+	width: 160px;
+	margin-bottom: 15px;
+}
+
+.item p {
+	font-size: 12px;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	color: var(--black);
+}
+
+.item h3 {
+	color: var(--black);
+}
+
+.white_btn {
+	cursor: pointer;
+	margin-top: 20px;
+	width: 160px;
+	font-weight: bold;
+	color: rgb(253, 77, 8);
+	line-height: 50px;
+	border: 1px solid rgb(253, 77, 8);
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 0 2px 15px rgb(250, 120, 69);
+	transition: all 0.2s;
+}
+
+.white_btn:hover {
+	color: white;
+	background-color: rgb(253, 77, 8);
+	box-shadow: 0 10px 15px rgb(250, 120, 69);
+}
+
+.item .red-btn, .item .white_btn {
+	width: 120px;
+	line-height: 35px;
+}
+
+.main_slide4 {
+  margin-top: 70px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 0 5%;
+  flex-wrap: wrap; 
+}
+
+.chef-feed {
+  flex: 1;
+  max-width: 600px;
+}
+
+.main_slide4 .chef-feed h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.main_slide4 .chef-feed p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  text-align: justify;
+  text-justify: inter-word; 
+}
+
+.about-img {
+  flex: 2;
+  text-align: center;
+  max-width: 600px; 
+}
+
+.main_slide4 .about-img img {
+  width: 100%;
+  max-width: 400px; 
+  margin-bottom: 15px;
+}
+
+.about-img h6 {
+  font-size: 18px;
+  color: var(--black);
+  margin: 8px 0;
+}
+
+.about-img p {
+  font-size: 14px;
+  color: var(--light-color);
+}
+
+.our-chefs {
+	padding: 80px 5%;
+	text-align: center;
+	background-color: #f9f9f9;
+}
+
+.our-chefs h2 {
+	font-size: 48px;
+	margin-bottom: 40px;
+}
+
+.chef-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
+	justify-content: center;
+}
+
+.chef-card {
+	background: #fff;
+	border-radius: 10px;
+	padding: 20px;
+	max-width: 250px;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+	transition: transform 0.3s;
+	text-align: center;
+}
+
+.chef-card:hover {
+	transform: translateY(-5px);
+}
+
+.chef-card img {
+	width: 100%;
+	border-radius: 50%;
+	margin-bottom: 15px;
+}
+
+.chef-card p {
+	font-size: 14px;
+	color: #555;
+}
+
+@media only screen and (max-width: 550px) {
+	.main_slide div:nth-child(1) {
+		font-size: 18px;
+	}
+	.main_slide div:nth-child(1) p {
+		padding-top: 5px;
+		margin: 10px 0;
+		font-size: 11px;
+	}
+	
+	.red-btn {
+		margin-top: 10px;
+		width: 120px;
+		line-height: 30px;
+		font-size: 12px;
+		padding: 0 10px;
+	}
+	
+	.main_slide div:nth-child(1) span {
+		text-underline-offset: 5px;
+	}
+	
+	.main_slide div:nth-child(2) img {
+		width: 70vw;
+	}
+}
+
+@media (max-width: 768px) {
+	.main_slide4 {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+	.chef-feed {
+		max-width: 100%;
+	}
+	.about-img {
+		width: auto;
+		margin-top: 20px;
+	}
+}
+
+
+</style>
+
+
+</head>
+
+<body>
+
+<!-- header section -->
+<header class="header">
+	<a href="#" class="logo"><img src="logo.png"></a>
+	
+	<nav class="navbar">
+		<a href="index.html"> Home </a>
+		<a href="Menu.html"> Food Menu </a>
+		<a href="register.html"> Sign Up </a>
+		<a href="reservation.html"> Book Table </a>
+	</nav>
+	
+	<div class="icons">
+		<div class="fa fa-bars" id="menu-btn"></div>
+		<div class="fa fa-search" id="search-btn"></div>
+		<div class="fa fa-shopping-cart" id="cart-btn"></div>
+		<div class="fa fa-user" id="login-btn"></div>
+	</div>
+	
+	<form class="search-form">
+		<input type="search" id="search-box" placeholder="Search Here....">
+		<label for="search-box" class="fa fa-search"></label>
+	</form>
+	
+	<div class="shopping-cart">
+		<div class="box">
+			<img src="image/cart-img-1.png">
+			<i class="fa fa-trash"></i>
+			<div class="content">
+				<h3> Almond Tofu </h3>
+				<span class="price">₱250.00/-</span>
+				<span class="quantity">Qty : 1</span>
+			</div>
+		</div>
+		
+	<div class="box">
+			<img src="image/cart-img-2.png">
+			<i class="fa fa-trash"></i>
+			<div class="content">
+				<h3> Qince Household Dish </h3>
+				<span class="price">₱350.00/-</span>
+				<span class="quantity">Qty : 1</span>
+			</div>
+		</div>
+		
+	<div class="box">
+			<img src="image/cart-img-3.png">
+			<i class="fa fa-trash"></i>
+			<div class="content">
+				<h3> Summer Festival Fish </h3>
+				<span class="price">₱120.00/-</span>
+				<span class="quantity">Qty : 1</span>
+			</div>
+		</div>
+		
+	<div class="total"> total : ₱720.00/- </div>
+	<a href="#" class="btn">Checkout</a>
+		
+	</div>
+	
+	<form action="#" class="login-form">
+		<h3> Login Now </h3>
+		<input type="email" placeholder="your email" class="box">
+		<input type="password" placeholder="your password" class="box">
+		
+		<p> Forgot your Password? <a href="#">Click Here</a></p>
+		<p> Don't Have an Account? <a href="register.html">Sign Up</a></p>
+		
+		<input type="submit" value="Login Now" class="btn">
+	</form>
+	
+<!-- header section -->
+</header>
+
+<div class="home">
+	<div class="main_slide">
+		<div>
+			<h1> Enjoy <span> Delicious Food </span> Served with Care. </h1>
+			<p> Relive, feel, and taste the delicious foods from all over Teyvat that is made with precision and love to truly capture the essence of Teyvat and it's nations' culture. </p>
+			
+			<button class="red-btn">Visit Now</button>
+		</div>
+		
+		<div>
+			<img src="image/sweetmadame.png" alt="">
+		</div>
+	</div>
+	
+	<div class="food-items">
+		<div class="item">
+			<div>
+				<img src="image/eel.png">
+			</div>
+			<h3>Shimi Chazuke</h3>
+			<p>Wanderer's specialty. The mildly bitter fragrance of tea and the refreshingly sweet aroma of rice</p>
+			<button class="white_btn">See Menu</button>
+		</div>
+		<div class="item">
+			<div>
+				<img src="image/lobster.png">
+			</div>
+			<h3>Pass the Luck</h3>
+			<p> "Ta-da! Super huge and freshly caught — a stroke of luck if ever there was one! And now, I pass that luck onto you!"</p>
+			<button class="red-btn">See Menu</button>
+		</div>
+		<div class="item">
+			<div>
+				<img src="image/guoba.png">
+			</div>
+			<h3>Lighter-Than-Air Pancakes</h3>
+			<p>Noelle's specialty. These thick pastries are the special afternoon snacks of the Knights of Favonius.</p>
+			<button class="white_btn">See Menu</button>
+		</div>
+	</div>
+	
+	<div class="main_slide4">
+	
+		<div class="chef-feed">
+			<h2>About <span style="color: red;"> US</span></h2>
+			<p>FreshBite Prep was built tall to provide visibility and is a strategic location that must be defended. It has existed since at least during the years right after the Cataclysm, nearly 500 years ago.
+			As most of the patrons that stop here are traveling merchants, the inn provides an area for them to trade and set up stalls. The view from the top of the inn is jaw-dropping — weather permitting, you can see 
+			all the way to Mt. Qingce and Jueyun Karst in the distance.Legend amongst the stalls says that the tower of the inn hides a mysterious secret, but that's as far as the legend goes, as no one has ever been able to 
+			verify the claims. The inn that stands at the southern end of Dihua Marsh seems to serve as something other than a resting place for guests. They say that Wangshu Inn is a haven for lovers' moonlit rendezvous. Folk
+			stories also have it that even ones as august as the adepti sometimes bask in the moonlight here.</p>
+		</div>
+		
+			<div class="about-img">
+				<img src="logo.png" alt="freshbite prep logo">
+			
+				<h6> FreshBite Prep </h6>
+				<p> Fresh from Teyvat </p>
+			</div>
+</div>
+
+<br><br>
+
+<section class="our-chefs">
+	<h2>Our Chefs</h2>
+	<div class="chef-container">
+		<div class="chef-card">
+			<img src="Escoffier.png" alt="Chef Escoffier">
+			<h3>Chef Escoffier</h3>
+			<p>Specialist in Fontaine dishes.</p>
+		</div>
+		<div class="chef-card">
+			<img src="Ei.png" alt="Chef Raiden Ei">
+			<h3>Chef Raiden Ei</h3>
+			<p>Specialist in Inazuma dishes.</p>
+		</div>
+		<div class="chef-card">
+			<img src="Xiangling.png" alt="Chef Xiangling">
+			<h3>Chef Xiangling</h3>
+			<p>Specialist in Liyue dishes.</p>
+		</div>
+		<div class="chef-card">
+			<img src="Ineffa.png" alt="Chef Ineffa">
+			<h3>Chef Ineffa</h3>
+			<p>Specialist in Nod Krai dishes.</p>
+		</div>
+	</div>
+</section>
+
+
+<script>
+let searchForm = document.querySelector('.search-form');
+
+document.querySelector('#search-btn').onclick = () =>
+{
+	searchForm.classList.toggle('active');
+}
+
+let shoppingCart = document.querySelector('.shopping-cart');
+
+document.querySelector('#cart-btn').onclick = () =>
+{
+	shoppingCart.classList.toggle('active');
+}
+
+let loginForm = document.querySelector('.login-form');
+
+document.querySelector('#login-btn').onclick = () =>
+{
+	loginForm.classList.toggle('active');
+}
+
+</script>
+</body>
+</html>
