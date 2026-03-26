@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luna Vista Resort</title>
+
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary-color: #2c3855;
+  --text-light: #767268;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+#bg-video {
+	position: fixed;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	min-height: 100%;
+	z-index: -1;
+	object-fit: cover;
+  filter: blur(10px);
+}
+
+body {
+  background: #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* NAVIGATION */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: var(--white);
+  z-index: 1000;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.nav__container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo img {
+  height: 80px;
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav__links a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.nav__links a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+  transition: 0.3s linear;
+}
+
+/* BUTTON */
+.btn {
+  padding: 10px 20px;
+  background: var(--primary-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #435681;
+  transition: 0.3s linear;
+}
+
+/* MAIN CONTAINER: Booking + Carousel */
+.container {
+  display: flex;
+  max-width: var(--max-width);
+  width: 100%;
+  gap: 40px;
+  margin: 140px auto 50px; /* space from fixed nav */
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* BOOKING FORM */
+.booking-form {
+  flex: 1;
+  min-width: 500px;
+  background: var(--white);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.booking-form h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.booking-form label {
+  display: block;
+  margin: 15px 0 5px;
+}
+
+.booking-form input,
+.booking-form select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.booking-form button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #435681;
+    transition: 0.3s linear;
+}
+
+/* CAROUSEL */
+.carousel-container {
+  flex: 1.5;
+  min-width: 300px;
+  height: 450px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* Carousel arrows */
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  padding: 0 15px;
+}
+
+.carousel-nav span {
+  cursor: pointer;
+  font-size: 2rem;
+  color: #fff;
+  background: rgba(0,0,0,0.4);
+  padding: 10px;
+  border-radius: 50%;
+  user-select: none;
+}
+
+.carousel-nav span:hover {
+  background: rgba(0,0,0,0.6);
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dot.active {
+  background: #fff;
+  transform: scale(1.2);
+}
+
+.amenities {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px 30px; 
+  margin-top: 20px;
+  justify-items: center;
+  text-align: center;
+}
+
+.carousel-container,
+.amenities {
+  width: 100%;
+}
+
+.right-side {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 350px;
+}
+
+/* FOOTER */
+.footer {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 40px 20px;
+  margin-top: auto;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center; /* center all sections */
+  text-align: center;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-section a {
+  color: #ddd;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .carousel-container {
+    height: 300px;
+  }
+}
+</style>
+</head>
+<body>
+
+  <!---VIDEO BGM-->
+
+  <video autoplay muted loop id="bg-video">
+		<source src="tropical.mp4" type="video/mp4">
+	</video>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav__container">
+    <div class="nav__logo">
+      <img src="logo.png" alt="Luna Vista Resort Logo">
+    </div>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="booking.html">Reservations</a></li>
+      <li><a href="register.html">Sign Up</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- LEFT: CAROUSEL -->
+  <div class="carousel-container">
+    <div class="slides">
+      <div class="slide active" style="background-image: url('room1.jpg');"></div>
+      <div class="slide" style="background-image: url('room2.jpg');"></div>
+      <div class="slide" style="background-image: url('room3.jpg');"></div>
+    </div>
+
+    <div class="carousel-nav">
+      <span class="prev">&#10094;</span>
+      <span class="next">&#10095;</span>
+    </div>
+
+    <div class="carousel-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+
+  <!-- RIGHT: FORM + AMENITIES -->
+  <div class="right-side">
+    <!-- BOOKING FORM -->
+    <form class="booking-form">
+      <h2>Reservation Form</h2>
+
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="number">Phone Number:</label>
+      <input type="number" id="number" name="number" required>
+
+      <label for="checkin">Check-in:</label>
+      <input type="date" id="checkin" name="checkin" required>
+
+      <label for="checkout">Check-out:</label>
+      <input type="date" id="checkout" name="checkout" required>
+
+      <label for="guests">Guests:</label>
+      <select id="guests" name="guests">
+        <option value="1">1</option>
+        <option value="2" selected>2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+
+      <label for="room">Room Type:</label>
+      <select id="room" name="room">
+        <option value="standard">Standard Room</option>
+        <option value="deluxe">Deluxe Room</option>
+        <option value="suite">Suite</option>
+      </select>
+
+      <button type="submit" class="submit-btn">Book Now</button>
+    </form>
+
+    <!-- AMENITIES -->
+    <div class="amenities">
+      <h2>Our Amenities</h2>
+      <div class="amenities-grid">
+        <div>🏊 Pool</div>
+        <div>📶 Free Wi-Fi</div>
+        <div>🏝️ Beach Access</div>
+        <div>🍽️ Restaurant</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Luna Vista Resort</h3>
+      <p>Your perfect getaway destination.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <p>Pampanga, Philippines</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Luna Vista Resort
+  </div>
+</footer>
+
+<!-- CAROUSEL SCRIPT -->
+<script>
+const dots = document.querySelectorAll('.dot');
+const slides = document.querySelectorAll('.slide');
+const next = document.querySelector('.next');
+const prev = document.querySelector('.prev');
+let current = 0;
+
+function showSlide(i) {
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+
+  slides[i].classList.add('active');
+  dots[i].classList.add('active');
+}
+
+dots.forEach((dot, index) => {
+  dot.addEventListener('click', () => {
+    current = index;
+    showSlide(current);
+  });
+});
+
+function showSlide(i) {
+  slides.forEach(s => s.classList.remove('active'));
+  slides[i].classList.add('active');
+}
+
+next.onclick = () => {
+  current = (current + 1) % slides.length;
+  showSlide(current);
+};
+
+prev.onclick = () => {
+  current = (current - 1 + slides.length) % slides.length;
+  showSlide(current);
+};
+
+// Auto slide every 5 seconds
+setInterval(() => {
+  current = (current + 1) % slides.length;
+  showSlide(current);
+}, 5000);
+</script>
+
+</body>
+</html>
