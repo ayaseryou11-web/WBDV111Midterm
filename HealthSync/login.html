@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HealthSync Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+    background:linear-gradient(135deg,#eef5ff,#ffffff);
+    overflow-x:hidden;
+}
+
+/* BACKGROUND BLOBS */
+body::before,
+body::after{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:0.5;
+    z-index:-1;
+}
+
+body::before{
+    background:#0d6efd;
+    top:-100px;
+    left:-100px;
+}
+
+body::after{
+    background:#6ea8fe;
+    bottom:-100px;
+    right:-100px;
+}
+
+/* HEADER */
+header{
+    display:flex;
+    justify-content:space-between;
+    padding:20px 50px;
+    background:rgba(13,110,253,0.75);
+    backdrop-filter:blur(14px);
+    color:white;
+}
+
+header a{
+    color:white;
+    margin-right:20px;
+    text-decoration:none;
+}
+
+/* LAYOUT */
+.top-section, .login-section{
+    display:grid;
+    gap:25px;
+    padding:50px;
+}
+
+.top-section{grid-template-columns:2fr 1fr;}
+.login-section{grid-template-columns:1fr 2fr;}
+
+/* REMEMBER ME ROW */
+.remember-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:10px 0 5px;
+}
+
+/* CUSTOM CHECKBOX */
+.checkbox{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+    font-size:14px;
+    color:#555;
+}
+
+/* HIDE DEFAULT */
+.checkbox input{
+    display:none;
+}
+
+/* BOX */
+.checkmark{
+    width:18px;
+    height:18px;
+    border-radius:5px;
+    border:2px solid #0d6efd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:0.3s;
+}
+
+/* CHECK EFFECT */
+.checkbox input:checked + .checkmark{
+    background:#0d6efd;
+}
+
+/* CHECK ICON */
+.checkbox input:checked + .checkmark::after{
+    content:"✓";
+    color:white;
+    font-size:12px;
+}
+
+/* TEXT */
+.label-text{
+    user-select:none;
+}
+
+/* HOVER */
+.checkbox:hover .checkmark{
+    transform:scale(1.1);
+}
+
+/* CARD */
+.card{
+    background:rgba(255,255,255,0.65);
+    backdrop-filter:blur(14px);
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+/* TEXT */
+h2{color:#0d6efd;margin-bottom:15px;}
+p{color:#555;}
+
+/* BUTTON */
+.btn{
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 22px;
+    border-radius:25px;
+    text-decoration:none;
+    background:#0d6efd;
+    color:white;
+    transition:0.3s;
+}
+
+.btn.secondary{background:#6c757d;}
+.btn:hover{transform:translateY(-3px);}
+
+/* FORM */
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:12px;
+    border:1px solid #ccc;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    background:#0d6efd;
+    color:white;
+    cursor:pointer;
+}
+
+/* DEMO GRID */
+.demo-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:20px;
+}
+
+.demo{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.demo:hover{
+    transform:translateY(-6px) scale(1.02);
+}
+
+/* AVATAR */
+.avatar{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    margin-bottom:10px;
+}
+
+/* ROLE */
+.role{
+    font-size:12px;
+    color:#777;
+    margin-bottom:8px;
+}
+
+/* CREDS */
+.creds{
+    font-size:13px;
+    background:#f1f5ff;
+    padding:6px;
+    border-radius:10px;
+    margin:8px 0;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .top-section,.login-section{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div>
+<a href="index.html">← Back to Website</a>
+<a href="#" onclick="clearSession()">Clear Session</a>
+</div>
+<img src="logo.png" height="40">
+</header>
+
+<!-- TOP -->
+<section class="top-section">
+
+<div class="card">
+<h2>Welcome to HealthSync</h2>
+<p>
+Login with a demo account to open the matching dashboard.<br><br>
+Choose from Default, Admin, Staff, or User roles.
+</p>
+
+<a href="index.html#booking" class="btn">Open Appointment Wizard</a>
+<a href="index.html" class="btn secondary">Return Home</a>
+</div>
+
+<div class="card">
+<h3>System Status</h3>
+<p>Accounts Ready: <b>4</b></p>
+<p>Dashboards: <b>Enabled</b></p>
+<p>Session: <b>Saved Locally</b></p>
+</div>
+
+</section>
+
+<!-- LOGIN -->
+<section class="login-section">
+
+<!-- SIGN IN -->
+<div class="card">
+<h2>Sign In</h2>
+
+<form onsubmit="login(event)">
+
+<input type="text" id="user" placeholder="Username">
+<input type="password" id="pass" placeholder="Password">
+
+<div class="remember-row">
+    <label class="checkbox">
+        <input type="checkbox" id="remember">
+        <span class="checkmark"></span>
+        <span class="label-text">Remember Me</span>
+    </label>
+</div>
+
+<button type="submit">Login</button>
+
+</form>
+</div>
+
+<!-- DEMO ACCOUNTS -->
+<div class="card">
+<h2>Demo Accounts</h2>
+
+<div class="demo-grid">
+
+<div class="demo" onclick="autoFill('default','1234')">
+<img src="ivan.jpg" class="avatar">
+<h4>Ivan Young</h4>
+<div class="role">Default • General</div>
+<div class="creds">default / 1234</div>
+</div>
+
+<div class="demo" onclick="autoFill('admin','admin')">
+<img src="sua.jpg" class="avatar">
+<h4>Dr. Sua Young</h4>
+<div class="role">Admin • Management</div>
+<div class="creds">admin / admin</div>
+</div>
+
+<div class="demo" onclick="autoFill('staff','staff')">
+<img src="mizi.jpg" class="avatar">
+<h4>Mizi Kim</h4>
+<div class="role">Staff • Operations</div>
+<div class="creds">staff / staff</div>
+</div>
+
+<div class="demo" onclick="autoFill('user','user')">
+<img src="till.jpg" class="avatar">
+<h4>Till Park</h4>
+<div class="role">User • Patient</div>
+<div class="creds">user / user</div>
+</div>
+
+</div>
+</div>
+
+</section>
+
+<script>
+/* AUTOFILL */
+function autoFill(u,p){
+    document.getElementById("user").value=u;
+    document.getElementById("pass").value=p;
+}
+
+/* LOGIN */
+function login(e){
+    e.preventDefault(); // stops page reload
+
+    let u = document.getElementById("user").value;
+    let p = document.getElementById("pass").value;
+
+    if(document.getElementById("remember").checked){
+        localStorage.setItem("sessionUser", u);
+    }
+
+    if(u==="admin" && p==="admin") location="admin.html";
+    else if(u==="staff" && p==="staff") location="staff.html";
+    else if(u==="user" && p==="user") location="user.html";
+    else if(u==="default" && p==="1234") location="default.html";
+    else alert("Invalid credentials");
+}
+
+/* CLEAR */
+function clearSession(){
+    localStorage.clear();
+    alert("Session cleared");
+}
+</script>
+
+</body>
+</html>

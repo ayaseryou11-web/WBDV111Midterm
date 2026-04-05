@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+    background:linear-gradient(135deg,#eef5ff,#ffffff);
+}
+
+/* BACKGROUND BLOBS */
+body::before, body::after{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:0.4;
+    z-index:-1;
+}
+body::before{background:#0d6efd;top:-100px;left:-100px;}
+body::after{background:#6ea8fe;bottom:-100px;right:-100px;}
+
+/* HEADER */
+header{
+    display:flex;
+    justify-content:space-between;
+    padding:20px 50px;
+    background:rgba(13,110,253,0.85);
+    backdrop-filter:blur(14px);
+    color:white;
+}
+
+header a{
+    color:white;
+    margin-right:20px;
+    text-decoration:none;
+}
+
+/* TOP SECTION */
+.top{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+    padding:40px;
+}
+
+/* CARD */
+.card{
+    background:rgba(255,255,255,0.65);
+    backdrop-filter:blur(14px);
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+.card:hover{transform:translateY(-5px);}
+
+/* TITLE */
+h2{color:#0d6efd;margin-bottom:10px;}
+p{color:#555;font-size:14px;}
+
+/* MINI STATS */
+.mini-grid{
+    display:grid;
+    gap:15px;
+}
+.mini{
+    background:#f1f5ff;
+    padding:12px;
+    border-radius:12px;
+    transition:0.3s;
+}
+.mini:hover{transform:scale(1.03);}
+
+/* STATS ROW */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    padding:0 40px;
+}
+
+/* BIG NUMBER */
+.big{
+    font-size:24px;
+    font-weight:700;
+    color:#0d6efd;
+}
+
+/* NOTIFICATIONS */
+.notifications{
+    padding:40px;
+}
+
+.note{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:15px;
+    margin-top: 10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+    transition:0.3s;
+}
+
+.note.unread{
+    border-left:5px solid #0d6efd;
+}
+
+.note:hover{
+    transform:translateX(5px);
+}
+
+.time{
+    font-size:12px;
+    color:#888;
+}
+
+/* FINAL GRID */
+.bottom{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    padding:40px;
+}
+
+/* LIST */
+ul{
+    margin-top:10px;
+    padding-left:15px;
+}
+
+li{
+    margin-bottom:8px;
+}
+
+/* INNER BOXES */
+.inner-box{
+    background:#f8faff;
+    padding:12px;
+    border-radius:10px;
+    margin-top:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.05);
+    transition:0.3s;
+}
+
+.inner-box:hover{
+    transform:translateX(5px);
+}
+
+/* OPTIONAL TITLE INSIDE */
+.inner-box b{
+    display:block;
+    margin-bottom:5px;
+    color:#0d6efd;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .top,.stats,.bottom{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div>
+<a href="index.html">🌐 Public Website</a>
+<a href="login.html">🔄 Switch Account</a>
+<a href="login.html">🚪 Log Out</a>
+</div>
+<img src="logo.png" height="40">
+</header>
+
+<!-- TOP -->
+<section class="top">
+
+<div class="card">
+<h2>Patient Access</h2>
+<p>
+Welcome back, <b>Till Park</b>.<br>
+You are logged in as <b>User</b>.<br><br>
+This user dashboard is meant for profile review, upcoming appointments, and quick access back to the booking wizard.
+</p>
+</div>
+
+<div class="card">
+<div class="mini-grid">
+<div class="mini"><b>Profile Completion:</b> 95%</div>
+<div class="mini"><b>Upcoming Visits:</b> 1 </div>
+<div class="mini"><b>Unread Messages:</b> 2</div>
+</div>
+</div>
+
+</section>
+
+<!-- STATS -->
+<section class="stats">
+
+<div class="card">
+<h3>Next Appointment</h3>
+<div class="big">Apr 20</div>
+<p>Your current mock schedule includes an afternoon pediatric follow-up.</p>
+</div>
+
+<div class="card">
+<h3>Medical Notes</h3>
+<div class="big">6</div>
+<p>Recent visit summaries are ready to review.</p>
+</div>
+
+<div class="card">
+<h3>Booking Status</h3>
+<div class="big">Ready</div>
+<p>You can start a new appointment request any time from the public wizard.</p>
+</div>
+
+</section>
+
+<!-- BOTTOM -->
+<section class="bottom">
+
+<div class="card">
+<h3>Latest Booking</h3>
+
+<div class="inner-box">
+<b>Status</b>
+No new booking submitted yet.
+</div>
+
+<div class="inner-box">
+<b>Last Activity</b>
+User visited booking wizard earlier.
+</div>
+
+</div>
+
+<div class="card">
+<h3>Profile Summary</h3>
+
+<div class="inner-box">
+<b>Name</b>
+Till Park
+</div>
+
+<div class="inner-box">
+<b>Account Type</b>
+Patient User
+</div>
+
+<div class="inner-box">
+<b>Profile Completion</b>
+95% complete
+</div>
+
+</div>
+
+<div class="card">
+<h3>Shift Notes</h3>
+
+<div class="inner-box">
+<b>Insurance Recheck</b>
+Verify policy renewal before discharge.
+</div>
+
+<div class="inner-box">
+<b>Doctor Hand-off</b>
+Rebalance late morning patient load.
+</div>
+
+<div class="inner-box">
+<b>Room Allocation</b>
+Check availability for overflow cases.
+</div>
+
+</div>
+
+</section>
+
+</body>
+</html>

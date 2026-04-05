@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+    background:linear-gradient(135deg,#eef5ff,#ffffff);
+}
+
+/* BACKGROUND BLOBS */
+body::before, body::after{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:0.4;
+    z-index:-1;
+}
+body::before{background:#0d6efd;top:-100px;left:-100px;}
+body::after{background:#6ea8fe;bottom:-100px;right:-100px;}
+
+/* HEADER */
+header{
+    display:flex;
+    justify-content:space-between;
+    padding:20px 50px;
+    background:rgba(13,110,253,0.85);
+    backdrop-filter:blur(14px);
+    color:white;
+}
+
+header a{
+    color:white;
+    margin-right:20px;
+    text-decoration:none;
+}
+
+/* TOP SECTION */
+.top{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+    padding:40px;
+}
+
+/* CARD */
+.card{
+    background:rgba(255,255,255,0.65);
+    backdrop-filter:blur(14px);
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+.card:hover{transform:translateY(-5px);}
+
+/* TITLE */
+h2{color:#0d6efd;margin-bottom:10px;}
+p{color:#555;font-size:14px;}
+
+/* MINI STATS */
+.mini-grid{
+    display:grid;
+    gap:15px;
+}
+.mini{
+    background:#f1f5ff;
+    padding:12px;
+    border-radius:12px;
+    transition:0.3s;
+}
+.mini:hover{transform:scale(1.03);}
+
+/* STATS ROW */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    padding:0 40px;
+}
+
+/* BIG NUMBER */
+.big{
+    font-size:24px;
+    font-weight:700;
+    color:#0d6efd;
+}
+
+/* NOTIFICATIONS */
+.notifications{
+    padding:40px;
+}
+
+.note{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:15px;
+    margin-top: 10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+    transition:0.3s;
+}
+
+.note.unread{
+    border-left:5px solid #0d6efd;
+}
+
+.note:hover{
+    transform:translateX(5px);
+}
+
+.time{
+    font-size:12px;
+    color:#888;
+}
+
+/* INNER BOXES */
+.inner-box{
+    background:#f8faff;
+    padding:12px;
+    border-radius:10px;
+    margin-top:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.05);
+    transition:0.3s;
+    border-left:4px solid transparent;
+}
+
+/* HOVER */
+.inner-box:hover{
+    transform:translateX(6px);
+    border-left:4px solid #0d6efd;
+}
+
+/* TITLE INSIDE */
+.inner-box b{
+    display:block;
+    margin-bottom:5px;
+    color:#0d6efd;
+}
+
+/* FINAL GRID */
+.bottom{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    padding:40px;
+}
+
+/* LIST */
+ul{
+    margin-top:10px;
+    padding-left:15px;
+}
+
+li{
+    margin-bottom:8px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .top,.stats,.bottom{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div>
+<a href="index.html">🌐 Public Website</a>
+<a href="login.html">🔄 Switch Account</a>
+<a href="login.html">🚪 Log Out</a>
+</div>
+<img src="logo.png" height="40">
+</header>
+
+<!-- TOP -->
+<section class="top">
+
+<div class="card">
+<h2>Branch Operations</h2>
+<p>
+Shift ready, <b>Mizi Kim</b>.<br>
+You are logged in as <b>Staff</b>.<br><br>
+This staff dashboard supports front desk coordination, patient flow, and same-day handoff tasks.
+</p>
+</div>
+
+<div class="card">
+<div class="mini-grid">
+<div class="mini"><b>Check-ins Today:</b> 15</div>
+<div class="mini"><b>Rooms Prepared:</b> 8</div>
+<div class="mini"><b>Follow-up Calls:</b> 5</div>
+</div>
+</div>
+
+</section>
+
+<!-- STATS -->
+<section class="stats">
+
+<div class="card">
+<h3>Waiting Patients</h3>
+<div class="big">3</div>
+<p>Current lobby load that needs check-in.</p>
+</div>
+
+<div class="card">
+<h3>Open Tasks</h3>
+<div class="big">6</div>
+<p>Pending preparation steps and callback items for the current shift.</p>
+</div>
+
+<div class="card">
+<h3>Average Delay</h3>
+<div class="big">6 min</div>
+<p>Front desk pacing inside the clinic for today.</p>
+</div>
+
+</section>
+
+<!-- NOTIFICATIONS -->
+<section class="notifications">
+
+<div class="card">
+<h3>Notification Center</h3>
+
+<div class="note unread">
+<b>Patient in room 3A is ready for vitals</b><br>
+<p>The chart has been opened and the assigned nurse is waiting for the intake support.</p>
+<span class="time">5 mins ago • Unread</span>
+</div>
+
+<div class="note unread">
+<b>Goodness gracious!</b><br>
+<p>Ikaw yung nagshoplift! You were the one caught stealing on CCTV. Oh my God! No way!</p>
+<span class="time">12 mins ago • Unread</span>
+</div>
+
+<div class="note">
+<b>Bawiin mo yung him, her ako!</b><br>
+<p>Ayoko~ him ka wahahahahaha him ka kaya wahahahahaha pag nagsi-CR sa he ka, sa her ako wahahahah</p>
+<span class="time">1 hour ago • Read</span>
+</div>
+
+<div class="note">
+<b>THAT IS NOT ME! KAKAMBAL KO YAN!</b><br>
+<span class="time">3 hours ago • Read</span>
+</div>
+
+</div>
+
+</section>
+
+<!-- BOTTOM -->
+<section class="bottom">
+
+<div class="card">
+<h3>Immediate Tasks</h3>
+
+<div class="inner-box">
+<b>Room Preparation</b>
+Prepare Room 3 for Pediatrics.
+</div>
+
+<div class="inner-box">
+<b>Sanitation</b>
+Sterilize used tools and garments.
+</div>
+
+<div class="inner-box">
+<b>Patient Follow-ups</b>
+Call back two reschedule requests.
+</div>
+
+</div>
+
+<div class="card">
+<h3>Latest Wizard Booking</h3>
+
+<div class="inner-box">
+<b>Status</b>
+No new booking submitted yet.
+</div>
+
+<div class="inner-box">
+<b>Last Activity</b>
+Last booking request was yesterday.
+</div>
+
+</div>
+
+<div class="card">
+<h3>Shift Notes</h3>
+
+<div class="inner-box">
+<b>Insurance Recheck</b>
+Verify policy renewal before discharge.
+</div>
+
+<div class="inner-box">
+<b>Doctor Hand-off</b>
+Rebalance late morning patient load.
+</div>
+
+<div class="inner-box">
+<b>Room Allocation</b>
+Check availability for overflow patients.
+</div>
+
+</div>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#eef5ff,#ffffff);
+    min-height:100vh;
+}
+
+/* BACKGROUND BLOBS */
+body::before, body::after{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:0.4;
+    z-index:-1;
+}
+body::before{background:#0d6efd;top:-100px;left:-100px;}
+body::after{background:#6ea8fe;bottom:-100px;right:-100px;}
+
+/* HEADER */
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 50px;
+    background:rgba(13,110,253,0.85);
+    backdrop-filter:blur(16px);
+    color:white;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+header a{
+    color:white;
+    margin-right:15px;
+    text-decoration:none;
+    padding:8px 16px;
+    border-radius:20px;
+    transition:0.25s;
+}
+
+header a:hover{
+    background:rgba(255,255,255,0.2);
+}
+
+/* TOP SECTION */
+.top{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+    padding:40px;
+}
+
+/* CARD */
+.card{
+    background:rgba(255,255,255,0.65);
+    backdrop-filter:blur(18px);
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+    transition:0.3s ease;
+    border:1px solid rgba(255,255,255,0.3);
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 50px rgba(13,110,253,0.15);
+}
+
+/* TITLE */
+h2,h3{
+    color:#0d6efd;
+    margin-bottom:10px;
+}
+
+p{
+    color:#555;
+    font-size:14px;
+    line-height:1.6;
+}
+
+/* MINI STATS */
+.mini-grid{
+    display:grid;
+    gap:15px;
+}
+
+.mini{
+    background:linear-gradient(135deg,#f1f5ff,#ffffff);
+    padding:14px;
+    border-radius:12px;
+    transition:0.25s;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.mini:hover{
+    transform:scale(1.04);
+}
+
+/* STATS ROW */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    padding:0 40px;
+}
+
+/* BIG NUMBER */
+.big{
+    font-size:28px;
+    font-weight:700;
+    color:#0d6efd;
+    margin:10px 0;
+}
+
+/* NOTIFICATIONS */
+.notifications{
+    padding:40px;
+}
+
+.note{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+    transition:0.25s;
+}
+
+.note.unread{
+    border-left:5px solid #0d6efd;
+    background:linear-gradient(135deg,#f5f9ff,#ffffff);
+}
+
+.note:hover{
+    transform:translateX(6px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.time{
+    font-size:12px;
+    color:#888;
+}
+
+/* BOTTOM GRID */
+.bottom{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    padding:40px;
+}
+
+/* LIST */
+ul{
+    margin-top:10px;
+    padding-left:18px;
+}
+
+li{
+    margin-bottom:8px;
+    color:#444;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .top,.stats,.bottom{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div>
+<a href="index.html">🌐 Public Website</a>
+<a href="login.html">🔄 Switch Account</a>
+<a href="login.html">🚪 Log Out</a>
+</div>
+<img src="logo.png" height="40">
+</header>
+
+<!-- TOP -->
+<section class="top">
+
+<div class="card">
+<h2>Branch Operations</h2>
+<p>
+Hello, <b>Sua Young</b>.<br>
+You are logged in as <b>Admin</b>.<br><br>
+This admin view focuses on branch operations, doctor schedule visibility,
+and appointment approvals.
+</p>
+</div>
+
+<div class="card">
+<div class="mini-grid">
+<div class="mini"><b>Primary Branch:</b> Central</div>
+<div class="mini"><b>Pending Reviews:</b> 8</div>
+<div class="mini"><b>Staff Online:</b> 21</div>
+</div>
+</div>
+
+</section>
+
+<!-- STATS -->
+<section class="stats">
+
+<div class="card">
+<h3>Schedule Changes</h3>
+<div class="big">12</div>
+<p>Recent updates in doctor availability and shifts.</p>
+</div>
+
+<div class="card">
+<h3>Approval Queue</h3>
+<div class="big">6</div>
+<p>Appointments waiting for admin confirmation.</p>
+</div>
+
+<div class="card">
+<h3>Records Updated</h3>
+<div class="big">27</div>
+<p>Patient or operational records updated today.</p>
+</div>
+
+</section>
+
+<!-- NOTIFICATIONS -->
+<section class="notifications">
+
+<div class="card">
+<h3>Notification Center</h3>
+
+<div class="note unread">
+<b>Dr. Reyes updated cardiology schedule</b><br>
+<span class="time">5 mins ago • Unread</span>
+</div>
+
+<div class="note unread">
+<b>New appointment pending approval</b><br>
+<span class="time">12 mins ago • Unread</span>
+</div>
+
+<div class="note">
+<b>Branch North submitted daily report</b><br>
+<span class="time">1 hour ago • Read</span>
+</div>
+
+<div class="note">
+<b>System maintenance completed successfully</b><br>
+<span class="time">3 hours ago • Read</span>
+</div>
+
+</div>
+
+</section>
+
+<!-- BOTTOM -->
+<section class="bottom">
+
+<div class="card">
+<h3>Priority Actions</h3>
+<ul>
+<li>Review pending appointment approvals</li>
+<li>Verify updated doctor schedules</li>
+<li>Monitor branch performance metrics</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Latest Wizard Booking</h3>
+<p>
+Patient requested dermatology consultation.<br>
+Scheduled for tomorrow at 10:30 AM.
+</p>
+</div>
+
+<div class="card">
+<h3>Daily Snapshot</h3>
+<p>
+System stable across all branches.<br>
+Minor delays reported in North branch.<br>
+Overall operations running smoothly.
+</p>
+</div>
+
+</section>
+
+</body>
+</html>
