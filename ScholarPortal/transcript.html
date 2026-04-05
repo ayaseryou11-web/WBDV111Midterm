@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScholarPortal - Transcript</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#eef3f9;padding:30px;}
+
+.container{max-width:950px;margin:auto;background:#fff;padding:40px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.12);position:relative;overflow:hidden;}
+
+/* WATERMARK LOGO */
+.container::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:400px;
+  height:400px;
+  background:url('logo.png') no-repeat center/contain;
+  opacity:0.05;
+  pointer-events:none;
+}
+
+.header{display:flex;align-items:center;gap:15px;border-bottom:2px solid #eee;padding-bottom:15px;margin-bottom:25px;}
+.header img{width:65px;}
+.header h1{color:#0a3d62;font-size:24px;}
+
+.info{margin-bottom:25px;padding:15px;background:#f8fafc;border-radius:12px;box-shadow:inset 0 0 5px rgba(0,0,0,0.05);}
+.info p{margin:6px 0;color:#444;}
+
+h3{color:#1e5f9a;margin-bottom:10px;}
+
+.table{width:100%;border-collapse:collapse;margin-top:10px;overflow:hidden;border-radius:10px;}
+.table th, .table td{border:1px solid #ddd;padding:12px;text-align:left;}
+.table th{background:linear-gradient(135deg,#1e5f9a,#0a3d62);color:#fff;}
+.table tr:nth-child(even){background:#f9fbfd;}
+.table tr:hover{background:#f1f7ff;}
+
+.signature-section{margin-top:40px;display:flex;justify-content:space-between;align-items:center;}
+.signature{text-align:center;}
+.signature p{margin-top:60px;border-top:1px solid #aaa;padding-top:5px;color:#555;}
+
+.buttons{margin-top:30px;display:flex;gap:12px;justify-content:flex-end;}
+.btn{padding:12px 18px;border:none;border-radius:12px;cursor:pointer;font-weight:600;transition:0.3s;}
+.home{background:#1e5f9a;color:#fff;}
+.print{background:#f1c40f;color:#0a3d62;}
+.btn:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,0.2);}
+
+@media print{
+  .buttons{display:none;}
+  body{background:#fff;padding:0;}
+  .container{box-shadow:none;border-radius:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <img src="logo.png">
+    <h1>ScholarPortal Registration Card</h1>
+  </div>
+
+  <div class="info" id="studentInfo"></div>
+
+  <h3>Registered Courses</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Course</th>
+        <th>Schedule</th>
+        <th>Room</th>
+      </tr>
+    </thead>
+    <tbody id="courseTable"></tbody>
+  </table>
+
+  <div class="signature-section">
+    <div class="signature">
+      <p>_________________________<br>Registrar's Signature</p>
+    </div>
+    <div class="signature">
+      <p>_________________________<br>Student's Signature</p>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button class="btn home" onclick="goHome()">Back to Home</button>
+    <button class="btn print" onclick="window.print()">Print Form</button>
+  </div>
+
+</div>
+
+<script>
+const id = localStorage.getItem("studentID");
+const program = localStorage.getItem("program");
+const name = localStorage.getItem("name") || "N/A";
+const courses = JSON.parse(localStorage.getItem("courses")||"[]");
+
+// Use fixed schedule and rooms for realistic look
+const scheduleMap = {"Algorithms":"Mon 8:00-10:00","Data Structures":"Tue 10:00-12:00","AI Basics":"Wed 1:00-3:00","Networking":"Mon 10:00-12:00","Database Systems":"Tue 1:00-3:00","Web Development":"Wed 3:00-5:00","3D Animation":"Thu 8:00-10:00","Game Design":"Thu 10:00-12:00","Digital Arts":"Fri 1:00-3:00"};
+const roomMap = {"Algorithms":"Room 101","Data Structures":"Room 102","AI Basics":"Room 103","Networking":"Room 201","Database Systems":"Room 202","Web Development":"Room 203","3D Animation":"Room 301","Game Design":"Room 302","Digital Arts":"Room 303"};
+
+const infoDiv=document.getElementById("studentInfo");
+infoDiv.innerHTML=`
+  <p><strong>Full Name:</strong> ${name}</p>
+  <p><strong>Student ID:</strong> ${id}</p>
+  <p><strong>Program:</strong> ${program}</p>
+`;
+
+const table=document.getElementById("courseTable");
+courses.forEach(c=>{
+  let row=`<tr>
+    <td>${c}</td>
+    <td>${scheduleMap[c] || 'TBD'}</td>
+    <td>${roomMap[c] || 'TBD'}</td>
+  </tr>`;
+  table.innerHTML+=row;
+});
+
+function goHome(){
+  window.location.href="index.html";
+}
+</script>
+
+</body>
+</html>
