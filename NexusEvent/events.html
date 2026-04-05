@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus Events - Events</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+  background:#0f0f1a;
+  color:#fff;
+}
+
+/* VIDEO BACKGROUND */
+.video-bg{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
+}
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(15,15,26,0.7);
+  z-index:-1;
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px;
+  background: linear-gradient(270deg, #ff4fd8, #7b5cff, #00e5ff);
+  background-size: 600% 600%;
+  animation: gradientMove 8s ease infinite;
+  border-bottom:5px solid #000;
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.logo img{width:230px;height:90px;}
+nav button{
+  margin:5px;
+  padding:10px 20px;
+  border:none;
+  background:#00e5ff;
+  font-weight:bold;
+  box-shadow:4px 4px 0 #000;
+  cursor:pointer;
+  border-radius:30px;
+}
+nav button:hover{
+  transform:translate(-2px,-2px);
+  box-shadow:6px 6px 0 #000;
+  color:black;
+  background:#ffe600;
+  transition:0.2s linear;
+}
+
+/* SEARCH BAR */
+.search-bar{
+  max-width:600px;
+  margin:50px auto 30px auto;
+  display:flex;
+  gap:10px;
+}
+.search-bar input{
+  flex:1;
+  padding:12px 15px;
+  border-radius:10px;
+  border:2px solid #00e5ff;
+  background:#0f0f1a;
+  color:#fff;
+  font-size:1rem;
+  outline:none;
+  box-shadow: inset 2px 2px 5px #000;
+  transition:0.3s;
+}
+.search-bar input:focus{
+  border-color:#ffe600;
+  box-shadow:0 0 10px #00ff9f, inset 2px 2px 5px #000;
+}
+.search-bar select{
+  padding:12px 15px;
+  border-radius:10px;
+  border:2px solid #00e5ff;
+  background:#0f0f1a;
+  color:#fff;
+  font-size:1rem;
+  outline:none;
+  box-shadow: inset 2px 2px 5px #000;
+  cursor:pointer;
+  transition:0.3s;
+}
+.search-bar select:focus{
+  border-color:#ffe600;
+  box-shadow:0 0 10px #00ff9f, inset 2px 2px 5px #000;
+}
+
+/* EVENTS GRID */
+.events-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+  max-width:1200px;
+  margin:0 auto 50px auto;
+  padding:0 20px;
+}
+
+.event-card{
+  background:linear-gradient(135deg,#1e1e2f,#2a2a4a);
+  padding:20px;
+  border-left:6px solid #00e5ff;
+  box-shadow:8px 8px 0 #000;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.event-card:hover{
+  transform:translate(-5px,-5px);
+  box-shadow:12px 12px 0 #000;
+}
+.event-card h3{
+  color:#00e5ff;
+  font-size:1.5rem;
+  text-shadow:2px 2px 0 #000;
+}
+.event-card p{
+  font-size:1rem;
+  color:#ddd;
+}
+.event-card .tags{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.event-card .tags span{
+  background:#ff4fd8;
+  color:#fff;
+  padding:3px 10px;
+  border-radius:15px;
+  font-size:0.85rem;
+  box-shadow:2px 2px 0 #000;
+}
+.tickets-btn{
+  margin-top:10px;
+  padding:12px 20px;
+  border:none;
+  border-radius:25px;
+  background:#00ff9f;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:4px 4px 0 #000;
+  color:#000;
+  transition:all 0.3s ease-in-out;
+  position:relative;
+  overflow:hidden;
+  display:inline-block;
+text-decoration:none;
+text-align:center;
+}
+.tickets-btn::before{
+  content:'';
+  position:absolute;
+  top:50%;
+  left:-50%;
+  width:200%;
+  height:300%;
+  background:rgba(255,255,255,0.2);
+  transform:rotate(25deg) translateY(-50%);
+  transition:all 0.5s ease;
+}
+.tickets-btn:hover::before{left:100%;}
+.tickets-btn:hover{
+  transform:translate(-2px,-2px) scale(1.05);
+  background:#00ffc1;
+  box-shadow:0 0 15px #00ff9f,0 0 30px #00ff9f inset;
+  color:#000;
+}
+
+/* FOOTER */
+footer{text-align:center;padding:20px;background:#000;}
+</style>
+</head>
+<body>
+
+<!-- VIDEO BACKGROUND -->
+<video autoplay muted loop class="video-bg">
+  <source src="background.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="logo">
+  </div>
+  <nav>
+  <a href="index.html"><button>Home</button></a>
+  <a href="events.html"><button>Events</button></a>
+  <a href="tickets.html"><button>Tickets</button></a>
+  <a href="venue.html"><button>Venue</button></a>
+  <a href="contact.html"><button>Contact</button></a>
+  <a href="admin.html"><button>Admin</button></a>
+</nav>
+</header>
+
+<h2 style="text-align:center; color:#ffe600; text-shadow:3px 3px 0 #000; margin-top:50px;">All Events</h2>
+
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Search by event name...">
+  <select id="tagFilter">
+    <option value="">All Tags</option>
+    <option value="EDM">EDM</option>
+    <option value="Pop">Pop</option>
+    <option value="Neon Vibes">Neon Vibes</option>
+    <option value="House">House</option>
+    <option value="Chillwave">Chillwave</option>
+    <option value="Art">Art</option>
+    <option value="Interactive">Interactive</option>
+    <option value="Futuristic">Futuristic</option>
+  </select>
+</div>
+
+<div class="events-grid" id="eventsGrid">
+  <!-- Existing Events -->
+  <div class="event-card" data-tags="EDM,Pop,Neon Vibes">
+    <h3>Astral Beats Festival</h3>
+    <p><b>Date:</b> June 20, 2026</p>
+    <p>Feel the cosmic vibes as EDM meets neon-light spectacles in the Celestial Arena.</p>
+    <div class="tags">
+      <span>EDM</span>
+      <span>Pop</span>
+      <span>Neon Vibes</span>
+    </div>
+    <a href="tickets.html" class="tickets-btn">Tickets</a>
+  </div>
+
+  <div class="event-card" data-tags="House,Chillwave,Immersive">
+    <h3>Lunar Groove Night</h3>
+    <p><b>Date:</b> July 15, 2026</p>
+    <p>A night of deep house and chillwave under a sky of LED moons and holograms.</p>
+    <div class="tags">
+      <span>House</span>
+      <span>Chillwave</span>
+      <span>Immersive</span>
+    </div>
+    <a href="tickets.html" class="tickets-btn">Tickets</a>
+  </div>
+
+  <div class="event-card" data-tags="Art,Interactive,Futuristic">
+    <h3>Stellar Arts Expo</h3>
+    <p><b>Date:</b> August 10, 2026</p>
+    <p>Explore digital art, neon installations, and interactive projections in a surreal space.</p>
+    <div class="tags">
+      <span>Art</span>
+      <span>Interactive</span>
+      <span>Futuristic</span>
+    </div>
+    <a href="tickets.html" class="tickets-btn">Tickets</a>
+  </div>
+
+  <!-- New Events -->
+  <div class="event-card" data-tags="Jazz,Live Music,Nightlife">
+    <h3>Cosmic Jazz Evening</h3>
+    <p><b>Date:</b> September 10, 2026</p>
+    <p>Smooth jazz under a starry neon sky with live improvisation sessions.</p>
+    <div class="tags">
+      <span>Jazz</span>
+      <span>Live Music</span>
+      <span>Nightlife</span>
+    </div>
+   <a href="tickets.html" class="tickets-btn">Tickets</a>
+  </div>
+
+  <div class="event-card" data-tags="Gaming,Competition,Esports">
+    <h3>Neon Gaming Marathon</h3>
+    <p><b>Date:</b> October 2, 2026</p>
+    <p>A 24-hour competitive gaming event with neon-lit arenas and live streams.</p>
+    <div class="tags">
+      <span>Gaming</span>
+      <span>Competition</span>
+      <span>Esports</span>
+    </div>
+    <a href="tickets.html" class="tickets-btn">Tickets</a>
+  </div>
+
+  <div class="event-card" data-tags="VR,Interactive,Family">
+    <h3>Virtual Reality Carnival</h3>
+    <p><b>Date:</b> November 18, 2026</p>
+    <p>Step into immersive VR worlds and interactive experiences with friends and family.</p>
+    <div class="tags">
+      <span>VR</span>
+      <span>Interactive</span>
+      <span>Family</span>
+    </div>
+    <a href="tickets.html" class="tickets-btn">Tickets</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Nexus Events. All Rights Reserved.</p>
+</footer>
+
+<script>
+// SEARCH & TAG FILTER
+const searchInput = document.getElementById('searchInput');
+const tagFilter = document.getElementById('tagFilter');
+const eventsGrid = document.getElementById('eventsGrid');
+const eventCards = Array.from(eventsGrid.getElementsByClassName('event-card'));
+
+function filterEvents() {
+  const searchText = searchInput.value.toLowerCase();
+  const selectedTag = tagFilter.value;
+
+  eventCards.forEach(card => {
+    const name = card.querySelector('h3').textContent.toLowerCase();
+    const tags = card.dataset.tags.split(',');
+
+    const matchesSearch = name.includes(searchText);
+    const matchesTag = selectedTag === "" || tags.includes(selectedTag);
+
+    card.style.display = (matchesSearch && matchesTag) ? 'flex' : 'none';
+  });
+}
+
+searchInput.addEventListener('input', filterEvents);
+tagFilter.addEventListener('change', filterEvents);
+</script>
+
+</body>
+</html>

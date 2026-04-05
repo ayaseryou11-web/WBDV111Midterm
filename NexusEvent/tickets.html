@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus Events - Tickets</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* GLOBAL STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #0f0f1a;
+    color: #fff;
+}
+
+/* VIDEO BACKGROUND */
+.video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 15, 26, 0.7);
+    z-index: -1;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(270deg, #ff4fd8, #7b5cff, #00e5ff);
+    background-size: 600% 600%;
+    animation: gradientMove 8s ease infinite;
+    border-bottom: 5px solid #000;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.logo img {
+    width: 230px;
+    height: 90px;
+}
+
+nav a button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    background: #00e5ff;
+    font-weight: bold;
+    box-shadow: 4px 4px 0 #000;
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+nav a button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #000;
+    color: black;
+    background: #ffe600;
+    transition: 0.2s linear;
+}
+
+/* TICKET TYPES SECTION */
+.ticket-types {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 50px 20px;
+    overflow-x: auto;
+}
+
+.ticket-card {
+    border-radius: 10px;
+    min-width: 250px;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 25px;
+    border-left: 6px solid #00e5ff;
+    background: linear-gradient(135deg, #1e1e2f, #2a2a4a);
+    box-shadow: 8px 8px 0 #000;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ticket-card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 12px 12px 0 #000;
+}
+
+.ticket-card h3 {
+    color: #00e5ff;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.ticket-card p {
+    color: #ddd;
+    font-size: 1rem;
+}
+
+.group-btn {
+    margin-top: 10px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    background: #00ff9f;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 #000;
+    color: #000;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.group-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -50%;
+    width: 200%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(25deg) translateY(-50%);
+    transition: all 0.5s ease;
+}
+
+.group-btn:hover::before {
+    left: 100%;
+}
+
+.group-btn:hover {
+    transform: translate(-2px, -2px) scale(1.05);
+    background: #00ffc1;
+    box-shadow: 0 0 15px #00ff9f, 0 0 30px #00ff9f inset;
+    color: #000;
+}
+
+/* TICKET BUILDER SECTION */
+.ticket-builder {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #1e1e2f, #2a2a4a);
+    border: 3px solid #00e5ff;
+    border-radius: 15px;
+    box-shadow: 8px 8px 0 #000;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ticket-builder h2 {
+    color: #ffe600;
+    text-shadow: 3px 3px 0 #000;
+    text-align: center;
+}
+
+.ticket-tier {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.tier-card {
+    flex: 1 1 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border-left: 5px solid #00e5ff;
+    background: #2a2a4a;
+    border-radius: 10px;
+    box-shadow: 5px 5px 0 #000;
+}
+
+.tier-card h3 {
+    color: #00e5ff;
+    font-size: 1.3rem;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.tier-card p {
+    color: #ddd;
+    font-size: 0.95rem;
+}
+
+.tier-card ul {
+    margin-left: 15px;
+    color: #ddd;
+    font-size: 0.95rem;
+}
+
+.tier-card input {
+    width: 60px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 2px solid #00e5ff;
+    background: #0f0f1a;
+    color: #fff;
+    outline: none;
+    box-shadow: inset 2px 2px 5px #000;
+}
+
+.total-display {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffe600;
+    text-align: center;
+}
+
+/* FAQS SECTION */
+.faqs {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.faqs h2 {
+    color: #ffe600;
+    text-shadow: 3px 3px 0 #000;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.faq-item {
+    background: linear-gradient(135deg, #1e1e2f, #2a2a4a);
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-left: 6px solid #00e5ff;
+    border-radius: 10px;
+    box-shadow: 5px 5px 0 #000;
+}
+
+.faq-item h4 {
+    color: #00e5ff;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.faq-item p {
+    color: #ddd;
+    font-size: 0.95rem;
+}
+/* REMOVE DEFAULT ARROWS */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* QUANTITY BOX */
+.quantity-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* INPUT */
+.quantity-box input {
+    width: 60px;
+    text-align: center;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 2px solid #00e5ff;
+    background: #0f0f1a;
+    color: #fff;
+    padding: 8px;
+    box-shadow: inset 2px 2px 6px #000;
+}
+
+/* BUTTONS */
+.qty-btn {
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: linear-gradient(135deg, #00e5ff, #7b5cff);
+    color: #000;
+    box-shadow: 3px 3px 0 #000;
+    transition: all 0.2s ease;
+}
+
+/* HOVER EFFECT */
+.qty-btn:hover {
+    transform: translate(-2px, -2px) scale(1.1);
+    box-shadow: 0 0 10px #00e5ff, 4px 4px 0 #000;
+}
+
+/* CLICK EFFECT */
+.qty-btn:active {
+    transform: scale(0.95);
+    box-shadow: 1px 1px 0 #000;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #000;
+}
+
+</style>
+
+<body>
+
+<!-- VIDEO BACKGROUND -->
+<video autoplay muted loop class="video-bg">
+  <source src="background.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="logo">
+  </div>
+  <nav>
+    <a href="index.html"><button>Home</button></a>
+    <a href="events.html"><button>Events</button></a>
+    <a href="tickets.html"><button>Tickets</button></a>
+    <a href="venue.html"><button>Venue</button></a>
+    <a href="contact.html"><button>Contact</button></a>
+    <a href="admin.html"><button>Admin</button></a>
+  </nav>
+</header>
+
+<!-- TICKET TYPES -->
+<h2 style="text-align:center;margin-top:50px;">Ticket Types</h2>
+<div class="ticket-types">
+  <div class="ticket-card">
+    <h3>Silver</h3>
+    <p>Standard entry with seating.</p>
+    <button class="group-btn">Ask for Group Rates</button>
+  </div>
+  <div class="ticket-card">
+    <h3>Gold</h3>
+    <p>Priority entry + complimentary drinks.</p>
+    <button class="group-btn">Ask for Group Rates</button>
+  </div>
+  <div class="ticket-card">
+    <h3>Premium</h3>
+    <p>VIP lounge, front row seating, backstage access.</p>
+    <button class="group-btn">Ask for Group Rates</button>
+  </div>
+</div>
+
+<!-- TICKET BUILDER -->
+<section class="ticket-builder">
+  <h2>Build Your Tickets</h2>
+  <div class="ticket-tier">
+    <div class="tier-card">
+      <h3>Silver - $50</h3>
+      <p>Inclusions:</p>
+      <ul>
+        <li>Standard Seating</li>
+        <li>Entry Pass</li>
+      </ul>
+     <label>Quantity:</label>
+<div class="quantity-box">
+  <button class="qty-btn minus">−</button>
+  <input type="number" min="0" value="0" data-price="50" class="ticket-input">
+  <button class="qty-btn plus">+</button>
+</div>
+    </div>
+    <div class="tier-card">
+      <h3>Gold - $100</h3>
+      <p>Inclusions:</p>
+      <ul>
+        <li>Priority Entry</li>
+        <li>Complimentary Drinks</li>
+        <li>Premium Seating</li>
+      </ul>
+      <label>Quantity:</label>
+<div class="quantity-box">
+  <button class="qty-btn minus">−</button>
+  <input type="number" min="0" value="0" data-price="50" class="ticket-input">
+  <button class="qty-btn plus">+</button>
+</div>
+    </div>
+    <div class="tier-card">
+      <h3>Premium - $200</h3>
+      <p>Inclusions:</p>
+      <ul>
+        <li>VIP Lounge</li>
+        <li>Front Row Seating</li>
+        <li>Backstage Access</li>
+        <li>Complimentary Drinks & Snacks</li>
+      </ul>
+      <label>Quantity:</label>
+<div class="quantity-box">
+  <button class="qty-btn minus">−</button>
+  <input type="number" min="0" value="0" data-price="50" class="ticket-input">
+  <button class="qty-btn plus">+</button>
+</div>
+    </div>
+  </div>
+  <div class="total-display">Total: $<span id="totalAmount">0</span></div>
+</section>
+
+<!-- FAQS -->
+<section class="faqs">
+  <h2>FAQs</h2>
+  <div class="faq-item">
+    <h4>Q: Can I get a refund if I can't attend?</h4>
+    <p>A: Tickets are non-refundable but can be transferred to another attendee.</p>
+  </div>
+  <div class="faq-item">
+    <h4>Q: Are children allowed?</h4>
+    <p>A: Yes, but tickets must be purchased according to age category if applicable.</p>
+  </div>
+  <div class="faq-item">
+    <h4>Q: Can I upgrade my ticket later?</h4>
+    <p>A: Yes, contact us before the event to upgrade your ticket tier if available.</p>
+  </div>
+  <div class="faq-item">
+    <h4>Q: Are group discounts available?</h4>
+    <p>A: Please use the "Ask for Group Rates" button above each ticket type to inquire.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Nexus Events. All Rights Reserved.</p>
+</footer>
+
+<script>
+// TICKET BUILDER TOTAL CALCULATION
+const ticketInputs = document.querySelectorAll('.ticket-input');
+const totalDisplay = document.getElementById('totalAmount');
+
+function updateTotal() {
+  let total = 0;
+  ticketInputs.forEach(input => {
+    const price = parseFloat(input.dataset.price);
+    const qty = parseInt(input.value) || 0;
+    total += price * qty;
+  });
+  totalDisplay.textContent = total;
+}
+
+ticketInputs.forEach(input => input.addEventListener('input', updateTotal));
+
+// CUSTOM + / - BUTTON FUNCTIONALITY
+document.querySelectorAll('.quantity-box').forEach(box => {
+  const input = box.querySelector('input');
+  const plus = box.querySelector('.plus');
+  const minus = box.querySelector('.minus');
+
+  plus.addEventListener('click', () => {
+    input.value = parseInt(input.value || 0) + 1;
+    input.dispatchEvent(new Event('input'));
+  });
+
+  minus.addEventListener('click', () => {
+    input.value = Math.max(0, parseInt(input.value || 0) - 1);
+    input.dispatchEvent(new Event('input'));
+  });
+});
+</script>
+
+</body>
+</html>
