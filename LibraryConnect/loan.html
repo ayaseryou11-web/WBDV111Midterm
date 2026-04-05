@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LibraryConnect - Loans</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+body{
+  font-family:'Poppins', sans-serif;
+  margin:0;
+  background:#f5f0e6;
+}
+
+/* VIDEO BACKGROUND */
+.video-bg{
+  position:fixed;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
+}
+
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(10,20,15,0.75);
+  z-index:-1;
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  background:#2c3e2f;
+  color:white;
+}
+
+header a{
+  color:white;
+  margin-left:20px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+header a:hover{
+  text-decoration:underline;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo img{
+  height:45px;
+}
+
+/* NAV BUTTONS - vintage-modern library card style */
+/* NAV BUTTONS - vintage-modern style */
+nav{
+  display:flex;
+  gap:15px;
+}
+
+.nav-btn{
+  padding:8px 16px;
+  background:#f5ecd7;      /* old library card color */
+  color:#2c3e2f;           /* dark text */
+  font-weight:600;
+  text-decoration:none;
+  border-radius:6px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover{
+  background:#e8d8a9;      /* hover color */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  text-decoration: none;
+}
+
+/* LOAN GRID */
+.loans-container{
+  max-width:1200px;
+  margin:40px auto;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:20px;
+  padding:0 20px;
+}
+
+/* BOOK CARD */
+.book-card{
+  background:white;
+  border-radius:8px;
+  padding:15px;
+  text-align:center;
+  box-shadow:0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover{
+  transform: translateY(-5px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+.book-card img{
+  width:100%;
+  height:200px;
+  object-fit:contain;
+  border-radius:4px;
+}
+
+.book-card h4{
+  margin:10px 0 5px;
+}
+
+.genre{
+  font-size:0.85rem;
+  color:#555;
+}
+
+.status{
+  margin-top:8px;
+  padding:4px 8px;
+  font-size:0.8rem;
+  font-weight:600;
+  border-radius:6px;
+  display:inline-block;
+}
+
+.status.Available{
+  background:#2ecc71;
+  color:white;
+}
+
+.status.CheckedOut{
+  background:#e74c3c;
+  color:white;
+}
+
+/* RETURN BUTTON */
+.return-btn{
+  margin-top:10px;
+  width:100%;
+  padding:8px;
+  border:none;
+  background:#c0392b;
+  color:white;
+  cursor:pointer;
+  border-radius:6px;
+  transition: all 0.3s ease;
+}
+
+.return-btn:hover{
+  background:#e74c3c;
+  transform: scale(1.05);
+}
+
+/* FOOTER */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #2c3e2f;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  z-index: 100; /* ensures it’s above other content */
+}
+
+</style>
+</head>
+<body>
+
+<!-- VIDEO -->
+<video class="video-bg" autoplay muted loop>
+  <source src="background.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+
+<header>
+
+  <div class="logo">
+    <img src="logo.png">
+  </div>
+
+ <nav>
+  <a class="nav-btn" href="index.html">Home</a>
+  <a class="nav-btn" href="loan.html">Loans</a>
+  <a class="nav-btn" href="overdue.html">Overdue</a>
+</nav>
+
+</header>
+
+<main>
+  <div class="loans-container" id="loanList">
+    <!-- Borrowed books will appear here -->
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 LibraryConnect. All rights reserved.
+</footer>
+
+<script>
+/* GET BORROWED BOOKS */
+const allBooks = [
+  {title:"B & B", genre:"Fiction", desc:"The story follows two characters, Seo Jin-won and Jeong Do-yeon.", img:"book1.jpg"},
+  {title:"Palace of the Omega", genre:"Fiction", desc:"Prince Ilia travels for a political marriage to improve his kingdom's standing but finds himself in a tumultuous situation.", img:"book2.png"},
+  {title:"The Way to Protect the Female Lead's Older Brother", genre:"Fiction", desc:"Roxana Agriche, acts as a villainess to manipulate her dangerous family from within.", img:"book3.png"},
+  {title:"Critical Digital Pedagogy in Higher Education", genre:"Education", desc:"The book offers a rich anthology of the affordances of online education and how digital technologies can be used to promote change.", img:"educ1.jpg"},
+  {title:"College Mathematics and Statistics", genre:"Education", desc:"Train students in analyzing data, mathematical modeling, and problem-solving, covering areas from theoretical probability to applied statistics.", img:"educ2.jpg"},
+  {title:"The First 90 Days", genre:"Business", desc:"A practical guide for leaders navigating new roles, offering strategies to overcome transition challenges and secure early wins.", img:"biz1.png"},
+  {title:"Traction", genre:"Business", desc:"In Traction, you'll learn the secrets of strengthening the six key components of your business. You'll discover simple yet powerful ways to run your company.", img:"biz2.png"},
+];
+
+/* DISPLAY LOANS */
+function displayLoans(){
+  const container = document.getElementById("loanList");
+  container.innerHTML = "";
+
+  let loans = JSON.parse(localStorage.getItem("loans") || "[]");
+  if(loans.length === 0){
+    container.innerHTML = "<p style='grid-column:1/-1; text-align:center; color:#555;'>No books currently borrowed.</p>";
+    return;
+  }
+
+  loans.forEach(title=>{
+    const book = allBooks.find(b=>b.title === title);
+    if(book){
+      container.innerHTML += `
+        <div class="book-card">
+          <img src="${book.img}">
+          <h4>${book.title}</h4>
+          <div class="genre">${book.genre}</div>
+          <p>${book.desc}</p>
+          <div class="status CheckedOut">Checked Out</div>
+          <button class="return-btn" onclick="returnBook('${book.title}')">Return</button>
+        </div>
+      `;
+    }
+  });
+}
+
+/* RETURN BOOK FUNCTION */
+function returnBook(title){
+  let loans = JSON.parse(localStorage.getItem("loans") || "[]");
+  loans = loans.filter(t=>t!==title);
+  localStorage.setItem("loans", JSON.stringify(loans));
+  displayLoans();
+}
+
+/* INITIAL LOAD */
+displayLoans();
+</script>
+
+</body>
+</html>

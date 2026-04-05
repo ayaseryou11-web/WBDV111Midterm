@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LibraryConnect</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  color:#f5ecd7;
+  overflow-x:hidden;
+}
+
+/* VIDEO BACKGROUND */
+.video-bg{
+  position:fixed;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
+}
+
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(10,20,15,0.75);
+  z-index:-1;
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  backdrop-filter:blur(8px);
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo img{
+  height:45px;
+}
+
+.logo h1{
+  font-family:'Playfair Display';
+  color:#e8d8a9;
+}
+
+/* NAV BUTTONS - vintage-modern style */
+nav{
+  display:flex;
+  gap:15px;
+}
+
+.nav-btn{
+  padding:8px 16px;
+  background:#f5ecd7;      /* old library card color */
+  color:#2c3e2f;           /* dark text */
+  font-weight:600;
+  text-decoration:none;
+  border-radius:6px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover{
+  background:#e8d8a9;      /* hover color */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+/* HERO */
+.hero{
+  text-align:center;
+  padding:80px 20px 30px;
+}
+
+.hero h2{
+  font-family:'Playfair Display';
+  font-size:2.8rem;
+}
+
+.hero p{
+  opacity:.85;
+  margin-top:10px;
+}
+
+/* SEARCH + FILTER */
+.controls{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:20px;
+}
+
+.controls input,
+.controls select{
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  width:200px;
+}
+
+/* BOOK GRID */
+.books{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:20px;
+  padding:20px 40px;
+
+  max-width:1200px;   /* controls overall width */
+  margin:0 auto;      /* centers it horizontally */
+}
+
+/* Tablet */
+@media(max-width: 900px){
+  .books{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media(max-width: 500px){
+  .books{
+    grid-template-columns: 1fr;
+  }
+}
+
+.book-card{
+  background:#f5ecd7;
+  color:#2c3e2f;
+  border-radius:10px;
+  padding:15px;
+  transition:.3s;
+  border-left:6px solid #c2a878;
+}
+
+.book-card:hover{
+  transform:translateY(-5px) scale(1.02);
+}
+
+.book-card img{
+  width:100%;
+  height:200px; /* increase height */
+  object-fit:contain;
+}
+
+.book-card h4{
+  margin-top:10px;
+}
+
+.genre{
+  font-size:0.85rem;
+  opacity:0.7;
+}
+
+.borrow-btn{
+  margin-top:10px;
+  width:100%;
+  padding:8px;
+  border:none;
+  background:#2c3e2f;
+  color:white;
+  cursor:pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.borrow-btn:hover{
+  background:#e8d8a9;
+  color:#2c3e2f;
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 8px 15px rgba(232,216,169,0.6);
+}
+
+
+/* AUTH */
+.auth{
+  margin:60px auto;
+  width:300px;
+  background:rgba(255,255,255,0.1);
+  padding:20px;
+  border-radius:10px;
+}
+
+.auth h3{
+  margin-top:10px;
+}
+
+.auth input{
+  width:100%;
+  margin:6px 0;
+  padding:8px;
+  border:none;
+  border-bottom:2px solid #f5ecd7;
+  background:transparent;
+  color:white;
+}
+
+.auth button{
+  width:100%;
+  padding:8px;
+  margin-top:8px;
+  border:none;
+  background:#e8d8a9;
+  color:#2c3e2f;
+  cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:20px;
+  background:rgba(0,0,0,0.4);
+  margin-top:40px;
+}
+
+.status{
+  margin-top:8px;
+  padding:4px 8px;
+  font-size:0.8rem;
+  font-weight:600;
+  border-radius:6px;
+  display:inline-block;
+}
+
+.status.Available{
+  background:#2c3e2f;
+  color:#f5ecd7;
+}
+
+.status.CheckedOut{
+  background:#a93e3e;
+  color:white;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero h2{font-size:2rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO -->
+<video class="video-bg" autoplay muted loop>
+  <source src="background.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <img src="logo.png">
+  </div>
+
+    <nav>
+    <a class="nav-btn" href="index.html">Home</a>
+    <a class="nav-btn" href="loan.html">Loans</a>
+    <a class="nav-btn" href="overdue.html">Overdue</a>
+  </nav>
+
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h2>Explore Your Digital Library</h2>
+  <p>Discover, borrow, and enjoy books in a timeless modern experience.</p>
+</section>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <input type="text" id="search" placeholder="Search books...">
+  <select id="genreFilter">
+    <option value="">All Genres</option>
+    <option>Fiction</option>
+    <option>Education</option>
+    <option>Business</option>
+  </select>
+</div>
+
+<!-- BOOKS -->
+<div class="books" id="bookList"></div>
+
+<!-- AUTH -->
+<div class="auth">
+  <h3>Sign Up</h3>
+  <input id="user" placeholder="Username">
+  <input id="pass" type="password" placeholder="Password">
+  <button onclick="register()">Register</button>
+
+  <h3>Login</h3>
+  <input id="luser" placeholder="Username">
+  <input id="lpass" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 LibraryConnect | Designed with elegance
+</footer>
+
+<script>
+const books = [
+  {title:"B & B", genre:"Fiction", desc:"The story follows two characters, Seo Jin-won and Jeong Do-yeon.", img:"book1.jpg"},
+  {title:"Palace of the Omega", genre:"Fiction", desc:"Prince Ilia travels for a political marriage to improve his kingdom's standing but finds himself in a tumultuous situation.", img:"book2.png"},
+  {title:"The Way to Protect the Female Lead's Older Brother", genre:"Fiction", desc:"Roxana Agriche, acts as a villainess to manipulate her dangerous family from within.", img:"book3.png"},
+  {title:"Critical Digital Pedagogy in Higher Education", genre:"Education", desc:"The book offers a rich anthology of the affordances of online education and how digital technologies can be used to promote change.", img:"educ1.jpg"},
+  {title:"College Mathematics and Statistics", genre:"Education", desc:"Train students in analyzing data, mathematical modeling, and problem-solving, covering areas from theoretical probability to applied statistics.", img:"educ2.jpg"},
+  {title:"The First 90 Days", genre:"Business", desc:"A practical guide for leaders navigating new roles, offering strategies to overcome transition challenges and secure early wins.", img:"biz1.png"},
+  {title:"Traction", genre:"Business", desc:"In Traction, you'll learn the secrets of strengthening the six key components of your business. You'll discover simple yet powerful ways to run your company.", img:"biz2.png"},
+];
+
+/* HELPER: CHECK IF BOOK IS BORROWED */
+function isBorrowed(title){
+  let loans = JSON.parse(localStorage.getItem("loans") || "[]");
+  return loans.includes(title);
+}
+
+/* DISPLAY BOOKS */
+function displayBooks(list){
+  const container = document.getElementById("bookList");
+  container.innerHTML = "";
+
+  list.forEach(b=>{
+    container.innerHTML += `
+      <div class="book-card">
+        <img src="${b.img}">
+        <h4>${b.title}</h4>
+        <div class="genre">${b.genre}</div>
+        <p>${b.desc}</p>
+
+        <!-- STATUS -->
+        <div class="status ${isBorrowed(b.title) ? "CheckedOut" : "Available"}">
+          ${isBorrowed(b.title) ? "Checked Out" : "Available"}
+        </div>
+
+        <!-- BORROW BUTTON -->
+        <button class="borrow-btn" 
+                onclick="borrow('${b.title}')" 
+                ${isBorrowed(b.title) ? "disabled" : ""}>
+          Borrow
+        </button>
+      </div>
+    `;
+  });
+
+  addStatusHoverEffect(); // update hover effect after rendering
+}
+
+/* STATUS HOVER ANIMATION */
+function addStatusHoverEffect(){
+  const statuses = document.querySelectorAll(".status");
+  statuses.forEach(s=>{
+    s.addEventListener("mouseenter", ()=>{
+      if(s.classList.contains("Available")){
+        s.style.boxShadow = "0 0 8px 2px #2ecc71";
+        s.style.transition = "all 0.3s ease";
+      } else {
+        s.style.boxShadow = "0 0 8px 2px #e74c3c";
+        s.style.transition = "all 0.3s ease";
+      }
+    });
+    s.addEventListener("mouseleave", ()=>{
+      s.style.boxShadow = "none";
+    });
+  });
+}
+
+/* INITIAL DISPLAY */
+displayBooks(books);
+
+/* SEARCH + FILTER */
+function filterBooks(){
+  let search = document.getElementById("search").value.toLowerCase();
+  let genre = document.getElementById("genreFilter").value;
+
+  let filtered = books.filter(b =>
+    (b.title.toLowerCase().includes(search) || b.desc.toLowerCase().includes(search)) &&
+    (genre === "" || b.genre === genre)
+  );
+
+  displayBooks(filtered);
+}
+
+document.getElementById("search").addEventListener("input", filterBooks);
+document.getElementById("genreFilter").addEventListener("change", filterBooks);
+
+/* BORROW FUNCTION */
+function borrow(title){
+  let loans = JSON.parse(localStorage.getItem("loans") || "[]");
+  if(!loans.includes(title)){
+    loans.push(title);
+    localStorage.setItem("loans", JSON.stringify(loans));
+    alert("Borrowed: " + title);
+    displayBooks(books); // refresh grid to show new status
+  }
+}
+
+/* AUTH */
+function register(){
+  localStorage.setItem("user", document.getElementById("user").value);
+  localStorage.setItem("pass", document.getElementById("pass").value);
+  alert("Registered!");
+}
+
+function login(){
+  let u = document.getElementById("luser").value;
+  let p = document.getElementById("lpass").value;
+
+  if(u === localStorage.getItem("user") && p === localStorage.getItem("pass")){
+    alert("Welcome " + u);
+  } else {
+    alert("Invalid login");
+  }
+}
+</script>
+
+</body>
+</html>
