@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwiftCart Login</title>
+  <style>
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background: rgba(0,0,0,0.8);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 3px solid #ffd700;
+      width: 350px;
+      text-align: center;
+    }
+
+    .login-container h1 {
+      color: #ffd700;
+      margin-bottom: 1rem;
+    }
+
+    .login-container p {
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .login-container label {
+      display: block;
+      margin: 0.5rem 0 0.2rem;
+      color: #ffd700;
+      font-size: 0.8rem;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 2px solid #fff;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    .login-container button {
+      margin-top: 1rem;
+      background: #3c8d0d;
+      border: 3px solid #fff;
+      padding: 0.7rem;
+      cursor: pointer;
+      color: #fff;
+      font-family: 'Press Start 2P', cursive;
+      border-radius: 6px;
+      transition: transform 0.2s ease, background 0.3s ease;
+      width: 100%;
+    }
+
+    .login-container button:hover {
+      transform: scale(1.05);
+      background: #5cbf2a;
+      box-shadow: 0 0 8px #ffd700;
+    }
+
+    .back-btn {
+      background: #2e86c1;
+      border: 3px solid #fff;
+      padding: 0.5rem;
+      cursor: pointer;
+      color: #fff;
+      font-family: 'Press Start 2P', cursive;
+      border-radius: 6px;
+      transition: transform 0.2s ease, background 0.3s ease;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.05);
+      background: #5dade2;
+      box-shadow: 0 0 8px #ffd700;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <button class="back-btn" onclick="window.location.href='index.html'">⬅ Back to Store</button>
+    <h1>SwiftCart Admin Login</h1>
+    <p><strong>Username:</strong> admin<br><strong>Password:</strong> 12345</p>
+
+    <form onsubmit="return validateLogin()">
+      <label for="username">Username:</label>
+      <input type="text" id="username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" required>
+
+      <button type="submit">Sign-in as Admin</button>
+    </form>
+  </div>
+
+  <script>
+    function validateLogin() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Hardcoded credentials
+      const validUser = "admin";
+      const validPass = "12345";
+
+      if (username === validUser && password === validPass) {
+        alert("Login successful! Redirecting to dashboard...");
+        window.location.href = "admin.html";
+        return false;
+      } else {
+        alert("Incorrect username or password!");
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>

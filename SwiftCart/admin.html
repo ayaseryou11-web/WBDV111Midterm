@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwiftCart Admin Dashboard</title>
+  <style>
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      margin: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.7);
+      padding: 1rem 2rem;
+      border-bottom: 3px solid #ffd700;
+    }
+
+    header h1 {
+      color: #ffd700;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a {
+      background: #3c8d0d;
+      border: 3px solid #fff;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      color: #fff;
+      font-family: 'Press Start 2P', cursive;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    nav a:hover {
+      transform: scale(1.1);
+      background: #5cbf2a;
+      box-shadow: 0 0 8px #ffd700;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .card {
+      background: rgba(0,0,0,0.85);
+      border: 3px solid #ffd700;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 0 12px #000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #ffd700;
+    }
+
+    .card h2 {
+      color: #ffd700;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px dashed #ffd700;
+      padding-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .card p, .card ul {
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card ul li {
+      background: rgba(255,255,255,0.1);
+      margin: 0.3rem 0;
+      padding: 0.4rem;
+      border-radius: 6px;
+    }
+
+    .pipeline .status-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.pipeline .status-item span {
+  font-size: 0.8rem;
+  color: #ffd700;
+}
+
+.status-bar {
+  height: 12px;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.status-bar::after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 70%; /* adjust width to simulate progress */
+  border-radius: 4px;
+}
+
+.status-bar.green::after {
+  background: #4caf50; /* operational */
+}
+
+.status-bar.yellow::after {
+  background: #ffeb3b; /* updating */
+}
+
+.status-bar.red::after {
+  background: #f44336; /* delayed */
+}
+
+.pipeline small {
+  font-size: 0.7rem;
+  color: #ccc;
+}
+
+
+    footer {
+      background: rgba(0,0,0,0.8);
+      text-align: center;
+      padding: 1rem;
+      border-top: 3px solid #ffd700;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SwiftCart Admin Dashboard</h1>
+    <nav>
+      <a href="index.html">Store</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Order Snapshot -->
+    <div class="card">
+      <h2>📊 Order Snapshot</h2>
+      <p><strong>Latest Cart Items:</strong> Seed, Star</p>
+      <p><strong>Latest Receipt Total:</strong> $12</p>
+      <p><strong>Tracking Stage:</strong> Preparing for delivery</p>
+    </div>
+
+    <!-- Customers -->
+    <div class="card">
+      <h2>👥 Customers</h2>
+      <ul>
+        <li>User123 – 2 orders</li>
+        <li>FarmerJoe – 5 orders</li>
+        <li>PixelQueen – 1 order</li>
+      </ul>
+    </div>
+
+    <!-- Receipts -->
+    <div class="card">
+      <h2>🧾 Receipts</h2>
+      <ul>
+        <li>Order #101 – $15 – Delivered</li>
+        <li>Order #102 – $7 – In Transit</li>
+        <li>Order #103 – $20 – Preparing</li>
+      </ul>
+    </div>
+
+    <!-- Pipeline Status -->
+ <div class="card pipeline">
+  <h2>⚙️ Pipeline Status</h2>
+  <div class="status-item">
+    <span>Inventory Sync</span>
+    <div class="status-bar green"></div>
+    <small>Operational</small>
+  </div>
+  <div class="status-item">
+    <span>Payment Gateway</span>
+    <div class="status-bar green"></div>
+    <small>Operational</small>
+  </div>
+  <div class="status-item">
+    <span>Delivery Tracking</span>
+    <div class="status-bar yellow"></div>
+    <small>Updating</small>
+  </div>
+  <div class="status-item">
+    <span>Customer Support</span>
+    <div class="status-bar red"></div>
+    <small>Delayed</small>
+  </div>
+</div>
+
+  </main>
+
+  <footer>
+    © 2026 SwiftCart | Admin Dashboard
+  </footer>
+</body>
+</html>
