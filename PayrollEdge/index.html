@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payroll Edge - Employee Overview</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Overlay now covers the entire viewport */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 40, 0.85);
+      z-index: 0;
+    }
+
+    header {
+      background: rgba(0,0,64,0.9);
+      display: flex;
+      align-items: center;
+      padding: 15px 40px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      position: relative;
+      z-index: 1;
+    }
+
+    header img.logo {
+      width: 130px;
+      margin-right: 30px;
+    }
+
+   nav {
+  display: flex;
+  gap: 15px;
+  margin-left: auto;
+}
+
+/* Base button style */
+nav a {
+  position: relative;
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: #cce6ff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Glow background effect */
+nav a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, #00c4ff, #0066ff);
+  opacity: 0;
+  transition: 0.3s ease;
+  z-index: -1;
+  border-radius: 8px;
+}
+
+/* Hover effect */
+nav a:hover::before {
+  opacity: 0.2;
+}
+
+nav a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px #00c4ff;
+  transform: translateY(-2px);
+}
+
+/* Active tab (current page) */
+nav a.active {
+  background: linear-gradient(120deg, #00c4ff, #0066ff);
+  color: white;
+  box-shadow: 0 0 15px #00c4ff;
+}
+
+    .container {
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 40px;
+      color: #00c4ff;
+      text-shadow: 0 0 12px #00c4ff;
+      letter-spacing: 2px;
+    }
+
+    /* Manager card styling */
+    .manager-card {
+      background: linear-gradient(145deg, rgba(20,40,80,0.95), rgba(0,0,40,0.9));
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 40px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0,196,255,0.7);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .manager-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 35px rgba(0,196,255,1);
+    }
+
+    .manager-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      object-fit: cover;
+      border: 3px solid #00c4ff;
+    }
+
+    .manager-card h2 {
+      margin: 10px 0;
+      font-size: 22px;
+      color: #fff;
+    }
+
+    .manager-card p {
+      margin: 5px 0;
+      font-size: 15px;
+      color: #cce6ff;
+    }
+
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .staff-card {
+      background: rgba(10,20,60,0.9);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .staff-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 30px rgba(0,196,255,0.8);
+    }
+
+    .staff-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      object-fit: cover;
+      border: 3px solid #003366;
+    }
+
+    .staff-card h2 {
+      margin: 10px 0 5px;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .staff-card p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #cce6ff;
+    }
+
+    .staff-card.active {
+  border: 2px solid #00c4ff;
+  box-shadow: 0 0 35px #00c4ff;
+  transform: scale(1.05);
+}
+
+    .top-performer {
+      border: 2px solid #00ff99;
+      box-shadow: 0 0 20px #00ff99;
+    }
+
+    .top-performer::after {
+      content: "⭐ Top Performer";
+      display: block;
+      margin-top: 10px;
+      color: #00ff99;
+      font-weight: bold;
+    }
+
+    .least-performer {
+      border: 2px solid #ff4d4d;
+      box-shadow: 0 0 20px #ff4d4d;
+    }
+
+    .least-performer::after {
+      content: "⚠ Needs Improvement";
+      display: block;
+      margin-top: 10px;
+      color: #ff4d4d;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <header>
+    <img src="logo.png" alt="Payroll Edge Logo" class="logo">
+    <nav>
+      <a href="index.html">Staff</a>
+      <a href="timesheets.html">Timesheets</a>
+      <a href="payslips.html">Payslips</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>Employee Overview</h1>
+
+    <!-- Manager Card -->
+    <div class="manager-card">
+      <img src="wise.png" alt="Manager">
+      <h2>Manager: Wise </h2>
+      <p>Position: General Manager</p>
+      <p>Weekly Hours: 50</p>
+    </div>
+
+    <!-- Staff Cards -->
+    <div class="staff-grid">
+      <div class="staff-card top-performer">
+        <img src="anby.jpg" alt="Staff 1">
+        <h2>Anby Demara</h2>
+        <p>Position: Senior Developer</p>
+        <p>Weekly Hours: 45</p>
+      </div>
+
+      <div class="staff-card">
+        <img src="nicole.jpg" alt="Staff 2">
+        <h2>Nicole Demara</h2>
+        <p>Position: HR Manager</p>
+        <p>Weekly Hours: 40</p>
+      </div>
+
+      <div class="staff-card least-performer">
+        <img src="billy.jpg" alt="Staff 3">
+        <h2>Billy Kid</h2>
+        <p>Position: Junior Analyst</p>
+        <p>Weekly Hours: 28</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+/* =========================
+   Fade-in animation on load
+========================= */
+window.addEventListener("load", () => {
+  document.querySelectorAll(".manager-card, .staff-card").forEach((card, index) => {
+    card.style.opacity = 0;
+    card.style.transform = "translateY(20px)";
+    
+    setTimeout(() => {
+      card.style.transition = "all 0.6s ease";
+      card.style.opacity = 1;
+      card.style.transform = "translateY(0)";
+    }, index * 150);
+  });
+});
+
+
+/* =========================
+   Click to highlight card
+========================= */
+document.querySelectorAll(".staff-card").forEach(card => {
+  card.addEventListener("click", () => {
+    document.querySelectorAll(".staff-card").forEach(c => c.classList.remove("active"));
+    card.classList.add("active");
+  });
+});
+
+
+/* =========================
+   Auto-detect top performer
+========================= */
+function updateTopPerformer() {
+  let cards = document.querySelectorAll(".staff-card");
+  let maxHours = 0;
+  let minHours = Infinity;
+  let topCard = null;
+  let leastCard = null;
+
+  cards.forEach(card => {
+    let text = card.innerText;
+    let hours = parseInt(text.match(/Weekly Hours: (\d+)/)[1]);
+
+    if (hours > maxHours) {
+      maxHours = hours;
+      topCard = card;
+    }
+
+    if (hours < minHours) {
+      minHours = hours;
+      leastCard = card;
+    }
+  });
+
+  cards.forEach(c => {
+    c.classList.remove("top-performer", "least-performer");
+  });
+
+  if (topCard) topCard.classList.add("top-performer");
+  if (leastCard) leastCard.classList.add("least-performer");
+}
+
+updateTopPerformer();
+
+
+/* =========================
+   Animate numbers (count up)
+========================= */
+function animateNumbers() {
+  document.querySelectorAll(".staff-card p, .manager-card p").forEach(p => {
+    let match = p.innerText.match(/(\d+)/);
+    if (!match) return;
+
+    let finalValue = parseInt(match[1]);
+    let current = 0;
+
+    let interval = setInterval(() => {
+      current += Math.ceil(finalValue / 20);
+      if (current >= finalValue) {
+        current = finalValue;
+        clearInterval(interval);
+      }
+      p.innerText = p.innerText.replace(/\d+/, current);
+    }, 30);
+  });
+}
+
+animateNumbers();
+
+
+/* =========================
+   Parallax background effect
+========================= */
+document.addEventListener("mousemove", (e) => {
+  let x = (e.clientX / window.innerWidth - 0.5) * 10;
+  let y = (e.clientY / window.innerHeight - 0.5) * 10;
+
+  document.body.style.backgroundPosition = `${50 + x}% ${50 + y}%`;
+});
+
+/* =========================
+   Active nav highlight
+========================= */
+const links = document.querySelectorAll("nav a");
+const currentPage = window.location.pathname.split("/").pop();
+
+links.forEach(link => {
+  if (link.getAttribute("href") === currentPage) {
+    link.classList.add("active");
+  }
+});
+
+</script>
+
+</body>
+</html>

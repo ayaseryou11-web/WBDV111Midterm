@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payroll Edge - Login</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('background3.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 64, 0.85); /* Navy blue overlay */
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-box {
+      background: linear-gradient(145deg, rgba(10,20,60,0.95), rgba(0,0,40,0.9));
+      padding: 50px;
+      border-radius: 16px;
+      text-align: center;
+      width: 400px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+    }
+
+    .login-box img.logo {
+      width: 150px; /* Bigger logo */
+      margin-bottom: 25px;
+    }
+
+    .login-box h1 {
+      margin-bottom: 25px;
+      font-size: 28px;
+      letter-spacing: 3px;
+      color: #00c4ff; /* Neon accent */
+      text-shadow: 0 0 10px #00c4ff;
+    }
+
+    .input-group {
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #cce6ff;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #e6f0ff;
+      color: #000;
+      font-size: 15px;
+    }
+
+    .login-box button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(90deg, #001f4d, #003366);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 17px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .login-box button:hover {
+      background: linear-gradient(90deg, #003366, #0055aa);
+      transform: scale(1.05);
+    }
+
+    .security-icons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .security-icons img {
+      width: 45px;
+      height: 45px;
+      filter: invert(100%) brightness(200%);
+      transition: transform 0.3s ease;
+    }
+
+    .security-icons img:hover {
+      transform: scale(1.2);
+    }
+
+    .credentials {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #99ccff;
+      background: rgba(0,0,40,0.6);
+      padding: 10px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="login-box">
+      <!-- Replace logo.png with your actual logo -->
+      <img src="logo.png" alt="Payroll Edge Logo" class="logo">
+      <h1>Access Now</h1>
+      <form id="loginForm">
+        <div class="input-group">
+          <label for="username">Name</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <div class="security-icons">
+        <!-- Replace with your own fingerprint/faceID icons -->
+        <img src="finger.png" alt="Fingerprint Icon">
+        <img src="face.png" alt="FaceID Icon">
+      </div>
+      <div class="credentials">
+        <strong>Demo Credentials:</strong><br>
+        Username: <code>Wise</code><br>
+        Password: <code>1234</code>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === 'Wise' && password === '1234') {
+        window.location.href = 'index.html';
+      } else {
+        alert('Invalid credentials. Try again.');
+      }
+    });
+  </script>
+</body>
+</html>
+
