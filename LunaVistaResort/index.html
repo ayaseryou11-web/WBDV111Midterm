@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luna Vista Resort</title>
+
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary-color: #2c3855;
+  --primary-color-dark: #435681;
+  --text-light: #767268;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  padding-top: 100px; /* space for fixed nav */
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: var(--white);
+  z-index: 1000;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.nav__container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo img {
+  height: 80px;
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav__links a {
+  text-decoration: none;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.nav__links a:hover {
+  color: var(--primary-color);
+}
+
+/* VIDEO HERO */
+.video-hero {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+
+.bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.video-hero::after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* behind the overlay text and button */
+}
+
+.video-overlay {
+  position: relative;
+  color: #fff;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.video-overlay h1 {
+  font-size: 2.5rem;
+}
+
+.video-overlay p {
+  margin: 10px 0 20px;
+}
+
+/* BUTTON */
+.btn {
+  padding: 10px 20px;
+  background: var(--primary-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #435681;
+  transition: 0.3s linear;
+}
+
+/* HOME SECTION */
+.home-section {
+  display: flex;
+  gap: 40px;
+  max-width: var(--max-width);
+  margin: 60px auto;
+  padding: 20px;
+  align-items: center;
+}
+
+.about {
+  flex: 1;
+}
+
+.about h2 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.about p {
+  margin-bottom: 15px;
+  color: var(--text-light);
+}
+
+/* CAROUSEL */
+.carousel-container {
+  flex: 1;
+}
+
+.carousel {
+  position: relative;
+  height: 350px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* NAV BUTTONS */
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  padding: 0 15px;
+}
+
+.carousel-nav span {
+  cursor: pointer;
+  font-size: 1.8rem;
+  color: #fff;
+  background: rgba(0,0,0,0.4);
+  padding: 8px;
+  border-radius: 50%;
+}
+
+/* FOOTER */
+.footer {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 40px 20px;
+  margin-top: 60px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center; /* center all sections */
+  text-align: center; /* center text inside each section */
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-section a {
+  color: #ddd;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .home-section {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav__container">
+    <div class="nav__logo">
+      <img src="logo.png">
+    </div>
+    <ul class="nav__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="booking.html">Reservations</a></li>
+       <li><a href="register.html">Sign Up</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- VIDEO -->
+<div class="video-hero">
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="tropical.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay">
+    <h1>Welcome to Luna Vista Resort</h1>
+    <p>Relax. Unwind. Experience Paradise.</p>
+    <a href="booking.html" class="btn">Book Now</a>
+  </div>
+</div>
+
+<!-- ABOUT + CAROUSEL -->
+<div class="home-section">
+
+  <div class="about">
+    <h2>About Luna Vista Resort</h2>
+    <p>Escape the busy city and enjoy luxury, comfort, and unforgettable moments.</p>
+    <a href="#" class="btn">Learn More</a>
+  </div>
+
+  <div class="carousel-container">
+    <div class="carousel">
+      <div class="slide active" style="background-image:url('resort1.jpg')"></div>
+      <div class="slide" style="background-image:url('resort2.jpg')"></div>
+      <div class="slide" style="background-image:url('resort3.jpg')"></div>
+
+      <div class="carousel-nav">
+        <span class="prev">&#10094;</span>
+        <span class="next">&#10095;</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>Luna Vista Resort</h3>
+      <p>Your perfect getaway destination.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <p>Pampanga, Philippines</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Luna Vista Resort
+  </div>
+</footer>
+
+<!-- SCRIPT -->
+<script>
+const slides = document.querySelectorAll('.slide');
+const next = document.querySelector('.next');
+const prev = document.querySelector('.prev');
+let current = 0;
+
+function showSlide(i) {
+  slides.forEach(s => s.classList.remove('active'));
+  slides[i].classList.add('active');
+}
+
+next.onclick = () => {
+  current = (current + 1) % slides.length;
+  showSlide(current);
+};
+
+prev.onclick = () => {
+  current = (current - 1 + slides.length) % slides.length;
+  showSlide(current);
+};
+
+setInterval(() => {
+  current = (current + 1) % slides.length;
+  showSlide(current);
+}, 5000);
+</script>
+
+</body>
+</html>
