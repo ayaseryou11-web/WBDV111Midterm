@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> VibeStream Pro | EXPLORE </title>
+	<link rel="stylesheet" href="explorestyle.css">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+<style>
+
+/* VIDEO BACKGROUND */
+#bg-video {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: -1;
+	opacity: 0.7;
+}
+
+/* OPTIONAL DARK OVERLAY (makes text readable) */
+#video-overlay {
+	background: rgba(0,0,0,0.3);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+}
+
+
+
+/* ADDED ONLY */
+.search-bar{
+	margin:15px 0;
+	text-align:center;
+}
+.search-bar input{
+	width:60%;
+	padding:10px;
+	border-radius:20px;
+	border:none;
+}
+
+/* SONG TITLE */
+#song-title{
+	text-align:center;
+	color:#1db954;
+	font-weight:600;
+}
+
+/* EXTRA CONTROLS */
+.extra-controls{
+	display:flex;
+	gap:10px;
+	align-items:center;
+}
+.extra-controls button{
+	background:#222;
+	border:none;
+	color:#fff;
+	font-size:18px;
+	padding:8px;
+	border-radius:50%;
+	cursor:pointer;
+}
+#main-play{
+	background:linear-gradient(135deg,#1db954,#1ed760);
+	width:55px;
+	height:55px;
+	font-size:24px;
+}
+
+/* TOP SEARCH BAR */
+.top-search {
+	position: relative;
+	margin-left: 20px;
+}
+
+.top-search input {
+	padding: 8px 35px 8px 12px;
+	border-radius: 20px;
+	border: none;
+	outline: none;
+	width: 200px;
+}
+
+.top-search i {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #555;
+}
+
+/* MOBILE */
+@media (max-width:768px){
+	.top-search input {
+		width: 120px;
+	}
+}
+
+/* STATES */
+.item.active{border:2px solid #1db954;}
+#like.active{color:red;}
+#shuffle.active,#repeat.active{background:#1db954;}
+
+/* VISUALIZER */
+.visualizer{
+	display:flex;
+	gap:4px;
+	height:20px;
+}
+.visualizer span{
+	width:4px;
+	background:#1db954;
+	animation:bounce 1s infinite;
+}
+@keyframes bounce{
+	0%,100%{height:5px;}
+	50%{height:20px;}
+}
+
+/* ROTATE */
+.rotate{animation:spin 4s linear infinite;}
+@keyframes spin{
+	from{transform:rotate(0);}
+	to{transform:rotate(360deg);}
+}
+
+</style>
+
+</head>
+
+<body>
+
+	<video autoplay muted loop id="bg-video">
+	<source src="vid.mp4" type="video/mp4">
+</video>
+
+<div id="video-overlay"></div>
+
+<audio id="audio"></audio>
+
+<div class="audio-controls">
+
+	<img id="album-cover" src="" alt="cover">
+
+	<!-- SONG TITLE -->
+	<h4 id="song-title">No song playing</h4>
+
+	<!-- NEW CONTROLS -->
+	<div class="extra-controls">
+		<button id="prev"><i class='bx bx-skip-previous'></i></button>
+		<button id="main-play"><i class='bx bx-play'></i></button>
+		<button id="next"><i class='bx bx-skip-next'></i></button>
+		<button id="shuffle"><i class='bx bx-shuffle'></i></button>
+		<button id="repeat"><i class='bx bx-repeat'></i></button>
+		<button id="like"><i class='bx bx-heart'></i></button>
+	</div>
+	
+	<input type="range" id="progress" value="0" min="0" max="100">
+	
+	<span id="time">0:00</span>
+	
+	<i class='bx bx-volume-full'></i>
+	<input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+
+	<!-- VISUALIZER -->
+	<div class="visualizer">
+		<span></span><span></span><span></span><span></span><span></span>
+	</div>
+
+</div>
+
+
+	<div class="sidebar">
+		<div class="logo">
+		<a href="index.html">
+			<img src="logo.png" alt="Logo" />
+		</a>
+		</div>
+		
+		<div class="navigation">
+			<ul>
+				<li>
+				<a href="index.html">
+					<span class="bx bx-home"></span>
+					<span>Home</span>
+				</a>
+				</li>
+			
+				
+				<li>
+				<a href="#">
+					<span class="bx bx-book"></span>
+					<span>Your Library</span>
+				</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="navigation">
+			<ul>
+				<li>
+				<a href="#">
+					<span class="bx bx-headphone"></span>
+					<span>Create Playlist</span>
+				</a>
+				</li>
+				
+				<li>
+				<a href="#">
+					<span class="bx bx-heart"></span>
+					<span>Liked Songs</span>
+				</a>
+				</li>
+			</ul>
+		</div>
+		
+		<br>
+		
+		<div class="policies">
+			<ul>
+				<li>
+					<a href="#">Cookies</a>
+				</li>
+				<li>
+					<a href="#">Privacy</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="main-container">
+		<div class="topbar">
+			<div class="prev-next-buttons">
+				<button type="button" class="bx bx-chevrons-left"></button>
+				<button type="button" class="bx bx-chevrons-right"></button>
+			</div>
+			
+			<div class="navbar">
+				<ul>
+					<li>
+						<a href="#"> Premium </a>
+					</li>
+					<li>
+						<a href="#"> Support </a>
+					</li>
+					<li>
+						<a href="#"> Download </a>
+					</li>
+					<li class="divider">|</li>
+					<li>
+						<a href="register.html"> Sign Up </a>
+					</li>
+					<li>
+						<a href="login.html"> Log In </a>
+					</li>
+				</ul>
+
+				<div class="top-search">
+	<input type="text" id="searchInput" placeholder="Search songs..." onkeyup="searchSongs()">
+	<i class='bx bx-search'></i>
+</div>
+
+			</div>
+		</div>
+
+		<!-- SEARCH BAR -->
+		<div class="search-bar">
+			<input type="text" id="searchInput" placeholder="Search songs..." onkeyup="searchSongs()">
+		</div>
+		
+		<div class="playlist">
+			<h2> VibeStream Pro Playlists </h2>
+			<div class="list">
+			
+				<!-- YOUR ORIGINAL ITEMS UNCHANGED -->
+				<div class="item" data-song="music/Anthonymp.mp3" data-cover="antocover.jpeg">
+					<img src="antocover.jpeg">
+					<div class="play"><span class="bx bx-play"></span></div>
+					<h4>Antonymph</h4>
+					<p>Vylet Pony </p>
+				</div>
+
+				<div class="item" data-song="music/help.mp3" data-cover="help.jpg">
+					<img src="help.jpg">
+					<div class="play"><span class="bx bx-play"></span></div>
+					<h4>HELP!!</h4>
+					<p>Kobo Kanaeru</p>
+				</div>
+
+				<div class="item" data-song="music/sacredlight.mp3" data-cover="sacred.png">
+					<img src="sacred.png">
+					<div class="play"><span class="bx bx-play"></span></div>
+					<h4>Sacred Light</h4>
+					<p>BL8M</p>
+				</div>
+
+				<div class="item" data-song="music/robin.mp3" data-cover="hsralbum.jpg">
+					<img src="hsralbum.jpg">
+					<div class="play"><span class="bx bx-play"></span></div>
+					<h4>Hope is the Thing Wi...</h4>
+					<p>Robin, HOYO-MiX...</p>
+				</div>
+			
+			</div>
+		</div>
+		
+		<div class="preview">
+			<div class="text">
+				<h6>Preview of VibeStream Pro</h6>
+				<p>Sign up and go Pro to get unlimited songs with no ads.</p>
+			</div>
+			
+			<div class="button">
+				<a href="register.html" class="signup-btn">Sign Up</a>
+			</div>
+		</div>
+		
+	</div>
+	
+<script>
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("main-play");
+const progress = document.getElementById("progress");
+const volume = document.getElementById("volume");
+const timeDisplay = document.getElementById("time");
+const albumCover = document.getElementById("album-cover");
+const songTitle = document.getElementById("song-title");
+
+const playlistItems = document.querySelectorAll(".playlist .item");
+
+let currentSong = 0;
+let isShuffle = false;
+let isRepeat = false;
+
+/* SEARCH */
+function searchSongs(){
+	let input = document.getElementById("searchInput").value.toLowerCase();
+	playlistItems.forEach(item=>{
+		item.style.display = item.innerText.toLowerCase().includes(input) ? "block":"none";
+	});
+}
+
+/* PLAY */
+function playSong(index){
+	const item = playlistItems[index];
+	audio.src = item.dataset.song;
+	albumCover.src = item.dataset.cover;
+	songTitle.textContent = item.querySelector("h4").innerText;
+
+	audio.play();
+	playBtn.innerHTML = "<i class='bx bx-pause'></i>";
+	albumCover.classList.add("rotate");
+
+	playlistItems.forEach(i=>i.classList.remove("active"));
+	item.classList.add("active");
+
+	currentSong = index;
+}
+
+playlistItems.forEach((item,index)=>{
+	item.addEventListener("click", ()=>playSong(index));
+});
+
+/* CONTROLS */
+document.getElementById("next").onclick = ()=>{
+	currentSong = isShuffle ? Math.floor(Math.random()*playlistItems.length)
+	: (currentSong+1)%playlistItems.length;
+	playSong(currentSong);
+};
+
+document.getElementById("prev").onclick = ()=>{
+	currentSong = (currentSong-1+playlistItems.length)%playlistItems.length;
+	playSong(currentSong);
+};
+
+document.getElementById("shuffle").onclick = function(){
+	isShuffle=!isShuffle;
+	this.classList.toggle("active");
+};
+
+document.getElementById("repeat").onclick = function(){
+	isRepeat=!isRepeat;
+	this.classList.toggle("active");
+};
+
+document.getElementById("like").onclick = function(){
+	this.classList.toggle("active");
+};
+
+playBtn.onclick = ()=>{
+	if(!audio.src){ playSong(currentSong); return; }
+
+	if(audio.paused){
+		audio.play();
+		playBtn.innerHTML="<i class='bx bx-pause'></i>";
+	} else {
+		audio.pause();
+		playBtn.innerHTML="<i class='bx bx-play'></i>";
+	}
+};
+
+audio.ontimeupdate=()=>{
+	if(!audio.duration) return;
+	progress.value=(audio.currentTime/audio.duration)*100;
+
+	let m=Math.floor(audio.currentTime/60);
+	let s=Math.floor(audio.currentTime%60);
+	timeDisplay.textContent=m+":"+(s<10?"0":"")+s;
+};
+
+progress.oninput=()=>{
+	audio.currentTime=(progress.value/100)*audio.duration;
+};
+
+volume.oninput=()=>{
+	audio.volume=volume.value;
+};
+
+audio.onended=()=>{
+	if(isRepeat) playSong(currentSong);
+	else if(isShuffle) playSong(Math.floor(Math.random()*playlistItems.length));
+	else playSong((currentSong+1)%playlistItems.length);
+};
+</script>
+
+</body>
+</html>
