@@ -7,336 +7,239 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 /* GLOBAL STYLES */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+/* GLOBAL */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
-body {
-    background: #0f0f1a;
-    color: #fff;
+body{
+  background:#0f0f1a;
+  color:#fff;
 }
 
-/* VIDEO BACKGROUND */
-.video-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -2;
+/* BACKGROUND */
+.video-bg{
+  position:fixed;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
 }
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 15, 26, 0.7);
-    z-index: -1;
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(15,15,26,0.7);
+  z-index:-1;
 }
 
 /* HEADER */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background: linear-gradient(270deg, #ff4fd8, #7b5cff, #00e5ff);
-    background-size: 600% 600%;
-    animation: gradientMove 8s ease infinite;
-    border-bottom: 5px solid #000;
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  flex-wrap:wrap;
+  gap:15px;
+  background:linear-gradient(270deg,#ff4fd8,#7b5cff,#00e5ff);
+  background-size:600% 600%;
+  animation:gradientMove 8s infinite;
+}
+.logo img{
+  width:180px;
+  height:auto;
 }
 
-@keyframes gradientMove {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
 }
 
-.logo img {
-    width: 230px;
-    height: 90px;
+nav button{
+  padding:8px 16px;
+  border:none;
+  border-radius:25px;
+  background:#00e5ff;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:3px 3px 0 #000;
+}
+nav button:hover{
+  transform:translate(-2px,-2px);
+  background:#ffe600;
 }
 
-nav a button {
-    margin: 5px;
-    padding: 10px 20px;
-    border: none;
-    background: #00e5ff;
-    font-weight: bold;
-    box-shadow: 4px 4px 0 #000;
-    cursor: pointer;
-    border-radius: 30px;
+/* SECTION TITLE */
+h2{
+  text-align:center;
+  margin-top:50px;
+  font-size:clamp(1.5rem, 3vw, 2rem);
 }
 
-nav a button:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 #000;
-    color: black;
-    background: #ffe600;
-    transition: 0.2s linear;
+/* TICKET TYPES */
+.ticket-types{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:40px 20px;
+  max-width:1100px;
+  margin:auto;
 }
 
-/* TICKET TYPES SECTION */
-.ticket-types {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    padding: 50px 20px;
-    overflow-x: auto;
+.ticket-card{
+  padding:20px;
+  border-left:6px solid #00e5ff;
+  background:linear-gradient(135deg,#1e1e2f,#2a2a4a);
+  border-radius:12px;
+  box-shadow:6px 6px 0 #000;
+  transition:0.3s;
+}
+.ticket-card:hover{
+  transform:translateY(-6px);
 }
 
-.ticket-card {
-    border-radius: 10px;
-    min-width: 250px;
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 25px;
-    border-left: 6px solid #00e5ff;
-    background: linear-gradient(135deg, #1e1e2f, #2a2a4a);
-    box-shadow: 8px 8px 0 #000;
-    transition: transform 0.2s, box-shadow 0.2s;
+.group-btn{
+  margin-top:10px;
+  padding:10px;
+  border-radius:25px;
+  background:#00ff9f;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
 }
 
-.ticket-card:hover {
-    transform: translate(-5px, -5px);
-    box-shadow: 12px 12px 0 #000;
+/* BUILDER */
+.ticket-builder{
+  max-width:1000px;
+  margin:40px auto;
+  padding:20px;
 }
 
-.ticket-card h3 {
-    color: #00e5ff;
-    font-size: 1.5rem;
-    text-shadow: 2px 2px 0 #000;
+.ticket-tier{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
 }
 
-.ticket-card p {
-    color: #ddd;
-    font-size: 1rem;
+.tier-card{
+  padding:20px;
+  background:#2a2a4a;
+  border-radius:10px;
 }
 
-.group-btn {
-    margin-top: 10px;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 25px;
-    background: #00ff9f;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 4px 4px 0 #000;
-    color: #000;
-    transition: all 0.3s ease-in-out;
-    position: relative;
-    overflow: hidden;
+/* QUANTITY */
+.quantity-box{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
 }
 
-.group-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -50%;
-    width: 200%;
-    height: 300%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: rotate(25deg) translateY(-50%);
-    transition: all 0.5s ease;
-}
-
-.group-btn:hover::before {
-    left: 100%;
-}
-
-.group-btn:hover {
-    transform: translate(-2px, -2px) scale(1.05);
-    background: #00ffc1;
-    box-shadow: 0 0 15px #00ff9f, 0 0 30px #00ff9f inset;
-    color: #000;
-}
-
-/* TICKET BUILDER SECTION */
-.ticket-builder {
-    max-width: 900px;
-    margin: 50px auto;
-    padding: 20px;
-    background: linear-gradient(135deg, #1e1e2f, #2a2a4a);
-    border: 3px solid #00e5ff;
-    border-radius: 15px;
-    box-shadow: 8px 8px 0 #000;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.ticket-builder h2 {
-    color: #ffe600;
-    text-shadow: 3px 3px 0 #000;
-    text-align: center;
-}
-
-.ticket-tier {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.tier-card {
-    flex: 1 1 250px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px;
-    border-left: 5px solid #00e5ff;
-    background: #2a2a4a;
-    border-radius: 10px;
-    box-shadow: 5px 5px 0 #000;
-}
-
-.tier-card h3 {
-    color: #00e5ff;
-    font-size: 1.3rem;
-    text-shadow: 2px 2px 0 #000;
-}
-
-.tier-card p {
-    color: #ddd;
-    font-size: 0.95rem;
-}
-
-.tier-card ul {
-    margin-left: 15px;
-    color: #ddd;
-    font-size: 0.95rem;
-}
-
-.tier-card input {
-    width: 60px;
-    padding: 8px;
-    border-radius: 8px;
-    border: 2px solid #00e5ff;
-    background: #0f0f1a;
-    color: #fff;
-    outline: none;
-    box-shadow: inset 2px 2px 5px #000;
-}
-
-.total-display {
-    margin-top: 15px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #ffe600;
-    text-align: center;
-}
-
-/* FAQS SECTION */
-.faqs {
-    max-width: 900px;
-    margin: 50px auto;
-    padding: 0 20px;
-}
-
-.faqs h2 {
-    color: #ffe600;
-    text-shadow: 3px 3px 0 #000;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.faq-item {
-    background: linear-gradient(135deg, #1e1e2f, #2a2a4a);
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    border-left: 6px solid #00e5ff;
-    border-radius: 10px;
-    box-shadow: 5px 5px 0 #000;
-}
-
-.faq-item h4 {
-    color: #00e5ff;
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-}
-
-.faq-item p {
-    color: #ddd;
-    font-size: 0.95rem;
-}
-/* REMOVE DEFAULT ARROWS */
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-input[type=number] {
-    -moz-appearance: textfield;
-}
-
-/* QUANTITY BOX */
-.quantity-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-/* INPUT */
-.quantity-box input {
-    width: 60px;
-    text-align: center;
-    font-size: 1rem;
-    border-radius: 10px;
-    border: 2px solid #00e5ff;
-    background: #0f0f1a;
-    color: #fff;
-    padding: 8px;
-    box-shadow: inset 2px 2px 6px #000;
+.quantity-box input{
+  width:60px;
+  text-align:center;
 }
 
 /* BUTTONS */
-.qty-btn {
-    width: 35px;
-    height: 35px;
-    border: none;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    background: linear-gradient(135deg, #00e5ff, #7b5cff);
-    color: #000;
-    box-shadow: 3px 3px 0 #000;
-    transition: all 0.2s ease;
+.qty-btn{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  border:none;
+  background:#00e5ff;
+  cursor:pointer;
 }
 
-/* HOVER EFFECT */
-.qty-btn:hover {
-    transform: translate(-2px, -2px) scale(1.1);
-    box-shadow: 0 0 10px #00e5ff, 4px 4px 0 #000;
+/* TOTAL */
+.total-display{
+  text-align:center;
+  margin-top:20px;
+  font-size:1.2rem;
+  color:#ffe600;
 }
 
-/* CLICK EFFECT */
-.qty-btn:active {
-    transform: scale(0.95);
-    box-shadow: 1px 1px 0 #000;
+/* FAQ */
+.faqs{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+
+.faq-item{
+  padding:15px;
+  margin-bottom:10px;
+  background:#1e1e2f;
+  border-radius:10px;
 }
 
 /* FOOTER */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #000;
+footer{
+  text-align:center;
+  padding:20px;
+  background:#000;
+  margin-top:40px;
 }
 
+/* 📱 MOBILE FIXES */
+@media(max-width:768px){
+
+  header{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .logo img{
+    width:150px;
+  }
+
+  nav{
+    justify-content:center;
+  }
+
+  .ticket-builder{
+    padding:15px;
+  }
+
+  .tier-card{
+    padding:15px;
+  }
+
+  .quantity-box{
+    flex-direction:row;
+  }
+
+  .faq-item h4{
+    font-size:1rem;
+  }
+
+  .faq-item p{
+    font-size:0.9rem;
+  }
+}
+
+/* 📱 EXTRA SMALL (phones) */
+@media(max-width:480px){
+
+  h2{
+    font-size:1.3rem;
+  }
+
+  .ticket-card h3,
+  .tier-card h3{
+    font-size:1.2rem;
+  }
+
+  nav button{
+    padding:6px 12px;
+    font-size:0.8rem;
+  }
+
+}
 </style>
 
 <body>
@@ -395,7 +298,7 @@ footer {
      <label>Quantity:</label>
 <div class="quantity-box">
   <button class="qty-btn minus">−</button>
-  <input type="number" min="0" value="0" data-price="50" class="ticket-input">
+  <input type="number" min="0" value="0" data-price="100" class="ticket-input">
   <button class="qty-btn plus">+</button>
 </div>
     </div>
@@ -410,7 +313,7 @@ footer {
       <label>Quantity:</label>
 <div class="quantity-box">
   <button class="qty-btn minus">−</button>
-  <input type="number" min="0" value="0" data-price="50" class="ticket-input">
+ <input type="number" min="0" value="0" data-price="200" class="ticket-input">
   <button class="qty-btn plus">+</button>
 </div>
     </div>
