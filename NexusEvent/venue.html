@@ -5,296 +5,216 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nexus Events - Venue</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* GLOBAL */
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
 body{
-    background:#0f0f1a;
-    color:#fff;
+  background:#0f0f1a;
+  color:#fff;
 }
 
-/* VIDEO BG */
+/* BACKGROUND */
 .video-bg{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    z-index:-2;
+  position:fixed;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
 }
-
 .overlay{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:rgba(15,15,26,0.7);
-    z-index:-1;
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(10,10,20,0.75);
+  backdrop-filter:blur(6px);
+  z-index:-1;
 }
 
 /* HEADER */
 header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px;
-    background:linear-gradient(270deg,#ff4fd8,#7b5cff,#00e5ff);
-    background-size:600% 600%;
-    animation:gradientMove 8s ease infinite;
-    border-bottom:5px solid #000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background:linear-gradient(270deg,#ff4fd8,#7b5cff,#00e5ff);
+  background-size:600% 600%;
+  animation:gradientMove 8s infinite;
+  flex-wrap:wrap;
 }
-
 @keyframes gradientMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
+  0%{background-position:0%}
+  50%{background-position:100%}
+  100%{background-position:0%}
+}
+.logo img{width:200px}
+
+nav{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+nav button{
+  padding:10px 18px;
+  border:none;
+  border-radius:30px;
+  background:#00e5ff;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:4px 4px 0 #000;
+}
+nav button:hover{
+  transform:translate(-2px,-2px);
+  background:#ffe600;
 }
 
-.logo img{
-    width:230px;
-    height:90px;
+/* TITLE */
+.title{
+  text-align:center;
+  margin:50px 0 30px;
+  font-size:2.5rem;
+  color:#ffe600;
+  text-shadow:3px 3px #000;
 }
 
-nav a button{
-    margin:5px;
-    padding:10px 20px;
-    border:none;
-    background:#00e5ff;
-    font-weight:bold;
-    box-shadow:4px 4px 0 #000;
-    cursor:pointer;
-    border-radius:30px;
+/* VENUE GRID */
+.venue-grid{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  padding:20px;
 }
 
-nav a button:hover{
-    transform:translate(-2px,-2px);
-    box-shadow:6px 6px 0 #000;
-    background:#ffe600;
+/* GLASS CARD */
+.card{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(12px);
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 0 20px rgba(0,0,0,0.6);
+  transition:0.3s;
+}
+.card:hover{
+  box-shadow:0 0 25px #00ff9f;
 }
 
-/* VENUE SECTION */
-.venue-section{
-    max-width:1100px;
-    margin:60px auto;
-    padding:20px;
-    display:flex;
-    gap:30px;
-    flex-wrap:wrap;
+/* VENUE TEXT */
+.card h2{
+  color:#ffe600;
+  margin-bottom:10px;
+}
+.card p, .card li{
+  color:#ccc;
+}
+.card ul{
+  margin-left:20px;
+  margin-top:10px;
 }
 
-.venue-box{
-    flex:1 1 500px;
-    background:linear-gradient(135deg,#1e1e2f,#2a2a4a);
-    padding:25px;
-    border-radius:15px;
-    border-left:6px solid #00e5ff;
-    box-shadow:8px 8px 0 #000;
+/* BUTTON */
+.btn{
+  display:inline-block;
+  margin-top:15px;
+  padding:10px 18px;
+  border-radius:25px;
+  background:#00ff9f;
+  color:#000;
+  text-decoration:none;
+  font-weight:bold;
 }
-
-.venue-box h2{
-    color:#ffe600;
-    text-shadow:3px 3px 0 #000;
-    margin-bottom:10px;
-}
-
-.venue-box p{
-    color:#ddd;
-    margin-bottom:10px;
-}
-
-.venue-box ul{
-    margin-left:20px;
-    color:#ddd;
-}
-
-.see-btn{
-    margin-top:15px;
-    padding:12px 20px;
-    border:none;
-    border-radius:25px;
-    background:#00ff9f;
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:4px 4px 0 #000;
-}
-
-.see-btn:hover{
-    transform:translate(-2px,-2px);
-    background:#00ffc1;
+.btn:hover{
+  box-shadow:0 0 15px #00ff9f;
 }
 
 /* FLOOR PLAN */
-.floor-plan{
-    flex:1 1 400px;
-    background:#1e1e2f;
-    border-radius:15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:3px solid #00e5ff;
-    box-shadow:8px 8px 0 #000;
-    padding:20px;
+.floor img{
+  width:100%;
+  border-radius:15px;
+  transition:0.4s;
 }
-
-.floor-plan img{
-    width:100%;
-    border-radius:10px;
+.floor:hover img{
+  transform:scale(1.05);
 }
 
 /* AMENITIES */
 .amenities{
-    max-width:1100px;
-    margin:40px auto;
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
-    padding:0 20px;
+  max-width:1100px;
+  margin:40px auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:20px;
 }
 
-
-/* AMENITY CARD BASE */
-.amenity-card{
-    flex:1 1 250px;
-    background:linear-gradient(135deg,#1e1e2f,#2a2a4a);
-    padding:20px;
-    border-left:5px solid #00e5ff;
-    border-radius:10px;
-    box-shadow:6px 6px 0 #000;
-    position:relative;
-    overflow:hidden;
-    transition:all 0.3s ease;
+.amenity{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  padding:20px;
+  border-radius:15px;
+  transition:0.3s;
+}
+.amenity:hover{
+  transform:translateY(-8px);
+  box-shadow:0 0 20px #7b5cff;
+}
+.amenity h3{
+  color:#00e5ff;
+  margin-bottom:10px;
 }
 
-/* GLOW + LIFT */
-.amenity-card:hover{
-    transform:translate(-8px,-8px) scale(1.03);
-    box-shadow:
-        0 0 15px #00e5ff,
-        0 0 30px #7b5cff,
-        10px 10px 0 #000;
-}
-
-/* LIGHT SWEEP EFFECT */
-.amenity-card::before{
-    content:'';
-    position:absolute;
-    top:50%;
-    left:-60%;
-    width:200%;
-    height:300%;
-    background:rgba(255,255,255,0.1);
-    transform:rotate(25deg) translateY(-50%);
-    transition:0.6s;
-}
-
-.amenity-card:hover::before{
-    left:100%;
-}
-
-/* TEXT POP EFFECT */
-.amenity-card h3{
-    color:#00e5ff;
-    margin-bottom:10px;
-    transition:0.3s;
-}
-
-.amenity-card:hover h3{
-    color:#ffe600;
-    text-shadow:0 0 10px #ffe600;
-}
-
-.amenity-card p{
-    color:#ddd;
-    transition:0.3s;
-}
-
-.amenity-card:hover p{
-    color:#fff;
-}
-
-/* EVENT FLOW */
-.event-flow{
-    max-width:900px;
-    margin:50px auto;
-    padding:20px;
-}
-
-.event-flow h2{
-    text-align:center;
-    color:#ffe600;
-    text-shadow:3px 3px 0 #000;
-    margin-bottom:20px;
-}
-
+/* TIMELINE */
 .timeline{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
+  max-width:800px;
+  margin:50px auto;
+  padding:20px;
 }
-
+.timeline h2{
+  text-align:center;
+  color:#ffe600;
+  margin-bottom:20px;
+}
 .time-item{
-    background:linear-gradient(135deg,#1e1e2f,#2a2a4a);
-    padding:15px 20px;
-    border-left:6px solid #00e5ff;
-    border-radius:10px;
-    box-shadow:5px 5px 0 #000;
-}
-
-.time-item strong{
-    color:#00e5ff;
-}
-
-.see-btn{
-    display:inline-block;
-    text-align:center;
-    text-decoration:none;
-    margin-top:15px;
-    padding:12px 20px;
-    border-radius:25px;
-    background:#00ff9f;
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:4px 4px 0 #000;
-    color:#000;
-    transition:0.2s;
-}
-
-.see-btn:hover{
-    transform:translate(-2px,-2px);
-    background:#00ffc1;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  padding:15px;
+  border-left:5px solid #00e5ff;
+  border-radius:10px;
+  margin-bottom:10px;
 }
 
 /* FOOTER */
 footer{
-    text-align:center;
-    padding:20px;
-    background:#000;
+  text-align:center;
+  padding:20px;
+  background:#000;
 }
 
+/* MOBILE */
+@media(max-width:768px){
+  .venue-grid{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 
 <body>
 
-<!-- VIDEO -->
 <video autoplay muted loop class="video-bg">
-    <source src="background.mp4" type="video/mp4">
+  <source src="background.mp4">
 </video>
 <div class="overlay"></div>
 
 <header>
-  <div class="logo">
-    <img src="logo.png">
-  </div>
+  <div class="logo"><img src="logo.png"></div>
   <nav>
     <a href="index.html"><button>Home</button></a>
     <a href="events.html"><button>Events</button></a>
@@ -305,19 +225,19 @@ footer{
   </nav>
 </header>
 
-<!-- VENUE -->
-<section class="venue-section">
+<h1 class="title">Venue Experience</h1>
 
-  <div class="venue-box">
+<!-- VENUE -->
+<section class="venue-grid">
+
+  <div class="card">
     <h2>Astral Nexus Grand Hall</h2>
     <p>
       Inspired by the cosmic world of Honkai Star Rail, the Astral Nexus Grand Hall 
       is a futuristic venue that blends interstellar aesthetics with immersive lighting 
-      and holographic projections. Step into a space where galaxies collide and music 
-      echoes across dimensions.
+      and holographic projections.
     </p>
 
-    <p><strong>Venue Details:</strong></p>
     <ul>
       <li>Capacity: 2,500 guests</li>
       <li>Seating: 1,200 premium seats</li>
@@ -327,11 +247,11 @@ footer{
       <li>Interactive Light Floors</li>
     </ul>
 
-    <a href="tickets.html" class="see-btn">See Seating</a>
+    <a href="tickets.html" class="btn">See Seating</a>
   </div>
 
-  <div class="floor-plan">
-    <img src="map.png" alt="Floor Plan">
+  <div class="card floor">
+    <img src="map.png">
   </div>
 
 </section>
@@ -339,56 +259,43 @@ footer{
 <!-- AMENITIES -->
 <section class="amenities">
 
-  <div class="amenity-card">
+  <div class="amenity">
     <h3>Merchandise Hub</h3>
-    <p>Exclusive themed items, collectibles, and limited-edition event merchandise inspired by cosmic designs.</p>
+    <p>Exclusive themed items and collectibles.</p>
   </div>
 
-  <div class="amenity-card">
+  <div class="amenity">
     <h3>Galactic Food Court</h3>
-    <p>A variety of food stalls offering international cuisine, themed snacks, and signature drinks.</p>
+    <p>International cuisine and themed snacks.</p>
   </div>
 
-  <div class="amenity-card">
+  <div class="amenity">
     <h3>VIP Lounges</h3>
-    <p>Relax in premium lounges with ambient lighting, private service, and luxury seating.</p>
+    <p>Luxury seating with private service.</p>
   </div>
 
-  <div class="amenity-card">
+  <div class="amenity">
     <h3>Photo Zones</h3>
-    <p>Immersive photo booths with space-themed backdrops and interactive effects.</p>
+    <p>Interactive space-themed photo booths.</p>
   </div>
 
 </section>
 
 <!-- EVENT FLOW -->
-<section class="event-flow">
+<section class="timeline">
   <h2>Event Flow</h2>
 
-  <div class="timeline">
-    <div class="time-item">
-      <strong>6:00 PM</strong> - Venue Doors Open
-    </div>
-    <div class="time-item">
-      <strong>6:30 PM</strong> - Pre-show & Ambient Music
-    </div>
-    <div class="time-item">
-      <strong>7:00 PM</strong> - Opening Ceremony
-    </div>
-    <div class="time-item">
-      <strong>8:00 PM</strong> - Main Event Performance
-    </div>
-    <div class="time-item">
-      <strong>9:30 PM</strong> - Special Guest Appearance
-    </div>
-    <div class="time-item">
-      <strong>10:30 PM</strong> - Closing & Afterparty
-    </div>
-  </div>
+  <div class="time-item"><strong>6:00 PM</strong> - Venue Doors Open</div>
+  <div class="time-item"><strong>6:30 PM</strong> - Pre-show</div>
+  <div class="time-item"><strong>7:00 PM</strong> - Opening Ceremony</div>
+  <div class="time-item"><strong>8:00 PM</strong> - Main Event</div>
+  <div class="time-item"><strong>9:30 PM</strong> - Special Guest</div>
+  <div class="time-item"><strong>10:30 PM</strong> - Afterparty</div>
+
 </section>
 
 <footer>
-  <p>© 2026 Nexus Events. All Rights Reserved.</p>
+  © 2026 Nexus Events
 </footer>
 
 </body>
