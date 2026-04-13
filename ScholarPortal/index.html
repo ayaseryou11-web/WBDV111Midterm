@@ -4,11 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ScholarPortal - Dashboard</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{display:flex;min-height:100vh;background:#eef3f9;position:relative;overflow:hidden;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  display:flex;
+  min-height:100vh;
+  background:#eef3f9;
+}
 
 /* BACKGROUND LOGO */
 body::before{
@@ -20,14 +31,8 @@ body::before{
   width:400px;
   height:400px;
   background:url('logo.png') no-repeat center/contain;
-  opacity:0.06;
+  opacity:0.05;
   z-index:0;
-  pointer-events:none;
-}
-
-.main, .sidebar{
-  position:relative;
-  z-index:1;
 }
 
 /* SIDEBAR */
@@ -39,6 +44,8 @@ body::before{
   display:flex;
   flex-direction:column;
   justify-content:space-between;
+  position:relative;
+  z-index:1;
 }
 
 .logo{
@@ -49,32 +56,34 @@ body::before{
 }
 
 .logo img{width:45px;}
-.logo h2{font-weight:600;}
 
-.nav-links{display:flex;flex-direction:column;gap:12px;}
+.nav-links{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
 
 .nav-links a{
   color:#fff;
   padding:12px;
   border-radius:12px;
   text-decoration:none;
-  transition:0.3s;
   cursor:pointer;
+  transition:0.3s;
 }
 
 .nav-links a:hover{
   background:rgba(255,255,255,0.15);
-  transform:translateX(6px);
+  transform:translateX(5px);
 }
 
-.nav-links a.active{
+.nav-links .active{
   background:#f1c40f;
   color:#0a3d62;
   font-weight:600;
 }
 
 .logout{
-  margin-top:20px;
   padding:12px;
   border:none;
   border-radius:12px;
@@ -82,29 +91,40 @@ body::before{
   color:#0a3d62;
   cursor:pointer;
   font-weight:600;
-  transition:0.3s;
-}
-
-.logout:hover{
-  transform:translateY(-3px);
-  box-shadow:0 6px 15px rgba(0,0,0,0.2);
 }
 
 /* MAIN */
-.main{flex:1;padding:35px;}
+.main{
+  flex:1;
+  padding:30px;
+  overflow-y:auto;
+  position:relative;
+  z-index:1;
+}
 
-.header h1{color:#0a3d62;font-size:28px;}
-.user-info{color:#666;margin-top:5px;margin-bottom:20px;}
+.header{
+  margin-bottom:20px;
+}
 
+.header h1{
+  color:#0a3d62;
+}
+
+.user-info{
+  color:#666;
+  margin-top:5px;
+}
+
+/* WELCOME */
 .welcome{
   background:linear-gradient(135deg,#1e5f9a,#0a3d62);
   color:#fff;
   padding:25px;
   border-radius:18px;
   margin-bottom:25px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.15);
 }
 
+/* CARDS */
 .cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -120,22 +140,26 @@ body::before{
 }
 
 .card:hover{
-  transform:translateY(-6px) scale(1.01);
-  box-shadow:0 12px 25px rgba(0,0,0,0.15);
+  transform:translateY(-5px);
 }
 
-.card h3{color:#1e5f9a;margin-bottom:10px;}
+.card h3{
+  color:#1e5f9a;
+  margin-bottom:10px;
+}
 
 /* MODALS */
 .modal{
   position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
   background:rgba(0,0,0,0.6);
   display:none;
   justify-content:center;
   align-items:center;
-  backdrop-filter:blur(4px);
+  z-index:999;
 }
 
 .modal-content{
@@ -143,33 +167,22 @@ body::before{
   padding:25px;
   border-radius:18px;
   width:90%;
-  max-width:520px;
-  animation:fadeIn 0.3s ease;
+  max-width:500px;
 }
 
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(20px);} 
-  to{opacity:1;transform:translateY(0);} 
+.modal-content h2{
+  margin-bottom:15px;
+  color:#0a3d62;
 }
-
-.modal-content h2{color:#0a3d62;margin-bottom:15px;}
 
 .modal-content input,
 .modal-content select,
 .modal-content textarea{
   width:100%;
   padding:10px;
-  margin-bottom:12px;
+  margin-bottom:10px;
   border-radius:10px;
   border:1px solid #ccc;
-  transition:0.2s;
-}
-
-.modal-content input:focus,
-.modal-content select:focus,
-.modal-content textarea:focus{
-  border-color:#1e5f9a;
-  box-shadow:0 0 5px rgba(30,95,154,0.4);
 }
 
 .modal-content button{
@@ -177,15 +190,9 @@ body::before{
   padding:12px;
   border:none;
   border-radius:12px;
-  background:linear-gradient(135deg,#1e5f9a,#f1c40f);
+  background:#1e5f9a;
   color:#fff;
   cursor:pointer;
-  font-weight:600;
-  transition:0.3s;
-}
-
-.modal-content button:hover{
-  transform:translateY(-2px);
 }
 
 /* COURSES */
@@ -195,24 +202,23 @@ body::before{
   border-radius:10px;
   margin-bottom:8px;
   cursor:pointer;
-  transition:0.3s;
+  transition:0.2s;
 }
 
 .course-item:hover{
   background:#f1c40f;
-  color:#0a3d62;
 }
 
 .selected{
   background:#1e5f9a;
   color:#fff;
 }
-
 </style>
 </head>
 
 <body>
 
+<!-- SIDEBAR -->
 <div class="sidebar">
   <div>
     <div class="logo">
@@ -232,6 +238,7 @@ body::before{
   <button class="logout" onclick="logout()">Logout</button>
 </div>
 
+<!-- MAIN -->
 <div class="main">
   <div class="header">
     <h1>Student Dashboard</h1>
@@ -240,7 +247,7 @@ body::before{
 
   <div class="welcome">
     <h3>Welcome to ScholarPortal 🎓</h3>
-    <p>Your centralized academic hub. Manage courses, registration, and personal records efficiently.</p>
+    <p>Your centralized academic hub.</p>
   </div>
 
   <div class="cards">
@@ -298,7 +305,7 @@ body::before{
       <option>3rd Year</option>
       <option>4th Year</option>
     </select>
-    <button onclick="registerStudent()">Confirm Registration</button>
+    <button onclick="registerStudent()">Confirm</button>
   </div>
 </div>
 
@@ -310,14 +317,24 @@ document.getElementById("userInfo").innerText = `ID: ${studentID} | ${program}`;
 document.getElementById("fixedID").value = studentID;
 document.getElementById("fixedProg").value = program;
 
-function openModal(id){document.getElementById(id).style.display='flex';}
-window.onclick = e=>{document.querySelectorAll('.modal').forEach(m=>{if(e.target===m)m.style.display='none';});}
+/* MODAL */
+function openModal(id){
+  document.getElementById(id).style.display='flex';
+}
 
+window.onclick = e=>{
+  document.querySelectorAll('.modal').forEach(m=>{
+    if(e.target===m) m.style.display='none';
+  });
+};
+
+/* PROFILE */
 function saveProfile(){
   localStorage.setItem("name", document.getElementById("fullName").value);
   alert("Profile saved!");
 }
 
+/* COURSES */
 const coursesData={
   "Computer Science":["Algorithms","Data Structures","AI Basics"],
   "Information Technology":["Networking","Database Systems","Web Development"],
@@ -327,19 +344,26 @@ const coursesData={
 let selectedCourses=[];
 
 function loadCourses(){
-  const list=coursesData[program]||[];
-  const container=document.getElementById("coursesContainer");
+  const list = coursesData[program] || [];
+  const container = document.getElementById("coursesContainer");
+
   container.innerHTML="";
-  list.forEach(c=>{
-    let div=document.createElement("div");
+
+  list.forEach(course=>{
+    const div=document.createElement("div");
     div.className="course-item";
-    div.innerText=c;
+    div.innerText=course;
+
     div.onclick=()=>{
       div.classList.toggle("selected");
-      if(selectedCourses.includes(c)){
-        selectedCourses=selectedCourses.filter(x=>x!==c);
-      } else selectedCourses.push(c);
+
+      if(selectedCourses.includes(course)){
+        selectedCourses=selectedCourses.filter(c=>c!==course);
+      } else {
+        selectedCourses.push(course);
+      }
     };
+
     container.appendChild(div);
   });
 }
@@ -351,21 +375,32 @@ function saveCourses(){
 }
 
 function displayCourses(){
-  const courses=JSON.parse(localStorage.getItem("courses")||"[]");
-  const list=document.getElementById("courseList");
-  list.innerHTML=courses.map(c=>"<p>- "+c+"</p>").join("");
+  const courses = JSON.parse(localStorage.getItem("courses") || "[]");
+  const list = document.getElementById("courseList");
+
+  if(courses.length===0){
+    list.innerHTML="<p>No courses enrolled yet.</p>";
+    return;
+  }
+
+  list.innerHTML = courses.map(c=>`<p>• ${c}</p>`).join("");
 }
 
+/* REGISTER */
 function registerStudent(){
   document.getElementById("regStatus").innerText="Registered";
 }
 
-function logout(){localStorage.clear();window.location.href="login.html";}
+/* LOGOUT */
+function logout(){
+  localStorage.clear();
+  window.location.href="login.html";
+}
 
+/* INIT */
 loadCourses();
 displayCourses();
 </script>
 
 </body>
 </html>
-
