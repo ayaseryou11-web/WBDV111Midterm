@@ -1,9 +1,845 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Park Voyage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Park Voyage</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body {
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 50%,
+    #BFF3FF 100%
+  );
+}
+
+header{
+    background:linear-gradient(90deg,#0a1f44,#123a7a);
+    padding:15px 30px;display:flex;justify-content:space-between;
+    align-items:center
+}
+
+header h1{
+    color:#ffd700
+}
+
+nav a{
+    margin:0 10px;color:#fff;
+    text-decoration:none;
+    font-weight:500
+}
+
+nav a:hover{
+    color:#ffd700
+}
+
+.section{
+    padding:60px 20px;
+    text-align:center
+}
+
+.hero{
+    position:relative;
+    height:80vh;
+    overflow:hidden;
+}
+
+
+.hero-slider{
+    height:100%;
+    position:relative;
+}
+
+/* SLIDES */
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    transition:opacity 1s ease-in-out;
+}
+
+/* DARK OVERLAY FOR READABILITY */
+.slide::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.45);
+}
+
+/* ACTIVE SLIDE */
+.slide.active{
+    opacity:1;
+    z-index:1;
+}
+
+/* HERO TEXT BOX */
+.hero-content{
+    position:relative;
+    text-align:center;
+    max-width:750px;
+    padding:30px;
+    border-radius:18px;
+    background:rgba(0,0,0,0.35);
+    backdrop-filter:blur(10px);
+    color:#fff;
+    animation:fadeUp 1s ease;
+}
+
+/* SMALL LABEL */
+.tagline{
+    font-size:0.85rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:#ffd700;
+    margin-bottom:12px;
+}
+
+/* MAIN TITLE */
+.hero-content h2{
+    font-size:3.2rem;
+    line-height:1.1;
+    margin-bottom:12px;
+}
+
+/* DESCRIPTION */
+.subtitle{
+    font-size:1.1rem;
+    opacity:0.9;
+    margin-bottom:20px;
+    line-height:1.5;
+}
+
+
+/* BUTTON (PREMIUM STYLE) */
+.btn{
+    background:linear-gradient(90deg,#ffd700,#ffb800);
+    color:#0a1f44;
+    padding:12px 26px;
+    border:none;
+    border-radius:50px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* DOTS */
+.dots{
+    position:absolute;
+    bottom:20px;
+    width:100%;
+    text-align:center;
+    z-index:2;
+}
+
+.dot{
+    height:12px;
+    width:12px;
+    margin:0 5px;
+    display:inline-block;
+    border-radius:50%;
+    background:#fff;
+    opacity:0.5;
+    cursor:pointer;
+}
+
+.dot.active{
+    opacity:1;
+    background:#ffd700;
+}
+
+.carousel{
+    display:flex;
+    overflow-x:auto;
+    gap:20px;
+    padding:20px;
+}
+
+.card{
+    min-width:300px;
+    background:#123a7a;
+    border-radius:15px;
+    padding:15px
+}
+
+.card img{
+    width:100%;
+    border-radius:10px
+}
+
+footer{
+    background:#123a7a;
+    text-align:center;
+    padding:20px
+}
+
+.dashboard{
+    display:none;
+    padding:20px
+}
+
+.card-small{
+    background:#123a7a;
+    padding:20px;
+    border-radius:10px;
+    margin:10px
+}
+
+.flex{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center
+}
+
+/* ABOUT */
+/* ABOUT SECTION (FULL UPGRADE) */
+.about-section{
+  padding:100px 20px;
+}
+
+.about-wrapper{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:60px;
+  flex-wrap:wrap;
+}
+
+/* TEXT SIDE */
+.about-text{
+  flex:1;
+  min-width:320px;
+  text-align:left;
+}
+
+.about-text h2{
+  font-size:2.8rem;
+  margin-bottom:30px;
+  color:#0a1f44;
+}
+
+/* BLOCK SPACING */
+.about-block{
+  margin-bottom:30px;
+}
+
+.about-block h3{
+  font-size:1.4rem;
+  margin-bottom:10px;
+  color:#123a7a;
+}
+
+.about-block p{
+  font-size:1.05rem;
+  line-height:1.7;
+  color:#333;
+}
+
+/* IMAGE SIDE */
+.about-image{
+  flex:1;
+  min-width:300px;
+  display:flex;
+  justify-content:center;
+}
+
+.about-image img{
+  width:100%;
+  max-width:500px;
+  border-radius:25px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.2);
+  transition:0.3s;
+}
+
+.about-image img:hover{
+  transform:scale(1.03);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .about-section{
+    padding:60px 20px;
+  }
+
+  .about-text h2{
+    font-size:2rem;
+  }
+
+  .about-wrapper{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .about-text{
+    text-align:center;
+  }
+}
+/* SECTION SPACING ONLY */
+.visit-section{
+  padding:80px 20px;
+}
+
+/* MAIN BOX (THIS FIXES YOUR PROBLEM) */
+.visit-box-wrapper{
+  max-width:1100px;
+  margin:auto;
+  border-radius:25px;
+  padding:50px;
+  background:linear-gradient(135deg,#00c6ff,#ffd700);
+  box-shadow:0 15px 40px rgba(0,0,0,0.2);
+  color:#fff;
+}
+
+/* FLEX LAYOUT */
+.visit-content{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:50px;
+  flex-wrap:wrap;
+}
+
+/* LEFT SIDE */
+.visit-left{
+  flex:1;
+  min-width:280px;
+}
+
+.visit-left h2{
+  font-size:2.3rem;
+  margin-bottom:25px;
+}
+
+/* INFO ITEMS */
+.info-item{
+  display:flex;
+  align-items:flex-start;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.icon{
+  font-size:1.4rem;
+}
+
+.info-item h4{
+  margin-bottom:4px;
+}
+
+.info-item p{
+  opacity:0.95;
+}
+
+/* RIGHT SIDE (GLASS CARD) */
+.visit-right{
+  flex:1;
+  min-width:260px;
+  background:rgba(255,255,255,0.2);
+  padding:25px;
+  border-radius:20px;
+  backdrop-filter:blur(12px);
+}
+
+.visit-right h3{
+  margin-bottom:15px;
+}
+
+.visit-right ul{
+  list-style:none;
+  padding:0;
+}
+
+.visit-right li{
+  margin-bottom:12px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .visit-box-wrapper{
+    padding:30px;
+  }
+
+  .visit-content{
+    flex-direction:column;
+    text-align:left;
+  }
+
+  .visit-left h2{
+    font-size:1.8rem;
+  }
+}
+/* RIDE CAROUSEL */
+.coverflow-carousel {
+  max-width: 1100px;
+  margin: 60px auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.coverflow-track {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.6s ease;
+}
+
+/* BASE CARD */
+.coverflow-card {
+  min-width: 320px; /* ⬆ bigger cards */
+  margin: 0 -60px;  /* tighter overlap for coverflow */
+  background: #123a7a;
+  border-radius: 20px;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+
+  transform: scale(0.75);
+  opacity: 0.4;
+  filter: blur(2px);
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+
+/* IMAGE IMPROVEMENT */
+.coverflow-card img {
+  width: 100%;
+  height: 260px;   /* ⬆ MUCH bigger image */
+  object-fit: cover;
+}
+
+/* CENTER CARD (MAIN FEATURED RIDE) */
+.coverflow-card.active {
+  transform: scale(1.25); /* ⬆ stronger focus */
+  opacity: 1;
+  filter: blur(0);
+  z-index: 5;
+}
+
+/* SIDE CARDS */
+.coverflow-card.left,
+.coverflow-card.right {
+  transform: scale(0.9);
+  opacity: 0.7;
+  filter: blur(1px);
+  z-index: 2;
+}
+
+/* FEEDBACK */
+.feedback-carousel{
+  position:relative;
+  height:100px;
+}
+
+.feedback{
+  position:absolute;
+  width:100%;
+  opacity:0;
+  transition:0.5s;
+}
+
+.feedback.active{
+  opacity:1;
+}
+
+/* FOOTER */
+.footer{
+  background:#123a7a;
+  color:#fff;
+  padding:40px 20px;
+}
+
+.footer-container{
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.footer input{
+  padding:8px;
+  border-radius:5px;
+  border:none;
+  margin-bottom:10px;
+}
+
+/* ANIMATION */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* MOBILE FIX */
+@media(max-width:768px){
+    .hero-content h2{
+        font-size:2rem;
+    }
+
+    .subtitle{
+        font-size:0.95rem;
+    }
+}
+
+@media(max-width:768px){.hero h2{font-size:2rem}}
+</style>
 </head>
 <body>
-    <img src="minion.jpg" alt="Meme image">
+
+<header>
+<h1>Park Voyage</h1>
+<nav>
+<a href="index.html">Home</a>
+<a href="rides.html">Attractions</a>
+<a href="dining.html">Dining</a>
+<a href="map.html">Map</a>
+<a href="tickets.html">Tickets</a>
+<a href="contact.html">Contact</a>
+<a href="login.html">Login/Sign-Up</a>
+</nav>
+</header>
+
+<section class="hero">
+  <div class="hero-slider">
+
+    <div class="slide active" style="background-image:url('entrance.png')">
+      <div class="hero-content">
+        <p class="tagline">Park Voyage</p>
+        <h2>Pradera Islands Theme Park</h2>
+        <p class="subtitle">
+         Your Ultimate Adventure Awaits in the Philippines!
+        </p>
+        <button class="btn" onclick="showSection('attractions')">Explore Rides</button>
+      </div>
+    </div>
+
+    <div class="slide" style="background-image:url('lake.jpg')">
+      <div class="hero-content">
+        <p class="tagline">Park Voyage</p>
+        <h2>Pradera Islands Theme Park</h2>
+        <p class="subtitle">
+         Your Ultimate Adventure Awaits in the Philippines!
+        </p>
+        <button class="btn" onclick="showSection('attractions')">Explore Rides</button>
+      </div>
+    </div>
+
+    <div class="slide" style="background-image:url('photoopp.jpg')">
+      <div class="hero-content">
+        <p class="tagline">Park Voyage</p>
+        <h2>Pradera Islands Theme Park</h2>
+        <p class="subtitle">
+         Your Ultimate Adventure Awaits in the Philippines!
+        </p>
+        <button class="btn" onclick="showSection('attractions')">Explore Rides</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dots">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+  </div>
+</section>
+
+
+<section class="about-section">
+
+  <div class="about-wrapper">
+
+    <!-- LEFT TEXT -->
+    <div class="about-text">
+      <h2>About Pradera Islands Theme Park</h2>
+
+      <div class="about-block">
+        <h3>Our Vision</h3>
+        <p>
+          Pradera Islands Theme Park envisions becoming a premier 23-hectare
+          "Pinoy-themed" destination that blends world-class attractions with
+          Filipino culture—creating a vibrant hub for tourism, adventure, and
+          unforgettable experiences in Central Luzon.
+        </p>
+      </div>
+
+      <div class="about-block">
+        <h3>Our Story</h3>
+        <p>
+          Built within the Pradera Verde complex, Park Voyage was designed to
+          elevate regional tourism by combining thrill rides, water attractions,
+          and cultural storytelling. It complements existing facilities such as
+          the golf course, wakeboard park, and flying club—creating a complete
+          leisure destination.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="about-image">
+      <img src="groundbreaking.jpg" alt="Park Image">
+    </div>
+
+  </div>
+
+</section>
+
+<section class="visit-section">
+
+  <div class="visit-box-wrapper">
+
+    <div class="visit-content">
+
+      <!-- LEFT -->
+      <div class="visit-left">
+        <h2>✨ Plan Your Visit</h2>
+
+        <div class="info-item">
+          <span class="icon">📍</span>
+          <div>
+            <h4>Location</h4>
+            <p>Pradera Verde Resort, Barangay Prado Siongco, Lubao, Pampanga</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="icon">📅</span>
+          <div>
+            <h4>Hours</h4>
+            <p>Open Hours: Tuesday to Sunday, 1:00 PM to 10:00 PM. <b>Closed on Mondays for maintenance.</b></p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="icon">⭐</span>
+          <div>
+            <h4>Admission</h4>
+            <p><b>₱499</b> : ~ Entrance Fee | <b>₱1,500</b> : ~ Ride All You Can (Adult) | <b>₱850</b> : ~ Ride All You Can (Junior - 36-47 inches) | <b>Free</b> : ~ Children (35 inches and below)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="visit-right">
+        <h3>Quick Tips</h3>
+        <ul>
+          <li>✔ Arrive early to avoid long queues</li>
+          <li>✔ Bring sunscreen and comfortable shoes</li>
+          <li>✔ Download our app for live wait times</li>
+          <li>✔ Book online for discounts</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="ride-section">
+  <h2 style="text-align:center;">Featured Rides</h2>
+
+  <div class="coverflow-carousel">
+
+    <div class="coverflow-track" id="coverflowTrack">
+
+      <div class="coverflow-card active">
+        <img src="airplane.jpg">
+        <h3>Sky Drop</h3>
+      </div>
+
+      <div class="coverflow-card">
+        <img src="ride2.jpg">
+        <h3>River Splash</h3>
+      </div>
+
+      <div class="coverflow-card">
+        <img src="ride3.jpg">
+        <h3>Island Coaster</h3>
+      </div>
+
+      <div class="coverflow-card">
+        <img src="ride4.jpg">
+        <h3>Wave Rider</h3>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+<h2>Visitor Feedback</h2>
+
+<div class="feedback-carousel">
+  <div class="feedback active">"Amazing experience! Will definitely come back!" – Maria</div>
+  <div class="feedback">"Perfect for family trips!" – John</div>
+  <div class="feedback">"Best theme park in Pampanga!" – Alex</div>
+</div>
+
+<div class="dots">
+  <span class="dot active" onclick="goFeedback(0)"></span>
+  <span class="dot" onclick="goFeedback(1)"></span>
+  <span class="dot" onclick="goFeedback(2)"></span>
+</div>
+
+</section>
+
+
+
+<footer class="footer">
+
+<div class="footer-container">
+
+  <div>
+    <h3>Contact</h3>
+    <p>Email: info@parkvoyage.com</p>
+    <p>Phone: +63 912 345 6789</p>
+  </div>
+
+  <div>
+    <h3>Open Hours</h3>
+    <p>Mon - Sun: 9AM - 8PM</p>
+  </div>
+
+  <div>
+    <h3>Follow Us</h3>
+    <p>🌐 Facebook</p>
+    <p>📸 Instagram</p>
+    <p>🎵 TikTok</p>
+  </div>
+
+  <div>
+    <h3>Leave Feedback</h3>
+    <input type="text" placeholder="Your feedback">
+    <button class="btn">Submit</button>
+  </div>
+
+</div>
+
+<p style="margin-top:20px;">© 2026 Park Voyage</p>
+
+</footer>
+
+<script>
+
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+
+function showSlide(index){
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+    currentSlide = index;
+}
+
+function nextSlide(){
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+
+function goToSlide(index){
+    showSlide(index);
+}
+
+// auto slide
+setInterval(nextSlide, 5000);
+
+function login(){
+let u=document.getElementById('username').value;
+let p=document.getElementById('password').value;
+document.querySelectorAll('.dashboard').forEach(d=>d.style.display='none');
+if(u==='user'&&p==='1234'){document.getElementById('userDash').style.display='block';}
+else if(u==='admin'&&p==='1234'){document.getElementById('adminDash').style.display='block';}
+else if(u==='super'&&p==='1234'){document.getElementById('superDash').style.display='block';}
+else{alert('Invalid login');}
+}
+function logout(){location.reload();}
+
+let feedbackIndex = 0;
+const feedbacks = document.querySelectorAll('.feedback');
+const feedbackDots = document.querySelectorAll('.feedback-carousel + .dots .dot');
+
+function showFeedback(i){
+  feedbacks.forEach(f => f.classList.remove('active'));
+  feedbackDots.forEach(d => d.classList.remove('active'));
+
+  feedbacks[i].classList.add('active');
+  feedbackDots[i].classList.add('active');
+  feedbackIndex = i;
+}
+
+function nextFeedback(){
+  feedbackIndex = (feedbackIndex + 1) % feedbacks.length;
+  showFeedback(feedbackIndex);
+}
+
+function goFeedback(i){
+  showFeedback(i);
+}
+
+setInterval(nextFeedback, 4000);
+
+const track = document.getElementById('coverflowTrack');
+const cards = document.querySelectorAll('.coverflow-card');
+
+let index = 0;
+
+// UPDATE POSITIONS
+function updateCarousel() {
+  cards.forEach((card, i) => {
+    card.classList.remove('active', 'left', 'right');
+
+    if (i === index) {
+      card.classList.add('active');
+    } else if (i === index - 1 || (index === 0 && i === cards.length - 1)) {
+      card.classList.add('left');
+    } else if (i === index + 1 || (index === cards.length - 1 && i === 0)) {
+      card.classList.add('right');
+    }
+  });
+
+  const offset = index * 340;
+track.style.transform = `translateX(calc(50% - ${offset}px))`;
+}
+
+// AUTO SLIDE
+function nextSlide() {
+  index = (index + 1) % cards.length;
+  updateCarousel();
+}
+
+// START AUTO
+setInterval(nextSlide, 3000);
+
+// INIT
+updateCarousel();
+
+
+</script>
+
 </body>
 </html>
