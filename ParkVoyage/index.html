@@ -400,8 +400,8 @@ footer{
 
 /* BASE CARD */
 .coverflow-card {
-  min-width: 320px; /* ⬆ bigger cards */
-  margin: 0 -60px;  /* tighter overlap for coverflow */
+  min-width: clamp(220px, 60vw, 320px);
+  margin: 0 -40px;  /* tighter overlap for coverflow */
   background: #123a7a;
   border-radius: 20px;
   overflow: hidden;
@@ -418,8 +418,8 @@ footer{
 /* IMAGE IMPROVEMENT */
 .coverflow-card img {
   width: 100%;
-  height: 260px;   /* ⬆ MUCH bigger image */
-  object-fit: cover;
+  height: clamp(160px, 35vw, 260px);
+  object-fit: cover;  /* ⬆ MUCH bigger image */
 }
 
 /* CENTER CARD (MAIN FEATURED RIDE) */
@@ -477,6 +477,120 @@ footer{
   margin-bottom:10px;
 }
 
+
+.section-title{
+  font-size:clamp(1.8rem,4vw,2.6rem);
+  font-weight:700;
+  text-align:center;
+  color:#0a1f44;
+  margin-bottom:40px;
+  position:relative;
+}
+
+.section-title span {
+  background:linear-gradient(90deg,#123a7a,#00c6ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.section-title::after{
+  content:"";
+  display:block;
+  width:60%;
+  height:4px;
+  margin:10px auto 0;
+  border-radius:5px;
+  background:linear-gradient(90deg,#00c6ff,#ffd700);
+}
+
+.section-header{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.section-badge{
+  display:inline-block;
+  padding:6px 14px;
+  font-size:0.75rem;
+  letter-spacing:2px;
+  border-radius:50px;
+  background:rgba(0,198,255,0.15);
+  color:#123a7a;
+  margin-bottom:10px;
+  font-weight:600;
+}
+
+.section-subtitle{
+  font-size:1rem;
+  color:#555;
+  max-width:600px;
+  margin:10px auto 0;
+}
+
+.feedback-carousel{
+  position:relative;
+  height:180px;
+  max-width:700px;
+  margin:20px auto;
+}
+
+.feedback{
+  position:absolute;
+  width:100%;
+  opacity:0;
+  transition:0.5s;
+  display:flex;
+  justify-content:center;
+}
+
+.feedback.active{
+  opacity:1;
+}
+
+/* CARD STYLE */
+.feedback-card{
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(10px);
+  padding:20px;
+  border-radius:20px;
+  display:flex;
+  gap:15px;
+  align-items:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
+  max-width:600px;
+}
+
+/* PROFILE IMAGE */
+.feedback-card img{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #ffd700;
+}
+
+/* TEXT */
+.feedback-text{
+  text-align:left;
+}
+
+.feedback-text p{
+  font-size:0.95rem;
+  color:#333;
+  margin-bottom:6px;
+}
+
+.feedback-text h4{
+  font-size:0.9rem;
+  color:#123a7a;
+}
+
+/* HOVER EFFECT */
+.feedback-card:hover{
+  transform:translateY(-3px);
+  transition:0.3s;
+}
+
 /* ANIMATION */
 @keyframes fadeUp{
     from{
@@ -501,6 +615,16 @@ footer{
 }
 
 @media(max-width:768px){.hero h2{font-size:2rem}}
+
+@media(max-width:768px){
+  .coverflow-card {
+    margin: 0 -20px;
+  }
+
+  .coverflow-card.active {
+    transform: scale(1.05);
+  }
+}
 </style>
 </head>
 <body>
@@ -657,7 +781,13 @@ footer{
 </section>
 
 <section class="ride-section">
-  <h2 style="text-align:center;">Featured Rides</h2>
+  <div class="section-header">
+    <div class="section-badge">TOP ATTRACTIONS</div>
+    <h2 class="section-title"><span>Featured Rides</span></h2>
+    <p class="section-subtitle">
+      Experience the most exciting rides and unforgettable thrills in the park.
+    </p>
+  </div>
 
   <div class="coverflow-carousel">
 
@@ -689,12 +819,47 @@ footer{
 </section>
 
 <section class="section">
-<h2>Visitor Feedback</h2>
+
+<div class="section-header">
+  <div class="section-badge">GUEST REVIEWS</div>
+  <h2 class="section-title"><span>Visitor Feedback</span></h2>
+  <p class="section-subtitle">
+    See what our visitors are saying about their unforgettable experiences.
+  </p>
+</div>
 
 <div class="feedback-carousel">
-  <div class="feedback active">"Amazing experience! Will definitely come back!" – Maria</div>
-  <div class="feedback">"Perfect for family trips!" – John</div>
-  <div class="feedback">"Best theme park in Pampanga!" – Alex</div>
+
+  <div class="feedback active">
+    <div class="feedback-card">
+      <img src="emu.jpg" alt="User">
+      <div class="feedback-text">
+        <p>"Amazing experience! Will definitely come back! Wonderhoi!"</p>
+        <h4>– EmuuuSmileee</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="feedback">
+    <div class="feedback-card">
+      <img src="tsukasa.jpg" alt="User">
+      <div class="feedback-text">
+        <p>"Perfect for family trips!"</p>
+        <h4>– IamAStarTsukasa</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="feedback">
+    <div class="feedback-card">
+      <img src="akito.jpg" alt="User">
+      <div class="feedback-text">
+        <p>"Rides were scary..but worth it"</p>
+        <h4>– AkiNome</h4>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="dots">
@@ -704,7 +869,6 @@ footer{
 </div>
 
 </section>
-
 
 
 <footer class="footer">
