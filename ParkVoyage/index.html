@@ -32,7 +32,9 @@ nav a{
 }
 
 nav a:hover{
-    color:#ffd700
+    color:#ffd700;
+    text-decoration: underline;
+    transition: all 0.3s ease;
 }
 
 .section{
@@ -137,12 +139,19 @@ nav a:hover{
 }
 
 /* DOTS */
+/* ONLY HERO DOTS */
+.hero .dots{
+  position:absolute;
+  bottom:20px;
+  width:100%;
+  text-align:center;
+  z-index:2;
+}
+
+/* DEFAULT DOTS (for feedback, etc.) */
 .dots{
-    position:absolute;
-    bottom:20px;
-    width:100%;
-    text-align:center;
-    z-index:2;
+  margin-top:20px;
+  text-align:center;
 }
 
 .dot{
@@ -591,6 +600,87 @@ footer{
   transition:0.3s;
 }
 
+/* FULL PAGE CENTER LOGO (WATERMARK STYLE) */
+.center-logo{
+  position:fixed; /* stays centered even when scrolling */
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  z-index:-1; /* behind everything */
+  pointer-events:none; /* doesn't block clicks */
+}
+
+.center-logo img{
+  width:clamp(220px, 30vw, 420px);
+  opacity:0.15; /* transparent look */
+  filter:drop-shadow(0 10px 30px rgba(0,0,0,0.2));
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo img{
+  width: 50px;;
+  height: 50px;
+  object-fit:contain;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+}
+
+.logo h1{
+  font-size:1.5rem;
+  color:#ffd700;
+}
+
+/* SOFT THEME PARK GLOW */
+.logo img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+
+  filter:
+    drop-shadow(0 0 4px rgba(255,215,0,0.6))
+    drop-shadow(0 0 8px rgba(255,184,0,0.4));
+
+  transition:0.3s ease;
+}
+
+.logo h1{
+  font-size:1.5rem;
+  color:#ffd700;
+
+  text-shadow:
+    0 0 4px rgba(255,215,0,0.6),
+    0 0 8px rgba(255,184,0,0.4);
+
+  transition:0.3s ease;
+}
+
+.logo:hover img{
+  filter:
+    drop-shadow(0 0 6px rgba(255,215,0,0.7))
+    drop-shadow(0 0 12px rgba(255,184,0,0.5));
+}
+
+.logo:hover h1{
+  text-shadow:
+    0 0 6px rgba(255,215,0,0.7),
+    0 0 12px rgba(255,184,0,0.5);
+}
+
+@media(max-width:768px){
+  .logo h1{
+    font-size:1.2rem;
+  }
+
+  .logo img{
+    width:32px;
+    height:32px;
+  }
+}
+
 /* ANIMATION */
 @keyframes fadeUp{
     from{
@@ -625,13 +715,86 @@ footer{
     transform: scale(1.05);
   }
 }
+
+/* HAMBURGER MENU */
+.menu-toggle{
+  display:none;
+  font-size:26px;
+  color:#fff;
+  cursor:pointer;
+}
+
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s;
+  z-index:999;
+}
+
+.overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+/* MOBILE NAV */
+@media(max-width:768px){
+
+  .menu-toggle{
+    display:block;
+    z-index:1001;
+  }
+
+  nav{
+    position:fixed;
+    top:0;
+    right:-100%; /* hidden off-screen */
+    width:260px;
+    height:100vh;
+    background:linear-gradient(180deg,#0a1f44,#123a7a);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    padding-top:80px;
+    transition:0.4s ease;
+    z-index:1000;
+    box-shadow:-10px 0 30px rgba(0,0,0,0.3);
+  }
+
+  nav a{
+    width:100%;
+    padding:15px 25px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+
+  /* ACTIVE STATE (slides in) */
+  nav.active{
+    right:0;
+  }
+}
 </style>
 </head>
 <body>
 
+  <div class="center-logo">
+  <img src="pradera.png" alt="Park Voyage Logo">
+</div>
+
 <header>
-<h1>Park Voyage</h1>
-<nav>
+<div class="overlay" onclick="toggleMenu()"></div>
+<div class="logo">
+  <img src="logo.png" alt="Logo">
+  <h1>Park Voyage</h1>
+</div>
+<div class="menu-toggle" onclick="toggleMenu()">
+  ☰
+</div>
+<nav id="navMenu">
 <a href="index.html">Home</a>
 <a href="rides.html">Attractions</a>
 <a href="dining.html">Dining</a>
@@ -878,12 +1041,12 @@ footer{
   <div>
     <h3>Contact</h3>
     <p>Email: info@parkvoyage.com</p>
-    <p>Phone: +63 912 345 6789</p>
+    <p>Phone: +63 99 8877 6655</p>
   </div>
 
   <div>
     <h3>Open Hours</h3>
-    <p>Mon - Sun: 9AM - 8PM</p>
+    <p>Tue - Sun: 1PM - 2PM</p>
   </div>
 
   <div>
@@ -1001,6 +1164,14 @@ setInterval(nextSlide, 3000);
 
 // INIT
 updateCarousel();
+
+function toggleMenu(){
+  const nav = document.getElementById("navMenu");
+  const overlay = document.querySelector(".overlay");
+
+  nav.classList.toggle("active");
+  overlay.classList.toggle("active");
+}
 
 
 </script>

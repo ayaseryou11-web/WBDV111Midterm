@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Park Voyage | Attractions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:linear-gradient(180deg,#ffffff 40%,#bff3ff 100%);
+}
+
+/* NAVBAR (same style as yours) */
+header{
+  background:linear-gradient(90deg,#0a1f44,#123a7a);
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo img{
+  width:40px;
+}
+
+.logo h1{
+  color:#ffd700;
+  font-size:1.4rem;
+}
+
+nav a{
+  margin:0 10px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:500;
+}
+
+nav a:hover{
+  color:#ffd700;
+}
+
+/* HERO */
+.hero{
+  padding:80px 20px 40px;
+  text-align:center;
+}
+
+.hero h2{
+  font-size:2.5rem;
+  color:#0a1f44;
+}
+
+.hero p{
+  color:#555;
+  margin-top:10px;
+}
+
+/* FILTER BAR */
+.filter-bar{
+  max-width:1000px;
+  margin:30px auto;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.filter-bar input,
+.filter-bar select{
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  outline:none;
+}
+
+/* GRID */
+.grid{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:20px;
+}
+
+/* CARD */
+.card{
+  background:#123a7a;
+  color:#fff;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+}
+
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.card-content{
+  padding:15px;
+}
+
+.card h3{
+  margin-bottom:5px;
+}
+
+.tags{
+  display:flex;
+  gap:8px;
+  margin:8px 0;
+  flex-wrap:wrap;
+}
+
+.tag{
+  font-size:0.7rem;
+  padding:4px 10px;
+  border-radius:20px;
+  background:#ffd700;
+  color:#0a1f44;
+  font-weight:600;
+}
+
+.tag.thrill{background:#ff4d4d;color:#fff;}
+.tag.family{background:#4caf50;color:#fff;}
+.tag.water{background:#00c6ff;color:#fff;}
+.tag.drop{background: #9D18ED;color: #fff;}
+
+.card p{
+  font-size:0.85rem;
+  opacity:0.9;
+  line-height:1.4;
+}
+
+/* FOOTER */
+footer{
+  background:#123a7a;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+  margin-top:40px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero h2{
+    font-size:1.8rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="logo">
+    <h1>Park Voyage</h1>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="rides.html">Attractions</a>
+    <a href="map.html">Map</a>
+    <a href="tickets.html">Tickets</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Attractions</h2>
+  <p>Explore thrilling rides, family adventures, and water attractions at Pradera Islands Theme Park</p>
+</section>
+
+<!-- FILTERS -->
+<div class="filter-bar">
+  <input type="text" id="search" placeholder="Search ride...">
+
+  <select id="type">
+    <option value="all">All Types</option>
+    <option value="thrill">Thrill</option>
+    <option value="family">Family</option>
+    <option value="water">Water</option>
+    <option value="drop">Drop</option>
+  </select>
+
+  <select id="age">
+    <option value="all">All Ages</option>
+    <option value="kids">Kids</option>
+    <option value="teen">Teens</option>
+    <option value="adult">Adults</option>
+  </select>
+</div>
+
+<!-- RIDES -->
+<section class="grid" id="rideGrid">
+
+  <div class="card" data-type="thrill" data-age="adult">
+    <img src="airplane.jpg">
+    <div class="card-content">
+      <h3>Space Force</h3>
+      <div class="tags">
+        <span class="tag thrill">Thrill</span>
+        <span class="tag">18+</span>
+      </div>
+      <p>Gives that classic air-patrol vibe, but quicker. Mini planes, fast circuit, and tight turns.</p>
+    </div>
+  </div>
+
+  <div class="card" data-type="drop" data-age="teen">
+    <img src="ride2.jpg">
+    <div class="card-content">
+      <h3>Diwata Towers</h3>
+      <div class="tags">
+        <span class="tag drop">Drop</span>
+        <span class="tag">All Ages</span>
+      </div>
+      <p>A relaxing yet fun pull and drop ride perfect for families and groups.</p>
+    </div>
+  </div>
+
+  <div class="card" data-type="thrill" data-age="teen">
+    <img src="ride3.jpg">
+    <div class="card-content">
+      <h3>Malyari Galleon</h3>
+      <div class="tags">
+        <span class="tag thrill">Thrill</span>
+        <span class="tag">Teens</span>
+      </div>
+      <p>A major swinging ship ride that "Let's you feel the adrenaline".</p>
+    </div>
+  </div>
+
+  <div class="card" data-type="thrill" data-age="all">
+    <img src="ride4.jpg">
+    <div class="card-content">
+      <h3>Galura Flyer</h3>
+      <div class="tags">
+        <span class="tag family">Family</span>
+        <span class="tag">All Ages</span>
+      </div>
+      <p>The ride that gives you that floating-over-the-park feeling.</p>
+    </div>
+  </div>
+
+  <div class="card" data-type="thrill" data-age="all">
+    <img src="turbulence.jpg">
+    <div class="card-content">
+      <h3>Turbulence</h3>
+      <div class="tags">
+        <span class="tag family">Family</span>
+        <span class="tag">All Ages</span>
+      </div>
+      <p>Like a space pod being shaken, wiggled, and spun just enough to confuse your inner ear.</p>
+    </div>
+  </div>
+
+  <div class="card" data-type="water" data-age="all">
+    <img src="bumpers.jpg">
+    <div class="card-content">
+      <h3>Battle Bumpers</h3>
+      <div class="tags">
+        <span class="tag water">Water</span>
+        <span class="tag">All Ages</span>
+      </div>
+      <p>Enjoy splashing your friends with this aquatic version of your favorite bumper cars.</p>
+    </div>
+  </div>
+
+  <div class="card" data-type="family" data-age="all">
+    <img src="pepito.jpg">
+    <div class="card-content">
+      <h3>Pepito Rush</h3>
+      <div class="tags">
+        <span class="tag family">Thrill</span>
+        <span class="tag">All Ages</span>
+      </div>
+      <p>A simple roller coaster with enough dips and turns to make you laugh and slightly scream.</p>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <p>© 2026 Park Voyage</p>
+</footer>
+
+<script>
+const search = document.getElementById("search");
+const type = document.getElementById("type");
+const age = document.getElementById("age");
+const cards = document.querySelectorAll(".card");
+
+function filterRides(){
+
+  const searchValue = search.value.toLowerCase();
+  const typeValue = type.value;
+  const ageValue = age.value;
+
+  cards.forEach(card => {
+
+    const title = card.querySelector("h3").innerText.toLowerCase();
+    const cardType = card.dataset.type;
+    const cardAge = card.dataset.age;
+
+    const matchSearch = title.includes(searchValue);
+    const matchType = typeValue === "all" || cardType === typeValue;
+    const matchAge = ageValue === "all" || cardAge === ageValue;
+
+    if(matchSearch && matchType && matchAge){
+      card.style.display = "block";
+    }else{
+      card.style.display = "none";
+    }
+
+  });
+
+}
+
+search.addEventListener("input", filterRides);
+type.addEventListener("change", filterRides);
+age.addEventListener("change", filterRides);
+</script>
+
+</body>
+</html>
