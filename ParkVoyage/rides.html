@@ -52,22 +52,62 @@ nav a{
 
 nav a:hover{
   color:#ffd700;
+  text-decoration: underline;
+  transition: all 0.5s ease;
 }
 
 /* HERO */
 .hero{
-  padding:80px 20px 40px;
-  text-align:center;
+    padding: 100px 20px 50px;
+    text-align: center;
 }
 
-.hero h2{
-  font-size:2.5rem;
-  color:#0a1f44;
+/* Badge */
+.section-badge{
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  border-radius: 50px;
+  background: rgba(0, 198, 255, 0.15);
+  color: #123a7a;
+  margin-bottom: 15px;
+  font-weight: 600;
 }
 
-.hero p{
-  color:#555;
-  margin-top:10px;
+/* title */
+.section-title{
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: #0a1f44;
+    margin-bottom: 15px;
+}
+
+/*gradient*/
+.section-title span{
+    background: linear-gradient(90deg, #123a7a, #00c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/*subtitle*/
+.section-subtitle{
+    font-size: 1rem;
+    color: #555;
+    max-width: 600px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+/*underline*/
+.section-title::after{
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    margin: 15px auto 0;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #00c6ff, #ff4d4d);
 }
 
 /* FILTER BAR */
@@ -105,17 +145,28 @@ nav a:hover{
   border-radius:15px;
   overflow:hidden;
   box-shadow:0 10px 25px rgba(0,0,0,0.15);
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:translateY(-5px);
+  transition:0.3s; 
 }
 
 .card img{
   width:100%;
-  height:180px;
+  aspect-ratio:16/9;
   object-fit:cover;
+}
+
+
+.card:hover{
+  transform:translateY(-10px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.card img{
+  background: #123a7a;
+  color: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .card-content{
@@ -140,6 +191,11 @@ nav a:hover{
   background:#ffd700;
   color:#0a1f44;
   font-weight:600;
+  transition: 0.3s ease;
+}
+
+.card:hover .tag{
+    transform: translateY(-2px);
 }
 
 .tag.thrill{background:#ff4d4d;color:#fff;}
@@ -152,6 +208,8 @@ nav a:hover{
   opacity:0.9;
   line-height:1.4;
 }
+
+
 
 /* FOOTER */
 footer{
@@ -168,29 +226,153 @@ footer{
     font-size:1.8rem;
   }
 }
+
+/* HAMBURGER MENU */
+.menu-toggle{
+  display:none;
+  font-size:26px;
+  color:#fff;
+  cursor:pointer;
+}
+
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s;
+  z-index:999;
+}
+
+.overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+/* MOBILE NAV */
+@media(max-width:768px){
+
+  .menu-toggle{
+    display:block;
+    z-index:1001;
+  }
+
+  nav{
+    position:fixed;
+    top:0;
+    right:-100%; /* hidden off-screen */
+    width:260px;
+    height:100vh;
+    background:linear-gradient(180deg,#0a1f44,#123a7a);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    padding-top:80px;
+    transition:0.4s ease;
+    z-index:1000;
+    box-shadow:-10px 0 30px rgba(0,0,0,0.3);
+  }
+
+  nav a{
+    width:100%;
+    padding:15px 25px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+
+  /* ACTIVE STATE (slides in) */
+  nav.active{
+    right:0;
+  }
+}
+
+.logo img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+
+  filter:
+    drop-shadow(0 0 4px rgba(255,215,0,0.6))
+    drop-shadow(0 0 8px rgba(255,184,0,0.4));
+
+  transition:0.3s ease;
+}
+
+.logo h1{
+  font-size:1.5rem;
+  color:#ffd700;
+
+  text-shadow:
+    0 0 4px rgba(255,215,0,0.6),
+    0 0 8px rgba(255,184,0,0.4);
+
+  transition:0.3s ease;
+}
+
+.logo:hover img{
+  filter:
+    drop-shadow(0 0 6px rgba(255,215,0,0.7))
+    drop-shadow(0 0 12px rgba(255,184,0,0.5));
+}
+
+.logo:hover h1{
+  text-shadow:
+    0 0 6px rgba(255,215,0,0.7),
+    0 0 12px rgba(255,184,0,0.5);
+}
+
+@media(max-width:768px){
+  .logo h1{
+    font-size:1.2rem;
+  }
+
+  .logo img{
+    width:32px;
+    height:32px;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">
-    <img src="logo.png" alt="logo">
-    <h1>Park Voyage</h1>
-  </div>
-
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="rides.html">Attractions</a>
-    <a href="map.html">Map</a>
-    <a href="tickets.html">Tickets</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+<div class="overlay" onclick="toggleMenu()"></div>
+<div class="logo">
+  <img src="logo.png" alt="Logo">
+  <h1>Park Voyage</h1>
+</div>
+<div class="menu-toggle" onclick="toggleMenu()">
+  ☰
+</div>
+<nav id="navMenu">
+<a href="index.html">Home</a>
+<a href="rides.html">Attractions</a>
+<a href="dining.html">Dining</a>
+<a href="map.html">Map</a>
+<a href="tickets.html">Tickets</a>
+<a href="contact.html">Contact</a>
+<a href="login.html">Login/Sign-Up</a>
+</nav>
 </header>
 
 <section class="hero">
-  <h2>Attractions</h2>
-  <p>Explore thrilling rides, family adventures, and water attractions at Pradera Islands Theme Park</p>
+    <div class="hero-content">
+
+        <div class="section-badge">PARK EXPERIENCES</div>
+
+        <h2 class="section-title">
+            Explore <span>Attrations</span>
+        </h2>
+
+        <p class="section-subtitle">
+          Discover thrilling rides, water adventures, and family-friendly fun designed for every kind of explorer!  
+        </p>
+
+    </div>
 </section>
 
 <!-- FILTERS -->
@@ -246,7 +428,7 @@ footer{
       <h3>Malyari Galleon</h3>
       <div class="tags">
         <span class="tag thrill">Thrill</span>
-        <span class="tag">Teens</span>
+        <span class="tag">Teen</span>
       </div>
       <p>A major swinging ship ride that "Let's you feel the adrenaline".</p>
     </div>
@@ -293,10 +475,94 @@ footer{
     <div class="card-content">
       <h3>Pepito Rush</h3>
       <div class="tags">
-        <span class="tag family">Thrill</span>
+        <span class="tag thrill">Thrill</span>
         <span class="tag">All Ages</span>
       </div>
       <p>A simple roller coaster with enough dips and turns to make you laugh and slightly scream.</p>
+    </div>
+  </div>
+
+  <div class="card" data-type="family" data-age="all">
+    <img src="fire.jpg">
+    <div class="card-content">
+      <h3>Naga Brigade</h3>
+      <div class="tags">
+        <span class="tag family">Family</span>
+        <span class="tag">All Ages</span>
+      </div>
+      <p>Come board a fire truck-style train and extinguish flames on set pieces to earn points.</p>
+    </div>
+  </div>
+
+  <div class="card" data-type="thrill" data-age="teen">
+    <img src="banua.jpg">
+    <div class="card-content">
+      <h3>Banua Shuttle</h3>
+      <div class="tags">
+        <span class="tag thrill">Thrill</span>
+        <span class="tag">Teen</span>
+      </div>
+      <p>The lift is slow, the air is still, but then — it releases. No countdown, no hint, no mercy. You’re dropped in a straight plunge that leaves your stomach somewhere above Pampanga.</p>
+    </div>
+  </div>
+
+  <div class="card" data-type="family" data-age="kids">
+    <img src="seeker.jpg">
+    <div class="card-content">
+      <h3>Star Seeker</h3>
+      <div class="tags">
+        <span class="tag family">Family</span>
+        <span class="tag">Kids</span>
+      </div>
+      <p>Come board a fire truck-style train and extinguish flames on set pieces to earn points.</p>
+    </div>
+  </div>
+
+  <div class="card" data-type="family" data-age="all">
+    <img src="obst.jpg">
+    <div class="card-content">
+      <h3>Bambalito’s Hide Out</h3>
+      <div class="tags">
+        <span class="tag family">Family</span>
+        <span class="tag">All Ages</span>
+      </div>
+      <p>Bambalito’s Hideout is a ropes-and-net adventure zone, with climbing grids, suspended nets, and a mini high-ropes challenge under a covered dome.</p>
+    </div>
+  </div>
+
+  <div class="card" data-type="family" data-age="all">
+    <img src="glide.jpg">
+    <div class="card-content">
+      <h3>Fire Gliders</h3>
+      <div class="tags">
+        <span class="tag family">Family</span>
+        <span class="tag">All Ages</span>
+      </div>
+      <p>Flying-glider style ride with pedals — so yes, you’re flying and working your legs. If you want a ride that feels airy without being drop-tower terrifying, start here.</p>
+    </div>
+  </div>
+
+  <div class="card" data-type="thrill" data-age="teen">
+    <img src="lago.jpg">
+    <div class="card-content">
+      <h3>Lago Launcher</h3>
+      <div class="tags">
+        <span class="tag thrill">Thrill</span>
+        <span class="tag">Teen</span>
+      </div>
+      <p>Enjoy a thrilling and splashing boat ride that winds up and launches you towards the water!</p>
+    </div>
+  </div>
+
+  <div class="card" data-type="thrill" data-age="teen">
+    <img src="horror.jpg">
+    <div class="card-content">
+      <h3>Bahay ni Aling Pasya</h3>
+      <div class="tags">
+        <span class="tag thrill">Thrill</span>
+        <span class="tag">Teen</span>
+      </div>
+      <p>Bahay ni Aling Pasya opens at 4 PM, and it’s best experienced at night when the lighting and atmosphere make the whole house feel eerier.</p>
     </div>
   </div>
 
@@ -341,6 +607,14 @@ function filterRides(){
 search.addEventListener("input", filterRides);
 type.addEventListener("change", filterRides);
 age.addEventListener("change", filterRides);
+
+function toggleMenu(){
+  const nav = document.getElementById("navMenu");
+  const overlay = document.querySelector(".overlay");
+
+  nav.classList.toggle("active");
+  overlay.classList.toggle("active");
+}
 </script>
 
 </body>
