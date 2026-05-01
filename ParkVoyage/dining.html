@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Park Voyage | Dining</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:linear-gradient(180deg,#ffffff 40%,#bff3ff 100%);
+}
+
+/* NAVBAR */
+header{
+  background:linear-gradient(90deg,#0a1f44,#123a7a);
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  filter:drop-shadow(0 0 6px rgba(255,215,0,0.6));
+}
+
+.logo h1{
+  color:#ffd700;
+  font-size:1.5rem;
+}
+
+nav a{
+  margin:0 10px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:500;
+}
+
+nav a:hover{
+  color:#ffd700;
+  text-decoration:underline;
+}
+
+/* HERO */
+.hero{
+  padding:120px 20px 80px;
+  text-align:center;
+  background:
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,2)),
+    url('bg.jpg');
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+}
+
+/* Badge */
+.section-badge{
+  display:inline-block;
+  padding:6px 14px;
+  font-size:0.75rem;
+  letter-spacing:2px;
+  border-radius:50px;
+  background:rgba(255,255,255,0.2);
+  color:#fff;
+  margin-bottom:15px;
+  font-weight:600;
+}
+
+/* Title */
+.section-title{
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.section-title span{
+  background:linear-gradient(90deg,#ffd700,#ffb800);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* Subtitle */
+.section-subtitle{
+  font-size:1rem;
+  max-width:600px;
+  margin:auto;
+  opacity:0.9;
+}
+
+/* GRID */
+.grid{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
+  gap:20px;
+  padding:40px 20px;
+}
+
+/* CARD */
+.card{
+  position:relative;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  transition:0.4s ease;
+  opacity:0;
+  transform:translateY(30px);
+  animation:fadeUp 0.6s ease forwards;
+}
+
+.card:nth-child(1){animation-delay:0.1s;}
+.card:nth-child(2){animation-delay:0.2s;}
+.card:nth-child(3){animation-delay:0.3s;}
+.card:nth-child(4){animation-delay:0.4s;}
+
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.card img{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  transition:transform 0.5s ease;
+}
+
+/* Overlay content */
+.card-content{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:20px;
+  background:linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+  color:#fff;
+  transform:translateY(45%);
+  transition:0.4s ease;
+  z-index:2;
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:0 20px 40px rgba(0,0,0,0.25);
+}
+
+.card:hover img{
+  transform:scale(1.1);
+}
+
+.card:hover .card-content{
+  transform:translateY(0);
+}
+
+/* Dark overlay */
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.25);
+  opacity:0;
+  transition:0.4s;
+  z-index:1;
+}
+
+.card:hover::before{
+  opacity:1;
+}
+
+/* TEXT */
+.card h3{
+  margin-bottom:5px;
+}
+
+.card p{
+  font-size:0.85rem;
+  line-height:1.4;
+  opacity:0.9;
+}
+
+/* TAGS */
+.tags{
+  display:flex;
+  gap:8px;
+  margin:8px 0;
+  flex-wrap:wrap;
+}
+
+.tag{
+  font-size:0.7rem;
+  padding:5px 12px;
+  border-radius:50px;
+  font-weight:600;
+  backdrop-filter:blur(6px);
+  background:rgba(255,255,255,0.2);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.3);
+  transition:0.3s;
+}
+
+.card:hover .tag{
+  transform:translateY(-2px);
+}
+
+.tag.cafe{background:#00c6ff;}
+.tag.resto{background:#9D18ED;}
+
+/* FOOTER */
+footer{
+  background:#123a7a;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+}
+
+/* MOBILE NAV */
+.menu-toggle{
+  display:none;
+  font-size:26px;
+  color:#fff;
+  cursor:pointer;
+}
+
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s;
+  z-index:999;
+}
+
+.overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+@media(max-width:768px){
+
+  .menu-toggle{
+    display:block;
+  }
+
+  nav{
+    position:fixed;
+    top:0;
+    right:-100%;
+    width:260px;
+    height:100vh;
+    background:linear-gradient(180deg,#0a1f44,#123a7a);
+    display:flex;
+    flex-direction:column;
+    padding-top:80px;
+    transition:0.4s;
+    z-index:1000;
+  }
+
+  nav.active{
+    right:0;
+  }
+
+  nav a{
+    width:100%;
+    padding:15px 25px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+}
+
+.logo img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+
+  filter:
+    drop-shadow(0 0 4px rgba(255,215,0,0.6))
+    drop-shadow(0 0 8px rgba(255,184,0,0.4));
+
+  transition:0.3s ease;
+}
+
+.logo h1{
+  font-size:1.5rem;
+  color:#ffd700;
+
+  text-shadow:
+    0 0 4px rgba(255,215,0,0.6),
+    0 0 8px rgba(255,184,0,0.4);
+
+  transition:0.3s ease;
+}
+
+.logo:hover img{
+  filter:
+    drop-shadow(0 0 6px rgba(255,215,0,0.7))
+    drop-shadow(0 0 12px rgba(255,184,0,0.5));
+}
+
+.logo:hover h1{
+  text-shadow:
+    0 0 6px rgba(255,215,0,0.7),
+    0 0 12px rgba(255,184,0,0.5);
+}
+
+@media(max-width:768px){
+  .logo h1{
+    font-size:1.2rem;
+  }
+
+  .logo img{
+    width:32px;
+    height:32px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="overlay" onclick="toggleMenu()"></div>
+
+<div class="logo">
+  <img src="logo.png">
+  <h1>Park Voyage</h1>
+</div>
+
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<nav id="navMenu">
+<a href="index.html">Home</a>
+<a href="rides.html">Attractions</a>
+<a href="dining.html">Dining</a>
+<a href="map.html">Map</a>
+<a href="tickets.html">Tickets</a>
+<a href="contact.html">Contact</a>
+<a href="login.html">Login/Sign-Up</a>
+</nav>
+</header>
+
+<section class="hero">
+  <div class="section-badge">DINING EXPERIENCE</div>
+
+  <h2 class="section-title">
+    Explore <span>Dining Areas</span>
+  </h2>
+
+  <p class="section-subtitle">
+    Discover the restaurants and cafes offered here in Pradera Islands Theme Park!
+  </p>
+</section>
+
+<section class="grid">
+
+  <div class="card">
+    <img src="zus.jpeg">
+    <div class="card-content">
+      <h3>ZUS Coffee</h3>
+      <div class="tags">
+        <span class="tag cafe">Cafe</span>
+      </div>
+      <p>ZUS Coffee is thrilled to bring our specialty coffee straight to your cups. We believe that premium coffee should be accessible to everyone.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="casa.jpg">
+    <div class="card-content">
+      <h3>Casa Fiesta</h3>
+      <div class="tags">
+        <span class="tag resto">Restaurant</span>
+      </div>
+      <p>Experience Casa Fiesta at Pradera Islands Theme Park with affordable, kid-friendly options perfect for family fun! Explore the exciting choices!</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="sinukuan.jpg">
+    <div class="card-content">
+      <h3>Sinukuan</h3>
+      <div class="tags">
+        <span class="tag resto">Restaurant</span>
+      </div>
+      <p>Casa Fiesta offers a varied menu including Pasta (Spaghetti with Meatballs), Quesadillas, Mozzarella Sticks, Buffalo Wings, Shrimp Fajitas, Calamares, and salads!</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="kusina.jpg">
+    <div class="card-content">
+      <h3>Kusina ni Nanay</h3>
+      <div class="tags">
+        <span class="tag resto">Restaurant</span>
+      </div>
+      <p>Enjoy the comfort of homemade Filipino dishes here in Kusina ni Nanay!</p>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <p>© 2026 Park Voyage</p>
+</footer>
+
+<script>
+function toggleMenu(){
+  const nav = document.getElementById("navMenu");
+  const overlay = document.querySelector(".overlay");
+
+  nav.classList.toggle("active");
+  overlay.classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

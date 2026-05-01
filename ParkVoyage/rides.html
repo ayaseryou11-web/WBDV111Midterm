@@ -19,7 +19,7 @@ body{
   background:linear-gradient(180deg,#ffffff 40%,#bff3ff 100%);
 }
 
-/* NAVBAR (same style as yours) */
+/* NAVBAR */
 header{
   background:linear-gradient(90deg,#0a1f44,#123a7a);
   padding:15px 30px;
@@ -146,6 +146,17 @@ nav a:hover{
   overflow:hidden;
   box-shadow:0 10px 25px rgba(0,0,0,0.15);
   transition:0.3s; 
+}
+
+.reveal{
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active{
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .card img{
@@ -360,7 +371,7 @@ footer{
 </header>
 
 <section class="hero">
-    <div class="hero-content">
+    <div class="hero-content reveal">
 
         <div class="section-badge">PARK EXPERIENCES</div>
 
@@ -398,7 +409,7 @@ footer{
 <!-- RIDES -->
 <section class="grid" id="rideGrid">
 
-  <div class="card" data-type="thrill" data-age="adult">
+  <div class="card reveal" data-type="thrill" data-age="adult">
     <img src="airplane.jpg">
     <div class="card-content">
       <h3>Space Force</h3>
@@ -410,7 +421,7 @@ footer{
     </div>
   </div>
 
-  <div class="card" data-type="drop" data-age="teen">
+  <div class="card reveal" data-type="drop" data-age="teen">
     <img src="ride2.jpg">
     <div class="card-content">
       <h3>Diwata Towers</h3>
@@ -422,7 +433,7 @@ footer{
     </div>
   </div>
 
-  <div class="card" data-type="thrill" data-age="teen">
+  <div class="card reveal" data-type="thrill" data-age="teen">
     <img src="ride3.jpg">
     <div class="card-content">
       <h3>Malyari Galleon</h3>
@@ -434,7 +445,7 @@ footer{
     </div>
   </div>
 
-  <div class="card" data-type="thrill" data-age="all">
+  <div class="card reveal" data-type="thrill" data-age="all">
     <img src="ride4.jpg">
     <div class="card-content">
       <h3>Galura Flyer</h3>
@@ -446,7 +457,7 @@ footer{
     </div>
   </div>
 
-  <div class="card" data-type="thrill" data-age="all">
+  <div class="card reveal" data-type="thrill" data-age="all">
     <img src="turbulence.jpg">
     <div class="card-content">
       <h3>Turbulence</h3>
@@ -458,7 +469,7 @@ footer{
     </div>
   </div>
 
-  <div class="card" data-type="water" data-age="all">
+  <div class="card reveal" data-type="water" data-age="all">
     <img src="bumpers.jpg">
     <div class="card-content">
       <h3>Battle Bumpers</h3>
@@ -470,7 +481,7 @@ footer{
     </div>
   </div>
 
-  <div class="card" data-type="family" data-age="all">
+  <div class="card reveal" data-type="family" data-age="all">
     <img src="pepito.jpg">
     <div class="card-content">
       <h3>Pepito Rush</h3>
@@ -482,7 +493,7 @@ footer{
     </div>
   </div>
 
-  <div class="card" data-type="family" data-age="all">
+  <div class="card reveal" data-type="family" data-age="all">
     <img src="fire.jpg">
     <div class="card-content">
       <h3>Naga Brigade</h3>
@@ -494,7 +505,7 @@ footer{
     </div>
   </div>
 
-  <div class="card" data-type="thrill" data-age="teen">
+  <div class="card reveal" data-type="thrill" data-age="teen">
     <img src="banua.jpg">
     <div class="card-content">
       <h3>Banua Shuttle</h3>
@@ -506,7 +517,7 @@ footer{
     </div>
   </div>
 
-  <div class="card" data-type="family" data-age="kids">
+  <div class="card reveal" data-type="family" data-age="kids">
     <img src="seeker.jpg">
     <div class="card-content">
       <h3>Star Seeker</h3>
@@ -518,7 +529,7 @@ footer{
     </div>
   </div>
 
-  <div class="card" data-type="family" data-age="all">
+  <div class="card reveal" data-type="family" data-age="all">
     <img src="obst.jpg">
     <div class="card-content">
       <h3>Bambalito’s Hide Out</h3>
@@ -530,7 +541,7 @@ footer{
     </div>
   </div>
 
-  <div class="card" data-type="family" data-age="all">
+  <div class="card reveal" data-type="family" data-age="all">
     <img src="glide.jpg">
     <div class="card-content">
       <h3>Fire Gliders</h3>
@@ -542,7 +553,7 @@ footer{
     </div>
   </div>
 
-  <div class="card" data-type="thrill" data-age="teen">
+  <div class="card reveal" data-type="thrill" data-age="teen">
     <img src="lago.jpg">
     <div class="card-content">
       <h3>Lago Launcher</h3>
@@ -554,7 +565,7 @@ footer{
     </div>
   </div>
 
-  <div class="card" data-type="thrill" data-age="teen">
+  <div class="card reveal" data-type="thrill" data-age="teen">
     <img src="horror.jpg">
     <div class="card-content">
       <h3>Bahay ni Aling Pasya</h3>
@@ -615,6 +626,25 @@ function toggleMenu(){
   nav.classList.toggle("active");
   overlay.classList.toggle("active");
 }
+
+const reveals = document.querySelectorAll(".reveal");
+
+function revealOnScroll(){
+  const triggerBottom = window.innerHeight * 0.85;
+
+  reveals.forEach((el, index) => {
+    const top = el.getBoundingClientRect().top;
+
+    if(top < triggerBottom){
+      setTimeout(() => {
+        el.classList.add("active");
+      }, index * 100); // stagger delay
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
 </script>
 
 </body>
