@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Park Voyage</title>
+<title>Park Voyage | Home</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
@@ -25,8 +25,15 @@ header h1{
     color:#ffd700
 }
 
+nav{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
 nav a{
-    margin:0 10px;color:#fff;
+    margin:0 10px;
+    color:#fff;
     text-decoration:none;
     font-weight:500
 }
@@ -1165,12 +1172,19 @@ setInterval(nextSlide, 3000);
 // INIT
 updateCarousel();
 
-function toggleMenu(){
+function toggleMenu() {
   const nav = document.getElementById("navMenu");
   const overlay = document.querySelector(".overlay");
+  const toggle = document.querySelector(".menu-toggle");
 
   nav.classList.toggle("active");
   overlay.classList.toggle("active");
+
+  const isOpen = nav.classList.contains("active");
+
+  toggle.textContent = isOpen ? "✕" : "☰";
+
+  document.body.style.overflow = isOpen ? "hidden" : "auto";
 }
 
 

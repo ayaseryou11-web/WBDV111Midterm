@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Park Voyage | Attractions</title>
+<title>Park Voyage | Map</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -19,7 +19,6 @@ body{
   background:linear-gradient(180deg,#ffffff 40%,#bff3ff 100%);
 }
 
-/* NAVBAR */
 /* NAVBAR */
 header{
   background:linear-gradient(90deg,#0a1f44,#123a7a);
@@ -57,14 +56,16 @@ nav{
 }
 
 nav a{
-  color:#fff;
-  text-decoration:none;
-  font-weight:500;
-  transition:0.3s;
+    margin:0 10px;
+    color:#fff;
+    text-decoration:none;
+    font-weight:500
 }
 
 nav a:hover{
-  color:#ffd700;
+    color:#ffd700;
+    text-decoration: underline;
+    transition: all 0.3s ease;
 }
 
 /* HAMBURGER (hidden on desktop) */
@@ -109,29 +110,60 @@ nav a:hover{
 }
 /* HERO */
 .hero{
-  padding: 100px 20px 50px;
+  padding:120px 20px 80px;
   text-align:center;
+  background:
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,2)),
+    url('map1.jpg');
+  background-size:cover;
+  background-position:center;
+  color:#fff;
 }
 
-.section-title{
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  font-weight:700;
-  color:#0a1f44;
+/* HERO ENTRANCE */
+.hero .section-badge,
+.hero .section-title,
+.hero .section-subtitle{
+  opacity:0;
+  transform:translateY(30px);
+  animation:heroIn 0.9s ease forwards;
+}
+
+.hero .section-badge{ animation-delay:0.1s; }
+.hero .section-title{ animation-delay:0.25s; }
+.hero .section-subtitle{ animation-delay:0.4s; }
+
+@keyframes heroIn{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* Badge */
+.section-badge{
+  display:inline-block;
+  padding:6px 14px;
+  font-size:0.75rem;
+  letter-spacing:2px;
+  border-radius:50px;
+  background:rgba(255,255,255,0.2);
+  color:#fff;
   margin-bottom:15px;
+  font-weight:600;
+}
+
+/* Title */
+.section-title{
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:700;
+  margin-bottom:10px;
 }
 
 .section-title span{
-  background: linear-gradient(90deg,#123a7a,#edcf0b);
+  background:linear-gradient(90deg,#ffd700,#ffb800);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-}
-
-.section-subtitle{
-  font-size:1rem;
-  color:#555;
-  max-width:600px;
-  margin:auto;
-  line-height:1.6;
 }
 
 /* MAIN LAYOUT */
@@ -141,6 +173,7 @@ nav a:hover{
   height:85vh;
   display:flex;
   gap:20px;
+  margin: 60px auto 0;
 }
 
 /* MAP */
@@ -406,6 +439,36 @@ footer{
     height:32px;
   }
 }
+
+.reveal{
+  opacity:0;
+  transform:translateY(50px) scale(0.97);
+  transition:all 0.8s cubic-bezier(0.2,0.8,0.2,1);
+  will-change:transform, opacity;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s ease;
+  z-index:999;
+}
+
+.overlay.active{
+  opacity:1;
+  visibility:visible;
+}
 </style>
 </head>
 
@@ -433,14 +496,21 @@ footer{
 </header>
 
 <section class="hero">
-  <h2 class="section-title">Map <span>Exploration</span></h2>
-  <p class="section-subtitle">Find your way around Pradera Islands!</p>
+  <div class="section-badge">MAP EXPLORARION</div>
+
+  <h2 class="section-title">
+    Navigate <span>Your Way</span>
+  </h2>
+
+  <p class="section-subtitle">
+    Find your way around Pradera Islands!
+  </p>
 </section>
 
 <div class="app">
 
   <!-- MAP -->
-  <div class="map-wrapper">
+<div class="map-wrapper reveal">
     <button class="reset-btn" onclick="resetMap()">Reset View</button>
     <img src="map.jpg" class="map">
 
@@ -453,7 +523,7 @@ footer{
   </div>
 
   <!-- SIDEBAR -->
-  <div class="sidebar" id="sidebar">
+  <div class="sidebar reveal" id="sidebar">
 
     <div class="card">
       <h2>📍 <span id="regionName">Click a marker</span></h2>
@@ -580,6 +650,33 @@ function resetMap() {
   `;
 }
 }
+
+window.addEventListener("load", () => {
+  document.querySelectorAll(".reveal").forEach((el, i) => {
+    setTimeout(() => {
+      el.classList.add("active");
+    }, i * 150);
+  });
+});
+
+function toggleMenu() {
+  const nav = document.getElementById("navMenu");
+  const overlay = document.querySelector(".overlay");
+  const toggle = document.querySelector(".menu-toggle");
+
+  nav.classList.toggle("active");
+  overlay.classList.toggle("active");
+
+  const isOpen = nav.classList.contains("active");
+
+  toggle.textContent = isOpen ? "✕" : "☰";
+
+  document.body.style.overflow = isOpen ? "hidden" : "auto";
+}
+
+document.querySelectorAll("nav a").forEach(link => {
+  link.addEventListener("click", toggleMenu);
+});
 </script>
 
 </body>

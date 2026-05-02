@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Park Voyage | Contact Us</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:linear-gradient(180deg,#ffffff 40%,#bff3ff 100%);
+}
+
+/* NAVBAR */
+header{
+  background:linear-gradient(90deg,#0a1f44,#123a7a);
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo img{
+  width:40px;
+}
+
+.logo h1{
+  color:#ffd700;
+  font-size:1.4rem;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+nav a{
+  margin:0 10px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:500;
+}
+
+nav a:hover{
+  color:#ffd700;
+  text-decoration: underline;
+  transition: all 0.5s ease;
+}
+
+/* HERO */
+.hero{
+  padding:120px 20px 80px;
+  text-align:center;
+  background:
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,2)),
+    url('soc.jpg');
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+}
+
+.hero .section-badge,
+.hero .section-title,
+.hero .section-subtitle{
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroIn 0.9s ease forwards;
+}
+
+.hero .section-badge{ animation-delay: 0.1s; }
+.hero .section-title{ animation-delay: 0.25s; }
+.hero .section-subtitle{ animation-delay: 0.4s; }
+
+@keyframes heroIn{
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Badge */
+.section-badge{
+  display:inline-block;
+  padding:6px 14px;
+  font-size:0.75rem;
+  letter-spacing:2px;
+  border-radius:50px;
+  background:rgba(255,255,255,0.2);
+  color:#fff;
+  margin-bottom:15px;
+  font-weight:600;
+}
+
+/* Title */
+.section-title{
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.section-title span{
+  background:linear-gradient(90deg,#ffd700,#ffb800);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* FOOTER */
+footer{
+  background:#123a7a;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+  margin-top:40px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero h2{
+    font-size:1.8rem;
+  }
+}
+
+/* HAMBURGER MENU */
+.menu-toggle{
+  display:none;
+  font-size:26px;
+  color:#fff;
+  cursor:pointer;
+}
+
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s;
+  z-index:999;
+}
+
+.overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+/* MOBILE NAV */
+@media(max-width:768px){
+
+  .menu-toggle{
+    display:block;
+    z-index:1001;
+  }
+
+  nav{
+    position:fixed;
+    top:0;
+    right:-100%; /* hidden off-screen */
+    width:260px;
+    height:100vh;
+    background:linear-gradient(180deg,#0a1f44,#123a7a);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    padding-top:80px;
+    transition:0.4s ease;
+    z-index:1000;
+    box-shadow:-10px 0 30px rgba(0,0,0,0.3);
+  }
+
+  nav a{
+    width:100%;
+    padding:15px 25px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+
+  /* ACTIVE STATE (slides in) */
+  nav.active{
+    right:0;
+  }
+}
+
+.logo img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+
+  filter:
+    drop-shadow(0 0 4px rgba(255,215,0,0.6))
+    drop-shadow(0 0 8px rgba(255,184,0,0.4));
+
+  transition:0.3s ease;
+}
+
+.logo h1{
+  font-size:1.5rem;
+  color:#ffd700;
+
+  text-shadow:
+    0 0 4px rgba(255,215,0,0.6),
+    0 0 8px rgba(255,184,0,0.4);
+
+  transition:0.3s ease;
+}
+
+.logo:hover img{
+  filter:
+    drop-shadow(0 0 6px rgba(255,215,0,0.7))
+    drop-shadow(0 0 12px rgba(255,184,0,0.5));
+}
+
+.logo:hover h1{
+  text-shadow:
+    0 0 6px rgba(255,215,0,0.7),
+    0 0 12px rgba(255,184,0,0.5);
+}
+
+@media(max-width:768px){
+  .logo h1{
+    font-size:1.2rem;
+  }
+
+  .logo img{
+    width:32px;
+    height:32px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="overlay" onclick="toggleMenu()"></div>
+<div class="logo">
+  <img src="logo.png" alt="Logo">
+  <h1>Park Voyage</h1>
+</div>
+<div class="menu-toggle" onclick="toggleMenu()">
+  ☰
+</div>
+<nav id="navMenu">
+<a href="index.html">Home</a>
+<a href="rides.html">Attractions</a>
+<a href="dining.html">Dining</a>
+<a href="map.html">Map</a>
+<a href="tickets.html">Tickets</a>
+<a href="contact.html">Contact</a>
+<a href="login.html">Login/Sign-Up</a>
+</nav>
+</header>
+
+<section class="hero">
+  <div class="section-badge">CONTACT US</div>
+
+  <h2 class="section-title">
+    Reach Out <span>to the Team</span>
+  </h2>
+
+  <p class="section-subtitle">
+   Got any questions? Our contact information and form is provided below!
+  </p>
+</section>
+
+
+<footer>
+  <p>© 2026 Park Voyage</p>
+</footer>
+
+<script>
+search.addEventListener("input", filterRides);
+type.addEventListener("change", filterRides);
+age.addEventListener("change", filterRides);
+
+function toggleMenu() {
+  const nav = document.getElementById("navMenu");
+  const overlay = document.querySelector(".overlay");
+  const toggle = document.querySelector(".menu-toggle");
+
+  nav.classList.toggle("active");
+  overlay.classList.toggle("active");
+
+  const isOpen = nav.classList.contains("active");
+
+  toggle.textContent = isOpen ? "✕" : "☰";
+
+  document.body.style.overflow = isOpen ? "hidden" : "auto";
+}
+
+const reveals = document.querySelectorAll(".reveal");
+
+function revealOnScroll(){
+  const triggerBottom = window.innerHeight * 0.85;
+
+  reveals.forEach((el, index) => {
+    const top = el.getBoundingClientRect().top;
+
+    if(top < triggerBottom && !el.classList.contains("active")){
+      setTimeout(() => {
+        el.classList.add("active");
+      }, index * 80); // smoother stagger
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
+</script>
+
+</body>
+</html>

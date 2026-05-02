@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Park Voyage | Tickets</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:linear-gradient(180deg,#ffffff 40%,#bff3ff 100%);
+}
+
+/* NAVBAR */
+header{
+  background:linear-gradient(90deg,#0a1f44,#123a7a);
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  filter:drop-shadow(0 0 6px rgba(255,215,0,0.6));
+}
+
+.logo h1{
+  color:#ffd700;
+  font-size:1.5rem;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+/* MOBILE NAV ONLY */
+@media(max-width:768px){
+
+  nav{
+    position:fixed;
+    top:0;
+    right:-100%;
+    width:260px;
+    height:100vh;
+    background:linear-gradient(180deg,#0a1f44,#123a7a);
+    flex-direction:column;
+    padding-top:80px;
+    transition:0.4s ease;
+    z-index:1000;
+  }
+
+  nav.active{
+    right:0;
+  }
+}
+
+nav a{
+    margin:0 10px;
+    color:#fff;
+    text-decoration:none;
+    font-weight:500
+}
+
+nav a:hover{
+    color:#ffd700;
+    text-decoration: underline;
+    transition: all 0.3s ease;
+}
+
+/* HERO */
+.hero{
+  padding:120px 20px 80px;
+  text-align:center;
+  background:
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,2)),
+    url('tix.jpg');
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+}
+
+/* HERO ENTRANCE */
+.hero .section-badge,
+.hero .section-title,
+.hero .section-subtitle{
+  opacity:0;
+  transform:translateY(30px);
+  animation:heroIn 0.9s ease forwards;
+}
+
+.hero .section-badge{ animation-delay:0.1s; }
+.hero .section-title{ animation-delay:0.25s; }
+.hero .section-subtitle{ animation-delay:0.4s; }
+
+@keyframes heroIn{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* Badge */
+.section-badge{
+  display:inline-block;
+  padding:6px 14px;
+  font-size:0.75rem;
+  letter-spacing:2px;
+  border-radius:50px;
+  background:rgba(255,255,255,0.2);
+  color:#fff;
+  margin-bottom:15px;
+  font-weight:600;
+}
+
+/* Title */
+.section-title{
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.section-title span{
+  background:linear-gradient(90deg,#ffd700,#ffb800);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* Subtitle */
+.section-subtitle{
+  font-size:1rem;
+  max-width:600px;
+  margin:auto;
+  opacity:0.9;
+}
+
+
+
+/* FOOTER */
+footer{
+  background:#123a7a;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+}
+
+/* MOBILE NAV */
+.menu-toggle{
+  display:none;
+  font-size:26px;
+  color:#fff;
+  cursor:pointer;
+  z-index: 1100;
+}
+
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s;
+  z-index:999;
+}
+
+.overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+@media(max-width:768px){
+
+  .menu-toggle{
+    display:block;
+  }
+
+  nav{
+    position:fixed;
+    top:0;
+    right:-100%;
+    width:260px;
+    height:100vh;
+    background:linear-gradient(180deg,#0a1f44,#123a7a);
+    display:flex;
+    flex-direction:column;
+    padding-top:80px;
+    transition:0.4s;
+    z-index:1000;
+  }
+
+  nav.active{
+    right:0;
+  }
+
+  nav a{
+    width:100%;
+    padding:15px 25px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+}
+
+.logo img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+
+  filter:
+    drop-shadow(0 0 4px rgba(255,215,0,0.6))
+    drop-shadow(0 0 8px rgba(255,184,0,0.4));
+
+  transition:0.3s ease;
+}
+
+.logo h1{
+  font-size:1.5rem;
+  color:#ffd700;
+
+  text-shadow:
+    0 0 4px rgba(255,215,0,0.6),
+    0 0 8px rgba(255,184,0,0.4);
+
+  transition:0.3s ease;
+}
+
+.logo:hover img{
+  filter:
+    drop-shadow(0 0 6px rgba(255,215,0,0.7))
+    drop-shadow(0 0 12px rgba(255,184,0,0.5));
+}
+
+.logo:hover h1{
+  text-shadow:
+    0 0 6px rgba(255,215,0,0.7),
+    0 0 12px rgba(255,184,0,0.5);
+}
+
+@media(max-width:768px){
+  .logo h1{
+    font-size:1.2rem;
+  }
+
+  .logo img{
+    width:32px;
+    height:32px;
+  }
+}
+
+/*tickets section*/
+.tickets{
+  width: 92%;
+  max-width: 1400px;
+  margin: 80px auto;
+
+  display: grid;
+
+  /* BIGGER cards */
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+
+  gap: 40px;
+}
+
+/*base card*/
+
+.ticket-card {
+  position: relative;
+  border-radius: 25px;
+  padding: 45px 30px;
+  min-height: 280px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(50px) scale(0.96);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  will-change: transform;
+}
+
+.ticket-card.show{
+  animation: cardIn 0.8s ease forwards;
+}
+
+.ticket-card:nth-child(1){ animation-delay:0.1s; }
+.ticket-card:nth-child(2){ animation-delay:0.2s; }
+.ticket-card:nth-child(3){ animation-delay:0.3s; }
+.ticket-card:nth-child(4){ animation-delay:0.4s; }
+.ticket-card:nth-child(5){ animation-delay:0.5s; }
+
+@keyframes cardIn{
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.ticket-card:hover{
+  transform: translateY(-12px) scale(1.05);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+}
+
+/*title*/
+
+.ticket-card h3{
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.price{
+  font-size: 48px; /* BIG */
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+.desc{
+  font-size: 15px;
+}
+
+/* card colors */
+
+/*regular*/
+.ticket-regular{
+  background: linear-gradient(135deg, #0055ff, #00c6ff);
+  box-shadow: 0 20px 50px rgba(0, 198, 255, 0.35);
+}
+
+.ticket-regular:hover{
+  box-shadow: 0 25px 70px rgba(0, 198, 255, 0.6);
+}
+
+/* JUNIOR */
+.ticket-junior{
+  background: linear-gradient(135deg,#00c853,#69f0ae);
+  box-shadow: 0 20px 50px rgba(0, 200, 83, 0.35);
+}
+
+.ticket-junior:hover{
+  box-shadow: 0 25px 70px rgba(0, 200, 83, 0.6);
+}
+
+/* ENTRANCE */
+.ticket-entry{
+  background: linear-gradient(135deg,#ffb800,#ffe082);
+  color:#1c1c1c;
+  box-shadow: 0 20px 50px rgba(255, 184, 0, 0.35);
+}
+
+.ticket-entry:hover{
+  box-shadow: 0 25px 70px rgba(255, 184, 0, 0.65);
+}
+
+/* SENIOR */
+.ticket-senior{
+  background: linear-gradient(135deg,#7c4dff,#b388ff);
+  box-shadow: 0 20px 50px rgba(124, 77, 255, 0.35);
+}
+
+.ticket-senior:hover{
+  box-shadow: 0 25px 70px rgba(124, 77, 255, 0.6);
+}
+
+/* KIDS */
+.ticket-kids{
+  background: linear-gradient(135deg,#e0e0e0,#ffffff);
+  color:#333;
+  box-shadow: 0 20px 50px rgba(160, 160, 160, 0.25);
+}
+
+.ticket-kids:hover{
+  box-shadow: 0 25px 70px rgba(160, 160, 160, 0.4);
+}
+
+/*popular badge*/
+.popular{
+  border: 3px solid #ffd700;
+  z-index: 5;
+}
+
+.popular:hover{
+  transform: translateY(-12px) scale(1.16);
+}
+
+.popular::before{
+  content: "MOST POPULAR";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffd700;
+  color: #000;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 20px;
+}
+
+
+
+/* ACTIVE / HIGHLIGHTED CARD */
+.ticket-card.active{
+  transform: scale(1.06);
+  z-index: 5;
+}
+
+.ticket-card.active .card-inner{
+  box-shadow: 0 0 25px rgba(255, 184, 0, 0.6),
+              0 0 50px rgba(255, 184, 0, 0.4);
+  border-radius: 20px;
+}
+
+@media(max-width:768px){
+  .tickets{
+    grid-template-columns: 1fr;
+  }
+
+  .ticket-card.popular{
+    grid-column: span 1;
+  }
+}
+
+/* GLOW ANIMATION */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 10px rgba(255,184,0,0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255,184,0,0.7);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255,184,0,0.3);
+  }
+}
+
+.ticket-card.active .card-front{
+  animation: glowPulse 2s infinite;
+}
+
+/* BOOKING SECTION WRAPPER */
+.booking{
+  width: 92%;
+  max-width: 850px;
+  margin: 100px auto;
+  padding: 40px;
+  border-radius: 30px;
+
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(18px);
+
+  box-shadow: 0 25px 70px rgba(0,0,0,0.15);
+
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s ease;
+}
+
+/* ENTER ANIMATION ACTIVE STATE */
+.booking.show{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* TITLE */
+.booking h2{
+  text-align: center;
+  font-size: 28px;
+  color: #0a1f44;
+  margin-bottom: 30px;
+}
+
+/* FORM GRID */
+.booking form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+/* FULL WIDTH FIELDS */
+.form-group:nth-child(5),
+.booking button{
+  grid-column: span 2;
+}
+
+/* LABEL */
+.form-group label{
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #123a7a;
+  font-size: 14px;
+}
+
+/* INPUTS */
+.form-group input,
+.form-group select{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.1);
+  outline: none;
+  transition: 0.3s ease;
+
+  background: rgba(255,255,255,0.9);
+}
+
+/* FOCUS GLOW */
+.form-group input:focus,
+.form-group select:focus{
+  border-color: #123a7a;
+  box-shadow: 0 0 0 4px rgba(18,58,122,0.15);
+}
+
+/* BUTTON */
+.btn{
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+
+  background: linear-gradient(90deg,#123a7a,#0a1f44);
+  color: white;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: all 0.35s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* BUTTON HOVER ANIMATION */
+.btn:hover{
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(18,58,122,0.35);
+  background: linear-gradient(90deg,#ffb800,#ffd700);
+  color: #1c1c1c;
+}
+
+/* BUTTON LIGHT SWEEP EFFECT */
+.btn::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.25);
+  transform: skewX(-25deg);
+  transition: 0.5s;
+}
+
+.btn:hover::before{
+  left: 120%;
+}
+
+#totalPrice{
+  font-weight: 700;
+  font-size: 18px;
+  color: #0a1f44;
+  background: rgba(255,184,0,0.15);
+  border: 2px solid rgba(255,184,0,0.4);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .booking form{
+    grid-template-columns: 1fr;
+  }
+
+  .form-group:nth-child(5),
+  .booking button{
+    grid-column: span 1;
+  }
+}
+
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s ease;
+  z-index:999;
+}
+
+.overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="overlay" onclick="toggleMenu()"></div>
+
+<header>
+
+<div class="logo">
+  <img src="logo.png">
+  <h1>Park Voyage</h1>
+</div>
+
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<nav id="navMenu">
+<a href="index.html">Home</a>
+<a href="rides.html">Attractions</a>
+<a href="dining.html">Dining</a>
+<a href="map.html">Map</a>
+<a href="tickets.html">Tickets</a>
+<a href="contact.html">Contact</a>
+<a href="login.html">Login/Sign-Up</a>
+</nav>
+</header>
+
+<section class="hero">
+  <div class="section-badge">ENTRY TICKETS</div>
+
+  <h2 class="section-title">
+    Choose Your <span>Adventure Pass</span>
+  </h2>
+
+  <p class="section-subtitle">
+    A list of available tickets and expenses for Pradera Islands Theme Park.
+  </p>
+</section>
+
+<!--tickets-->
+<div class="tickets">
+
+  <div class="ticket-card ticket-regular popular">
+    <h3>Regular Rate</h3>
+    <div class="price">₱1,500</div>
+    <p class="desc">Ride-All-You-Can (48 inches & above)</p>
+  </div>
+
+  <div class="ticket-card ticket-junior">
+    <h3>Junior Rate</h3>
+    <div class="price">₱850</div>
+    <p class="desc">Ride-All-You-Can (36–47 inches)</p>
+  </div>
+
+   <div class="ticket-card ticket-kids">
+    <h3>Kids</h3>
+    <div class="price">FREE</div>
+    <p class="desc">35 inches and below</p>
+  </div>
+
+  
+  <div class="ticket-card ticket-senior">
+    <h3>Senior / PWD</h3>
+    <div class="price">₱1,070</div>
+    <p class="desc">Includes 20% discount</p>
+  </div>
+
+  <div class="ticket-card ticket-entry">
+    <h3>Entrance Only</h3>
+    <div class="price">₱499</div>
+    <p class="desc">No rides (promo days only)</p>
+  </div>
+
+</div>
+
+<!--Booking Form-->
+<div class="booking">
+
+  <h2>🎟 Complete Your Booking</h2>
+
+  <form>
+
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" placeholder="Enter your Name" required>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" placeholder="Enter your Email" required>
+    </div>
+
+    <div class="form-group">
+      <label>Select Ticket Type</label>
+      <select required>
+        <option value=""> Choose ticket</option>
+        <option>Regular - ₱1,500</option>
+        <option>Junior - ₱850</option>
+        <option>Senior/PWD - ₱1,070</option>
+        <option>Entrance Only - ₱499</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Visit Date</label>
+      <input type="date" required>
+    </div>
+
+    <div class="form-group">
+      <label>Payment Method</label>
+      <select required>
+        <option>GCash</option>
+        <option>Maya</option>
+        <option>Credit/Debit Card</option>
+      </select>
+    </div>
+
+    <button class="btn">Confirm Booking</button>
+
+    <div class="form-group">
+  <label>Number of Tickets</label>
+  <input type="number" id="quantity" value="1" min="1" max="20">
+</div>
+
+<div class="form-group">
+  <label>Total Price</label>
+  <input type="text" id="totalPrice" value="₱0" readonly>
+</div>
+
+  </form>
+
+</div>
+
+
+<footer>
+  <p>© 2026 Park Voyage</p>
+</footer>
+
+<script>
+const ticketPrices = {
+  "Regular - ₱1,500": 1500,
+  "Junior - ₱850": 850,
+  "Senior/PWD - ₱1,070": 1070,
+  "Entrance Only - ₱499": 499
+};
+
+const ticketSelect = document.querySelector("select");
+const quantityInput = document.getElementById("quantity");
+const totalPriceInput = document.getElementById("totalPrice");
+
+function updatePrice() {
+  const selectedTicket = ticketSelect.value;
+  const quantity = parseInt(quantityInput.value) || 1;
+
+  const price = ticketPrices[selectedTicket] || 0;
+  const total = price * quantity;
+
+  totalPriceInput.value = "₱" + total.toLocaleString();
+}
+
+/* live update */
+ticketSelect.addEventListener("change", updatePrice);
+quantityInput.addEventListener("input", updatePrice);
+
+/* initial run */
+updatePrice();
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".ticket-card").forEach((card, i) => {
+    setTimeout(() => {
+      card.classList.add("show");
+    }, i * 150);
+  });
+
+  setTimeout(() => {
+    document.querySelector(".booking").classList.add("show");
+  }, 600);
+});
+
+function toggleMenu() {
+  const nav = document.getElementById("navMenu");
+  const overlay = document.querySelector(".overlay");
+  const toggle = document.querySelector(".menu-toggle");
+
+  nav.classList.toggle("active");
+  overlay.classList.toggle("active");
+
+  const isOpen = nav.classList.contains("active");
+
+  toggle.textContent = isOpen ? "✕" : "☰";
+
+  document.body.style.overflow = isOpen ? "hidden" : "auto";
+}
+
+document.querySelectorAll("nav a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.getElementById("navMenu").classList.remove("active");
+    document.querySelector(".overlay").classList.remove("active");
+    document.body.style.overflow = "auto";
+  });
+});
+</script>
+
+
+</body>
+</html>
